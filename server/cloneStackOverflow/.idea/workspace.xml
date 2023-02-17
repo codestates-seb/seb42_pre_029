@@ -4,12 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8615b28e-5e5f-4d56-8a25-a4a8b2bd4cca" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/preproject/cloneStackOverflow/answer/entity/Answer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/preproject/cloneStackOverflow/answer/repository/AnswerRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/preproject/cloneStackOverflow/audit/Auditable.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/7.6/checksums/checksums.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.6/checksums/checksums.lock" afterDir="false" />
-    </list>
+    <list default="true" id="8615b28e-5e5f-4d56-8a25-a4a8b2bd4cca" name="Changes" comment="✨ Answer 엔티티, 레포 , Auditable 인터페이스 추가" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -69,6 +64,14 @@
       <option name="presentableId" value="Default" />
       <updated>1676626359851</updated>
     </task>
+    <task id="LOCAL-00001" summary="✨ Answer 엔티티, 레포 , Auditable 인터페이스 추가">
+      <created>1676629770377</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1676629770377</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -111,5 +114,9 @@
         <entry key="d215567a-0d5f-4fbd-86c4-0d374c7b0b4a" value="TOOL_WINDOW" />
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="✨ Answer 엔티티, 레포 , Auditable 인터페이스 추가" />
+    <option name="LAST_COMMIT_MESSAGE" value="✨ Answer 엔티티, 레포 , Auditable 인터페이스 추가" />
   </component>
 </project>
