@@ -27,7 +27,7 @@ public class Member {
     @Column(length = 100, nullable = false)
     private String username;
 
-    @Column(length = 10)
+    @Column(length = 8)
     private String birth;
 
     @Column(length = 13, unique = true)
