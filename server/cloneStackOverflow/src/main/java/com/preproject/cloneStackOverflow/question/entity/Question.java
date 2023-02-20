@@ -7,7 +7,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.LastModifiedDate;
 
 import javax.persistence.*;
@@ -15,6 +14,7 @@ import javax.persistence.GenerationType;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Getter
 @Setter
@@ -31,9 +31,6 @@ public class Question extends Auditable {
     @ManyToOne
     @JoinColumn(name = "MEMBER_ID")
     private Member member;
-    @OneToMany(mappedBy = "question")
-    @JoinColumn(name = "ANSWER_ID")
-    private Answer answer;
     @NotNull
     @JoinColumn(name = "VIEW_COUNT")
     private long view = 1;
@@ -43,6 +40,8 @@ public class Question extends Auditable {
     @NotNull
     @JoinColumn(name = "ANSWER_COUNT")
     private long answerCount = 0;
+    @OneToMany(mappedBy = "question", cascade = CascadeType.PERSIST)
+    private List<Answer> answers;
 
     public Question(String title){
         this.title = title;
