@@ -15,7 +15,9 @@ function Header() {
         <div className="Button_container">
           <Link to="/login">
             <Button
-              style={'skyblue'}
+              bgColor={'var(--lbtn-default)'}
+              textColor={'#487299'}
+              border={'1px solid #83A6C4'}
               text={'log in'}
               type={'positive'}
               width={'4.2vw'}
@@ -23,7 +25,8 @@ function Header() {
           </Link>
           <Link to="/signup">
             <Button
-              style={'blue'}
+              bgColor={'var(--btn-default)'}
+              textColor={'#fff'}
               text={'sign up'}
               type={'positive'}
               width={'4.2vw'}
