@@ -10,5 +10,4 @@ public interface AnswerMapper {
     Answer answerPatchToAnswer(AnswerDto.Patch requestBody);
     AnswerDto.PatchResponse answerToPatchResponse(Answer answer);
     AnswerDto.GetResponse answerToGetResponse(Answer answer);
-    AnswerDto.GetResponseAll answerToGetResponseAll(Answer answer);
 }
