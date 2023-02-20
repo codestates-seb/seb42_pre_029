@@ -9,10 +9,9 @@ const GlobalStyle = createGlobalStyle`
   *, *:before, *:after {
     box-sizing: border-box;
     border: none;
-    @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
-    font-family: 'pretendard';
   }
   html, body {
+    font-family: 'pretendard';
     font-size: var(--font-size-md);
   }
   a {
