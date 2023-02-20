@@ -7,6 +7,7 @@ function App() {
       <GlobalStyle />
       <Header />
       Initial Setting
+      <li>hi</li>
     </div>
   );
 }
