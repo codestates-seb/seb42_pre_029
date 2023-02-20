@@ -25,7 +25,7 @@ const GlobalButton = styled.button`
   }
 `;
 
-const Button = ({ type, text, onClick, style }) => {
+function Button({ type, text, onClick, style }) {
   return (
     <>
       <GlobalButton className={`${style}`} type={type} onClick={onClick}>
@@ -33,6 +33,6 @@ const Button = ({ type, text, onClick, style }) => {
       </GlobalButton>
     </>
   );
-};
+}
 
 export default Button;

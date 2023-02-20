@@ -46,7 +46,7 @@ const GNB = styled.nav`
   }
 `;
 
-const Header = () => {
+function Header() {
   // const navigate = useNavigate();
   // const toLogin = () => {
   //   navigate(
@@ -79,6 +79,6 @@ const Header = () => {
       </GNB>
     </>
   );
-};
+}
 
 export default Header;
