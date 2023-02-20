@@ -1,6 +1,6 @@
 import Button from './Button';
 import styled from 'styled-components';
-// import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 const GNB = styled.nav`
   background-color: #f3f3f3;
@@ -47,12 +47,6 @@ const GNB = styled.nav`
 `;
 
 function Header() {
-  // const navigate = useNavigate();
-  // const toLogin = () => {
-  //   navigate(
-  //     'https://stackoverflow.com/users/login?ssrc=head&returnurl=https%3a%2f%2fstackoverflow.com%2f',
-  //   );
-  // };
   return (
     <>
       <GNB>
@@ -63,18 +57,12 @@ function Header() {
         </div>
 
         <div className="Button_container">
-          <Button
-            style={'skyblue'}
-            text={'log in'}
-            type={'positive'}
-            // onClick={toLogin}
-          />
-          <Button
-            style={'blue'}
-            text={'sign up'}
-            type={'positive'}
-            onClick={() => console.log('click')}
-          />
+          <Link to="/login">
+            <Button style={'skyblue'} text={'log in'} type={'positive'} />
+          </Link>
+          <Link to="/signup">
+            <Button style={'blue'} text={'sign up'} type={'positive'} />
+          </Link>
         </div>
       </GNB>
     </>
