@@ -64,11 +64,10 @@ public class MemberService {
 
         return memberRepository.save(updatedMember);
     }
-
     public void deleteMember(long memberId){
         Member findMember = memberRepository.findByMemberId(memberId);
         Member.checkNotFoundMember(findMember);
 
         memberRepository.delete(findMember);
     }
-}
+    }
