@@ -8,18 +8,18 @@ const GNB = styled.nav`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  padding: 0 27.86em;
+  padding: 0 20.3vw;
   height: 5.71em;
   box-shadow: 0px 6px 12px 0px #0000001f;
 
   & > img {
-    height: 2em;
+    width: 9.2vw;
   }
   & > .search_container {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    width: 38.6em;
+    width: 28.1vw;
     border-radius: 0.21em;
     background-color: white;
     & > input {
@@ -41,7 +41,7 @@ const GNB = styled.nav`
   }
   & > .Button_container {
     & > :first-child {
-      margin-right: 0.63em;
+      margin-right: 0.4vw;
     }
   }
 `;
@@ -58,10 +58,20 @@ function Header() {
 
         <div className="Button_container">
           <Link to="/login">
-            <Button style={'skyblue'} text={'log in'} type={'positive'} />
+            <Button
+              style={'skyblue'}
+              text={'log in'}
+              type={'positive'}
+              width={'4.2vw'}
+            />
           </Link>
           <Link to="/signup">
-            <Button style={'blue'} text={'sign up'} type={'positive'} />
+            <Button
+              style={'blue'}
+              text={'sign up'}
+              type={'positive'}
+              width={'4.2vw'}
+            />
           </Link>
         </div>
       </GNB>
