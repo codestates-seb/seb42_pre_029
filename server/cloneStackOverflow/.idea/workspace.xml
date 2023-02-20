@@ -10,6 +10,9 @@
       <change afterPath="$PROJECT_DIR$/src/main/java/com/preproject/cloneStackOverflow/answer/mapper/AnswerMapper.java" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/main/java/com/preproject/cloneStackOverflow/answer/repository/AnswerRepository.java" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/main/java/com/preproject/cloneStackOverflow/audit/Auditable.java" afterDir="false" />
+    <list default="true" id="8615b28e-5e5f-4d56-8a25-a4a8b2bd4cca" name="Changes" comment="✨ Answer 엔티티, 레포 , Auditable 인터페이스 추가">
+      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,13 +36,27 @@
       </state>
     </system>
   </component>
+
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
   </component>
   <component name="JpbToolWindowState">
     <option name="isToolWindowVisible" value="false" />
   </component>
+
   <component name="ProjectId" id="2LuYPcBgQrch2TbkJPWReNPyL8S" />
+
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="2LrPimLikJ0475hGPaDHPiWe1cr" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -49,6 +66,7 @@
   "keyToString": {
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+
     "last_opened_file_path": "C:/Users/kjy47/codeStates/pre-project/seb42_pre_029/server/cloneStackOverflow/src/main/java/com/preproject/cloneStackOverflow"
   }
 }]]></component>
@@ -74,6 +92,27 @@
       <option name="presentableId" value="Default" />
       <updated>1676722411286</updated>
     </task>
+
+    "last_opened_file_path": "C:/6s/developer/Project_JAVA/preproject/seb42_pre_029/server/cloneStackOverflow"
+  }
+}]]></component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="8615b28e-5e5f-4d56-8a25-a4a8b2bd4cca" name="Changes" comment="" />
+      <created>1676626359851</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1676626359851</updated>
+    </task>
+    <task id="LOCAL-00001" summary="✨ Answer 엔티티, 레포 , Auditable 인터페이스 추가">
+      <created>1676629770377</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1676629770377</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -84,7 +123,46 @@
             <State />
           </value>
         </entry>
+
       </map>
     </option>
+  </component>
+
+        <entry key="d215567a-0d5f-4fbd-86c4-0d374c7b0b4a">
+          <value>
+            <State>
+              <option name="SHOW_ONLY_AFFECTED_CHANGES" value="true" />
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="HEAD" />
+                      </list>
+                    </value>
+                  </entry>
+                  <entry key="roots">
+                    <value>
+                      <list>
+                        <option value="$PROJECT_DIR$/../.." />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="OPEN_GENERIC_TABS">
+      <map>
+        <entry key="d215567a-0d5f-4fbd-86c4-0d374c7b0b4a" value="TOOL_WINDOW" />
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="✨ Answer 엔티티, 레포 , Auditable 인터페이스 추가" />
+    <option name="LAST_COMMIT_MESSAGE" value="✨ Answer 엔티티, 레포 , Auditable 인터페이스 추가" />
   </component>
 </project>

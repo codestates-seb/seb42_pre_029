@@ -1,28 +1,35 @@
 package com.preproject.cloneStackOverflow.question.entity;
 
-import lombok.AllArgsConstructor;
+import com.preproject.cloneStackOverflow.answer.entity.Answer;
+import com.preproject.cloneStackOverflow.audit.Auditable;
+import com.preproject.cloneStackOverflow.member.entity.Member;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.LastModifiedDate;
-import org.springframework.data.relational.core.mapping.Table;
 
-import javax.persistence.Entity;
+import javax.persistence.*;
+import javax.persistence.GenerationType;
 import java.time.LocalDateTime;
 
 @Getter
 @Setter
 @NoArgsConstructor
-@AllArgsConstructor
 @Entity
-@Table
-public class Question {
+public class Question extends Auditable {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long questionId;
     private String title;
     private String body;
+    @ManyToOne
+    @JoinColumn(name = "MEMBER_ID")
+    private Member member;
+    @OneToMany
+    @JoinColumn(name = "ANSWER_ID")
+    private Answer answer;
     @CreatedDate
     private LocalDateTime createdAt;
     @LastModifiedDate
