@@ -1,5 +1,15 @@
 import styled from 'styled-components';
 
+function Button({ type, text, style, width }) {
+  return (
+    <>
+      <GlobalButton className={`${style}`} type={type} width={width}>
+        {text}
+      </GlobalButton>
+    </>
+  );
+}
+
 const GlobalButton = styled.button`
   width: ${props => props.width};
   height: 3em;
@@ -24,15 +34,5 @@ const GlobalButton = styled.button`
     }
   }
 `;
-
-function Button({ type, text, style, width }) {
-  return (
-    <>
-      <GlobalButton className={`${style}`} type={type} width={width}>
-        {text}
-      </GlobalButton>
-    </>
-  );
-}
 
 export default Button;

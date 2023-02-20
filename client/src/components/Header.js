@@ -2,6 +2,39 @@ import Button from './Button';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
+function Header() {
+  return (
+    <>
+      <GNB>
+        <img src="img/logo.svg" alt="logo" />
+        <div className="search_container">
+          <input type="text"></input>
+          <img src="img/search.svg" alt="search" />
+        </div>
+
+        <div className="Button_container">
+          <Link to="/login">
+            <Button
+              style={'skyblue'}
+              text={'log in'}
+              type={'positive'}
+              width={'4.2vw'}
+            />
+          </Link>
+          <Link to="/signup">
+            <Button
+              style={'blue'}
+              text={'sign up'}
+              type={'positive'}
+              width={'4.2vw'}
+            />
+          </Link>
+        </div>
+      </GNB>
+    </>
+  );
+}
+
 const GNB = styled.nav`
   background-color: #f3f3f3;
   display: flex;
@@ -45,38 +78,5 @@ const GNB = styled.nav`
     }
   }
 `;
-
-function Header() {
-  return (
-    <>
-      <GNB>
-        <img src="img/logo.svg" alt="logo" />
-        <div className="search_container">
-          <input type="text"></input>
-          <img src="img/search.svg" alt="search" />
-        </div>
-
-        <div className="Button_container">
-          <Link to="/login">
-            <Button
-              style={'skyblue'}
-              text={'log in'}
-              type={'positive'}
-              width={'4.2vw'}
-            />
-          </Link>
-          <Link to="/signup">
-            <Button
-              style={'blue'}
-              text={'sign up'}
-              type={'positive'}
-              width={'4.2vw'}
-            />
-          </Link>
-        </div>
-      </GNB>
-    </>
-  );
-}
 
 export default Header;
