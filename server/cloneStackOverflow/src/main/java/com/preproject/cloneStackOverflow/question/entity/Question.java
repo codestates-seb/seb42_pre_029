@@ -3,17 +3,17 @@ package com.preproject.cloneStackOverflow.question.entity;
 import com.preproject.cloneStackOverflow.answer.entity.Answer;
 import com.preproject.cloneStackOverflow.audit.Auditable;
 import com.preproject.cloneStackOverflow.member.entity.Member;
+import com.preproject.cloneStackOverflow.utils.CustomBeanUtils;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
+import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.query.internal.QueryImpl;
 
 import javax.persistence.*;
 import javax.persistence.GenerationType;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-import java.time.LocalDateTime;
 import java.util.List;
 
 @Getter
@@ -24,35 +24,45 @@ public class Question extends Auditable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long questionId;
-    @NotBlank(message = "제목을 입력해주세요.")
+    @NotBlank(message = "Insert Subject.")
+    @Column(length = 1000, nullable = false)
     private String title;
-    @NotBlank(message = "내용을 작성해주세요.")
+    @NotBlank(message = "Insert Text.")
+    @Column(length = 1000, nullable = false)
     private String body;
+    @Setter
     @ManyToOne
     @JoinColumn(name = "MEMBER_ID")
     private Member member;
-    @NotNull
+
     @JoinColumn(name = "VIEW_COUNT")
-    private long view = 1;
-    @NotNull
+    @Column(columnDefinition = "Integer default 0", nullable = false)
+    private int view;
+
     @JoinColumn(name = "QUESTION_COUNT")
-    private long questionCount = 1;
-    @NotNull
+    @Column(columnDefinition = "Integer default 1", nullable = false)
+    private long questionCount;
+
     @JoinColumn(name = "ANSWER_COUNT")
-    private long answerCount = 0;
+    @Column(columnDefinition = "Integer default 0", nullable = false)
+    private long answerCount;
+
+    @Setter
     @OneToMany(mappedBy = "question", cascade = CascadeType.PERSIST)
     private List<Answer> answers;
 
-    public Question(String title){
-        this.title = title;
+    public Question(Long questionId){
+        this.questionId = questionId;
     }
-    public Question(String title, String body){
-        this.title = title;
-        this.body = body;
+    public void setMember(Member memeber){
+        this.member = memeber;
+        if(!this.member.getQuestions().contains(this)){
+            this.member.getQuestions().add(this);
+        }
     }
-    public Question viewCount(long view){
-        this.view = view + 1;
-        return this;
+
+    public Question changeQuestionInfo(Question sourceQuestion, CustomBeanUtils<Question> beanUtils){
+        return beanUtils.copyNonNullProperties(sourceQuestion, this);
     }
 
     public Question questionCount(long questionCount){

@@ -13,9 +13,9 @@ import com.preproject.cloneStackOverflow.question.service.QuestionService;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class AnswerService {
@@ -73,5 +73,11 @@ public class AnswerService {
         return optionalAnswer.orElseThrow(() ->
                 new StackOverFlowException(ExceptionCode.ANSWER_NOT_FOUND));
 
+    }
+
+    public int findAnswerCount(List<Answer> answers){
+        List<Long> answerIds = answers.stream().map(answer -> answer.getAnswerId()).collect(Collectors.toList());
+
+        return answerRepository.countByAnswerIdIn(answerIds);
     }
 }

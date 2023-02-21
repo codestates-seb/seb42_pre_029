@@ -7,7 +7,13 @@ import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
 
+import java.util.List;
+
 public interface AnswerRepository extends JpaRepository<Answer,Long> {
+
+    int countByAnswerIdIn(List<Long> answerIds);
+
     @Query(value ="SELECT a FROM Answer a WHERE a.memberId = :memberId")
     List<Answer> findByMemberId(long memberId);
+
 }
