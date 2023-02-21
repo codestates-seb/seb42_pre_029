@@ -1,6 +1,8 @@
 package com.preproject.cloneStackOverflow.answer.entity;
 
 import com.preproject.cloneStackOverflow.audit.Auditable;
+import com.preproject.cloneStackOverflow.exception.ExceptionCode;
+import com.preproject.cloneStackOverflow.exception.StackOverFlowException;
 import com.preproject.cloneStackOverflow.member.entity.Member;
 import com.preproject.cloneStackOverflow.question.entity.Question;
 import lombok.Getter;
@@ -8,6 +10,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.List;
+import java.util.Stack;
 
 @Entity
 @Getter
@@ -41,5 +45,11 @@ public class Answer extends Auditable {
         this.question = question;
     }
 
+    // 추가
+    public static void checkNotFoundAnswers(int sourceAnswerCount, int targetAnswerCount) {
+        if (sourceAnswerCount != targetAnswerCount) {
+            throw new StackOverFlowException(ExceptionCode.ANSWER_NOT_FOUND);
+        }
+    }
 
 }
