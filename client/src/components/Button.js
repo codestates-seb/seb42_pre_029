@@ -1,20 +1,10 @@
 import styled from 'styled-components';
 
-function Button({
-  type,
-  text,
-  border,
-  bgColor,
-  textColor,
-  width,
-  hover,
-  selected,
-}) {
+function Button({ type, text, border, bgColor, textColor, hover, selected }) {
   return (
     <>
       <GlobalButton
         type={type}
-        width={width}
         border={border}
         bgColor={bgColor}
         textColor={textColor}
@@ -28,10 +18,9 @@ function Button({
 }
 
 const GlobalButton = styled.button`
-  width: ${({ width }) => width};
   height: 3em;
   font-size: 0.86em;
-  padding: 0.7em;
+  padding: 0.7em 1.2em;
   border: ${({ border }) => (border ? border : null)};
   border-radius: 0.21em;
   background-color: ${({ bgColor }) => bgColor};

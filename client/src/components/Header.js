@@ -24,7 +24,6 @@ function Header() {
               selected={'var(--lbtn-selected)'}
               text={'log in'}
               type={'positive'}
-              width={'4.2vw'}
             />
           </Link>
           <Link to="/signup">
@@ -36,7 +35,6 @@ function Header() {
               selected={'var(--btn-selected)'}
               text={'sign up'}
               type={'positive'}
-              width={'4.2vw'}
             />
           </Link>
         </div>
