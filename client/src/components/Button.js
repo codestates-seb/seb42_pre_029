@@ -1,6 +1,18 @@
 import styled from 'styled-components';
 
-function Button({ type, text, border, bgColor, textColor, hover, selected }) {
+function Button({
+  type,
+  text,
+  border,
+  bgColor,
+  textColor,
+  hover,
+  active,
+  height,
+  width,
+  fontSize,
+  padding,
+}) {
   return (
     <>
       <GlobalButton
@@ -9,7 +21,11 @@ function Button({ type, text, border, bgColor, textColor, hover, selected }) {
         bgColor={bgColor}
         textColor={textColor}
         hover={hover}
-        selected={selected}
+        active={active}
+        height={height}
+        width={width}
+        fontSize={fontSize}
+        padding={padding}
       >
         {text}
       </GlobalButton>
@@ -18,18 +34,21 @@ function Button({ type, text, border, bgColor, textColor, hover, selected }) {
 }
 
 const GlobalButton = styled.button`
-  height: 3em;
-  font-size: 0.86em;
-  padding: 0.7em 1.2em;
+  height: ${({ height }) => (height ? height : '32px')};
+  width: ${({ width }) => (width ? width : 'auto')};
+  font-size: ${({ fontSize }) => (fontSize ? fontSize : 'var(--font-size-sm)')};
+  padding: ${({ padding }) => (padding ? padding : 'auto')};
   border: ${({ border }) => (border ? border : null)};
-  border-radius: 0.21em;
-  background-color: ${({ bgColor }) => bgColor};
-  color: ${({ textColor }) => textColor};
-  :active {
-    background-color: ${({ selected }) => selected};
-  }
+  border-radius: 3px;
+  background-color: ${({ bgColor }) =>
+    bgColor ? bgColor : 'var(--btn-default)'};
+  color: ${({ textColor }) => (textColor ? textColor : 'var(--black-002)')};
   :hover {
-    background-color: ${({ hover }) => hover};
+    background-color: ${({ hover }) => (hover ? hover : 'var(--btn-hover)')};
+  }
+  :active {
+    background-color: ${({ active }) =>
+      active ? active : 'var(--btn-selected)'};
   }
 `;
 
