@@ -6,7 +6,9 @@ function Header() {
   return (
     <>
       <GNB>
-        <img src="img/logo.svg" alt="logo" />
+        <Link to="/">
+          <img src="img/logo.svg" alt="logo" />{' '}
+        </Link>
         <div className="search_container">
           <input type="text"></input>
           <img src="img/search.svg" alt="search" />
@@ -15,18 +17,24 @@ function Header() {
         <div className="Button_container">
           <Link to="/login">
             <Button
-              style={'skyblue'}
+              bgColor={'var(--lbtn-default)'}
+              textColor={'#487299'}
+              border={'1px solid #83A6C4'}
+              hover={'var(--lbtn-hover)'}
+              selected={'var(--lbtn-selected)'}
               text={'log in'}
               type={'positive'}
-              width={'4.2vw'}
             />
           </Link>
           <Link to="/signup">
             <Button
-              style={'blue'}
+              bgColor={'var(--btn-default)'}
+              textColor={'#fff'}
+              border={'1px solid #83A6C4'}
+              hover={'var(--btn-hover)'}
+              selected={'var(--btn-selected)'}
               text={'sign up'}
               type={'positive'}
-              width={'4.2vw'}
             />
           </Link>
         </div>
@@ -45,8 +53,10 @@ const GNB = styled.nav`
   height: 5.71em;
   box-shadow: 0px 6px 12px 0px #0000001f;
 
-  & > img {
-    width: 9.2vw;
+  & > Link {
+    & > img {
+      width: 9.2vw;
+    }
   }
   & > .search_container {
     display: flex;

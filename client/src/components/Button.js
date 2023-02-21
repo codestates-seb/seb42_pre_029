@@ -1,9 +1,16 @@
 import styled from 'styled-components';
 
-function Button({ type, text, style, width }) {
+function Button({ type, text, border, bgColor, textColor, hover, selected }) {
   return (
     <>
-      <GlobalButton className={`${style}`} type={type} width={width}>
+      <GlobalButton
+        type={type}
+        border={border}
+        bgColor={bgColor}
+        textColor={textColor}
+        hover={hover}
+        selected={selected}
+      >
         {text}
       </GlobalButton>
     </>
@@ -11,27 +18,18 @@ function Button({ type, text, style, width }) {
 }
 
 const GlobalButton = styled.button`
-  width: ${props => props.width};
   height: 3em;
   font-size: 0.86em;
-  border: none;
+  padding: 0.7em 1.2em;
+  border: ${({ border }) => (border ? border : null)};
   border-radius: 0.21em;
-  &.skyblue {
-    background-color: #e3ecf3;
-    color: #83a6c4;
-    border: 1px solid #83a6c4;
-    :active {
-      background-color: #b9d2e8;
-      color: #83a6c4;
-    }
+  background-color: ${({ bgColor }) => bgColor};
+  color: ${({ textColor }) => textColor};
+  :active {
+    background-color: ${({ selected }) => selected};
   }
-  &.blue {
-    background-color: #4393f7;
-    color: #fff;
-    :active {
-      background-color: #3172c6;
-      color: white;
-    }
+  :hover {
+    background-color: ${({ hover }) => hover};
   }
 `;
 
