@@ -7,22 +7,24 @@ function SideBar() {
 
   const menus = [
     { name: 'Questions', path: '/' },
-    { name: 'Tags', path: '/' },
+    // { name: 'Tags', path: '/' },
     { name: 'Users', path: '/login' },
   ];
 
   return (
     <SideBarContainer>
-      {menus.map((menu, index) => {
-        return (
-          <Link to={menu.path} key={index}>
-            <SideBarItem
-              menu={menu.name}
-              isActive={pathName === menu.path ? true : false}
-            />
-          </Link>
-        );
-      })}
+      <MenuContainer>
+        {menus.map((menu, index) => {
+          return (
+            <Link to={menu.path} key={index}>
+              <SideBarItem
+                menu={menu.name}
+                isActive={pathName === menu.path ? true : false}
+              />
+            </Link>
+          );
+        })}
+      </MenuContainer>
     </SideBarContainer>
   );
 }
@@ -33,6 +35,9 @@ const SideBarContainer = styled.div`
   flex-direction: column;
   top: 0;
   width: 200px;
+`;
+
+const MenuContainer = styled.div`
   height: 100%;
   padding-top: 80px;
   border-right: 1px solid var(--line-002);
