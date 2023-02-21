@@ -23,8 +23,13 @@ public class AnswerDto {
     @Getter
     @AllArgsConstructor
     public static class Patch{
+        private long answerId;
         @NotNull
         private String body;
+
+        public void setAnswerId(long answerId){
+            this.answerId = answerId;
+        }
     }
 
     @Getter
