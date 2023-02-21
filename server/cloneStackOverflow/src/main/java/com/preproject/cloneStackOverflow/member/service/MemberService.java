@@ -13,19 +13,20 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Optional;
 import java.util.Stack;
 
 @Service
 public class MemberService {
     private final MemberRepository memberRepository;
     private final CustomBeanUtils<Member> beanUtils;
-    private final PasswordEncoder passwordEncoder;
+   // private final PasswordEncoder passwordEncoder;
     //private final CustomAuthorityUtils authorityUtils; 이건 시큐리티,권한할때
 
-    public MemberService(MemberRepository memberRepository, CustomBeanUtils<Member> beanUtils, PasswordEncoder passwordEncoder) {
+    public MemberService(MemberRepository memberRepository, CustomBeanUtils<Member> beanUtils) {
         this.memberRepository = memberRepository;
         this.beanUtils = beanUtils;
-        this.passwordEncoder = passwordEncoder;
+        //this.passwordEncoder = passwordEncoder;
     }
 
     public Member signinMember(Member member){
@@ -36,8 +37,8 @@ public class MemberService {
         Member findMember = memberRepository.findByEmail(member.getEmail());
         Member.checkExistEmail(findMember);
 
-        String encryptedPassword = passwordEncoder.encode(member.getPassword());
-        member.setPassword(encryptedPassword);
+        //String encryptedPassword = passwordEncoder.encode(member.getPassword());
+       // member.setPassword(encryptedPassword);
 
         return memberRepository.save(member);
     }
@@ -69,5 +70,14 @@ public class MemberService {
         Member.checkNotFoundMember(findMember);
 
         memberRepository.delete(findMember);
+    }
+
+    public Member findVerifiedMember(long memberId) {
+        Optional<Member> optionalMember =
+                memberRepository.findById(memberId);
+        Member findMember =
+                optionalMember.orElseThrow(() ->
+                        new StackOverFlowException(ExceptionCode.MEMBER_NOT_FOUND));
+        return findMember;
     }
     }

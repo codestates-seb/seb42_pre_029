@@ -12,15 +12,8 @@ import org.mapstruct.Mapper;
 public interface AnswerMapper {
     default Answer answerPostToAnswer(AnswerDto.Post answerPostDto){
         Answer answer = new Answer();
-        Member member = new Member();
-        Question question = new Question();
-        member.setMemberId(answerPostDto.getMemberId());
-        question.setQuestionId(answerPostDto.getQuestionId());
-
-
-        answer.addMember(member);
-        answer.addQuestion(question);
         answer.setBody(answerPostDto.getBody());
+
         return answer;
     }
     Answer answerPatchToAnswer(AnswerDto.Patch requestBody);
