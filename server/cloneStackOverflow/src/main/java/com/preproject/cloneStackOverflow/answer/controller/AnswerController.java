@@ -44,9 +44,9 @@ public class AnswerController {
         return new ResponseEntity<>(mapper.answerToGetResponse(findAnswer), HttpStatus.OK);
     }
 
-    @GetMapping("/{member-id}")
+    @GetMapping("/member/{member-id}")
     public ResponseEntity getMemberAnswers(@PathVariable("member-id") @Positive long memberId){
-        List<Answer> memberAnswers = answerService.findMemberAnswers(memberId);
+        List<String> memberAnswers = answerService.findMemberAnswers(memberId);
 
         return new ResponseEntity<>(memberAnswers, HttpStatus.OK);
     }

@@ -28,18 +28,15 @@ public class QuestionService {
     private final QuestionRepository questionRepository;
     private final MemberService memberService;
     private final MemberRepository memberRepository;
-    private final AnswerService answerService;
     private final CustomBeanUtils beanUtils;
 
     public QuestionService(QuestionRepository questionRepository,
                            MemberService memberService,
                            MemberRepository memberRepository,
-                           AnswerService answerService,
                            CustomBeanUtils beanUtils){
         this.questionRepository = questionRepository;
         this.memberService = memberService;
         this.memberRepository = memberRepository;
-        this.answerService = answerService;
         this.beanUtils = beanUtils;
     }
 
@@ -97,13 +94,6 @@ public class QuestionService {
         Optional<Question> optionalQuestion = questionRepository.findById(questionId);
         Question findQuestion = optionalQuestion.orElseThrow(()-> new StackOverFlowException(ExceptionCode.QUESTION_NOT_FOUND));
         return findQuestion;
-    }
-
-    private void verifyQuestion(Question question){
-        memberService.findMember(question.getMember().getMemberId());
-        List<Answer> answers = question.getAnswers();
-        int existAnswerCount = answerService.findAnswerCount(answers);
-        Answer.checkNotFoundAnswers(answers.size(), existAnswerCount);
     }
 
     private void verifyExistsId(long questionId) {
