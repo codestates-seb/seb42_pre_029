@@ -31,8 +31,9 @@ public class MemberService {
         this.memberRepository = memberRepository;
         this.beanUtils = beanUtils;
         //this.passwordEncoder = passwordEncoder; 로그인 구현에서
-   // private final PasswordEncoder passwordEncoder;
-    //private final CustomAuthorityUtils authorityUtils; 이건 시큐리티,권한할때
+        // private final PasswordEncoder passwordEncoder;
+        //private final CustomAuthorityUtils authorityUtils; 이건 시큐리티,권한할때
+    }
 
     public Member signinMember(Member member){
         return null;
@@ -83,6 +84,7 @@ public class MemberService {
 
         memberRepository.delete(findMember);
     }
+
     @Transactional(readOnly = true)
     public Member findVerifiedMember(long memberId) {
 
@@ -91,12 +93,12 @@ public class MemberService {
         return optionalMember.orElseThrow(() ->
                 new StackOverFlowException(ExceptionCode.MEMBER_NOT_FOUND));
 
-    //public Member findVerifiedMember(long memberId) {
-      //  Optional<Member> optionalMember =
-          //      memberRepository.findById(memberId);
-      //  Member findMember =
-        //        optionalMember.orElseThrow(() ->
-              //          new StackOverFlowException(ExceptionCode.MEMBER_NOT_FOUND));
-      //  return findMember;
+//    public Member findVerifiedMember(long memberId) {
+//        Optional<Member> optionalMember =
+//                memberRepository.findById(memberId);
+//        Member findMember =
+//                optionalMember.orElseThrow(() ->
+//                        new StackOverFlowException(ExceptionCode.MEMBER_NOT_FOUND));
+//        return findMember;
     }
     }

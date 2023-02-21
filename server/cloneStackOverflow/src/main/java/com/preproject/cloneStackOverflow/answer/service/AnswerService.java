@@ -13,6 +13,7 @@ import com.preproject.cloneStackOverflow.question.service.QuestionService;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -49,10 +50,14 @@ public class AnswerService {
         return findVerifyAnswer(answer.getAnswerId());
     }
 
-    public List<Answer> findMemberAnswers(long memberId){
+    public List<String> findMemberAnswers(long memberId){
         Member findMember = memberService.findVerifiedMember(memberId);
-
-        return answerRepository.findByMemberId(findMember.getMemberId());
+        List<Answer> answerList = answerRepository.findByMember(findMember);
+        List<String> list = new ArrayList<>();
+        for(Answer answer : answerList){
+            list.add(answer.getBody());
+        }
+        return list;
     }
 
     public Answer updateAnswer(Answer answer) {
