@@ -36,8 +36,12 @@ public class MemberDto {
     public static class logout{
 
     }
-
+    @Getter
+    @AllArgsConstructor
     public static class Patch {
+
+        private long memberId;
+
         @NotBlank
         @Email
         private String email;

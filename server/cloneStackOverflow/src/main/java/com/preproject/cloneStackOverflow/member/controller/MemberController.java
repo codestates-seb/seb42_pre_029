@@ -57,15 +57,20 @@ public class MemberController {
                 new SingleResponseDto<>(memberMapper.memberToMemberGetResponseDto(member))
                 , HttpStatus.OK);
     }
+//    @GetMapping
+//    public ResponseEntity getMembers(@Positive @RequestParam int page,
+//                                     @Positive @RequestParam int size){
+//        Page<Member> pageMembers = memberService.findMembers(page - 1, size);
+//        List<Member> members = pageMembers.getContent();
+//        return new ResponseEntity<>(
+//                new MultiResponseDto<>(memberMapper.membersToMemberGetResponseDtos(members),
+//                        pageMembers),
+//                HttpStatus.OK);
+//    }
     @GetMapping
-    public ResponseEntity getMembers(@Positive @RequestParam int page,
-                                     @Positive @RequestParam int size){
-        Page<Member> pageMembers = memberService.findMembers(page - 1, size);
-        List<Member> members = pageMembers.getContent();
-        return new ResponseEntity<>(
-                new MultiResponseDto<>(memberMapper.membersToMemberGetResponseDtos(members),
-                        pageMembers),
-                HttpStatus.OK);
+    public ResponseEntity getMembers(){
+        List<Member> members = memberService.findMembers();
+        return new ResponseEntity<>(members, HttpStatus.OK);
     }
     @PatchMapping("/{member-id}")
     public ResponseEntity patchMember(@PathVariable("member-id") @Positive long memberId,

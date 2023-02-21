@@ -9,25 +9,30 @@ import com.preproject.cloneStackOverflow.utils.CustomBeanUtils;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
-import org.springframework.security.crypto.password.PasswordEncoder;
+//import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+
+import java.util.List;
 import java.util.Optional;
-import java.util.Stack;
 
 @Service
 public class MemberService {
     private final MemberRepository memberRepository;
     private final CustomBeanUtils<Member> beanUtils;
-   // private final PasswordEncoder passwordEncoder;
+
+    //private final PasswordEncoder passwordEncoder;    로그인 구현에서
     //private final CustomAuthorityUtils authorityUtils; 이건 시큐리티,권한할때
 
-    public MemberService(MemberRepository memberRepository, CustomBeanUtils<Member> beanUtils) {
+    public MemberService(MemberRepository memberRepository, CustomBeanUtils<Member> beanUtils
+    //                     ,PasswordEncoder passwordEncoder 로그인 구현에서..
+    ) {
         this.memberRepository = memberRepository;
         this.beanUtils = beanUtils;
-        //this.passwordEncoder = passwordEncoder;
-    }
+        //this.passwordEncoder = passwordEncoder; 로그인 구현에서
+   // private final PasswordEncoder passwordEncoder;
+    //private final CustomAuthorityUtils authorityUtils; 이건 시큐리티,권한할때
 
     public Member signinMember(Member member){
         return null;
@@ -54,16 +59,23 @@ public class MemberService {
     }
 
     @Transactional(readOnly = true)
-    public Page<Member> findMembers(int page, int size){
-        return memberRepository.findAll(PageRequest.of(page, size, Sort.by("memberId").descending()));
+    public List<Member> findMembers(){
+        return (List<Member>) memberRepository.findAll();
     }
 
     public Member updateMember(Member member){
-        Member findMember = findMember(member.getMemberId());
-
-        Member updatedMember = findMember.changeMemberInfo(member, beanUtils); // TODO 리팩토링 포인트 beanUtils 어쩔?
-
-        return memberRepository.save(updatedMember);
+        Member findMember = findVerifiedMember(member.getMemberId());
+        Optional.ofNullable(member.getEmail())
+                .ifPresent(email -> findMember.setEmail(email));
+        Optional.ofNullable(member.getPassword())
+                .ifPresent(password -> findMember.setPassword(password));
+        Optional.ofNullable(member.getUsername())
+                .ifPresent(username -> findMember.setUsername(username));
+        Optional.ofNullable(member.getBirth())
+                .ifPresent(birth -> findMember.setBirth(birth));
+        Optional.ofNullable(member.getPhone())
+                .ifPresent(phone -> findMember.setPhone(phone));
+        return memberRepository.save(findMember);
     }
     public void deleteMember(long memberId){
         Member findMember = memberRepository.findByMemberId(memberId);
@@ -71,13 +83,20 @@ public class MemberService {
 
         memberRepository.delete(findMember);
     }
-
+    @Transactional(readOnly = true)
     public Member findVerifiedMember(long memberId) {
+
         Optional<Member> optionalMember =
                 memberRepository.findById(memberId);
-        Member findMember =
-                optionalMember.orElseThrow(() ->
-                        new StackOverFlowException(ExceptionCode.MEMBER_NOT_FOUND));
-        return findMember;
+        return optionalMember.orElseThrow(() ->
+                new StackOverFlowException(ExceptionCode.MEMBER_NOT_FOUND));
+
+    //public Member findVerifiedMember(long memberId) {
+      //  Optional<Member> optionalMember =
+          //      memberRepository.findById(memberId);
+      //  Member findMember =
+        //        optionalMember.orElseThrow(() ->
+              //          new StackOverFlowException(ExceptionCode.MEMBER_NOT_FOUND));
+      //  return findMember;
     }
     }
