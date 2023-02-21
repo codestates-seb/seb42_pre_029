@@ -28,18 +28,15 @@ public class QuestionService {
     private final QuestionRepository questionRepository;
     private final MemberService memberService;
     private final MemberRepository memberRepository;
-    private final AnswerService answerService;
     private final CustomBeanUtils beanUtils;
 
     public QuestionService(QuestionRepository questionRepository,
                            MemberService memberService,
                            MemberRepository memberRepository,
-                           AnswerService answerService,
                            CustomBeanUtils beanUtils){
         this.questionRepository = questionRepository;
         this.memberService = memberService;
         this.memberRepository = memberRepository;
-        this.answerService = answerService;
         this.beanUtils = beanUtils;
     }
 
@@ -64,26 +61,25 @@ public class QuestionService {
     }
 
     public Question findQuestion(long questionId){
-        return questionRepository.findById(questionId).orElseThrow(() -> new StackOverFlowException(ExceptionCode.QUESTION_NOT_FOUND));
+        Question question = questionRepository.findById(questionId).orElseThrow(() -> new StackOverFlowException(ExceptionCode.QUESTION_NOT_FOUND));
+        question.setView(question.getView()+1);
+        return questionRepository.save(question);
     }
 
     public Page<Question> findQuestions(int page, int size){
         return questionRepository.findAll(PageRequest.of(page, size, Sort.by("questionId").descending()));
     }
 
-    /*@Transactional
     public Question viewCount(long questionId){
-        //Question question = findQuestion(questionId);
-        .setView(Question.getView()+1);
         return questionRepository.findById(questionId).orElseThrow(() -> new StackOverFlowException(ExceptionCode.QUESTION_NOT_FOUND));
-    }*/
+    }
 
     public long questionCount() {
         long question = questionRepository.count();
         return question;
     }
     /*//Todo : answerCount 구현
-    public int answerCount(List<Long> quesiotnId){
+    public  answerCount(List<Long> quesiotnId){
         question.getAnswers().stream().map(answer->answer.getAnswerId()).collect(Collectors.toList());
         return questionRepository.countByQuestionIdIn(questionIds);
     }*/
@@ -99,12 +95,12 @@ public class QuestionService {
         return findQuestion;
     }
 
-    private void verifyQuestion(Question question){
+    /*private void verifyQuestion(Question question){
         memberService.findMember(question.getMember().getMemberId());
         List<Answer> answers = question.getAnswers();
         int existAnswerCount = answerService.findAnswerCount(answers);
         Answer.checkNotFoundAnswers(answers.size(), existAnswerCount);
-    }
+    }*/
 
     private void verifyExistsId(long questionId) {
         Optional<Question> question = questionRepository.findById(questionId);

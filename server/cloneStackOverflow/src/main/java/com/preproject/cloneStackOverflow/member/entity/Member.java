@@ -16,7 +16,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table
+@Table()
 public class Member {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,7 +28,7 @@ public class Member {
     @Column(length = 100, nullable = false)
     private String password;
 
-    @Column(length = 10, nullable = false)
+    @Column(length = 10, nullable = false, unique = true)
     private String username;
 
     @Column(length = 10)
@@ -51,7 +51,7 @@ public class Member {
 //        }
 //    }
     public Member changeMemberInfo(Member sourceMember, CustomBeanUtils<Member> customBeanUtils) {
-        return customBeanUtils.copyNonNullProperties(sourceMember, this);  // TODO 고치고 싶다.
+        return customBeanUtils.copyNonNullProperties(sourceMember, this);
     }
 
     public static void checkNotFoundMember(Member member) {
