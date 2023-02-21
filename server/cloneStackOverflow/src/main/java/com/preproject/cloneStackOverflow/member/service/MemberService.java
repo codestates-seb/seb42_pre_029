@@ -13,6 +13,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+
 import java.util.List;
 import java.util.Optional;
 
@@ -20,6 +21,7 @@ import java.util.Optional;
 public class MemberService {
     private final MemberRepository memberRepository;
     private final CustomBeanUtils<Member> beanUtils;
+
     //private final PasswordEncoder passwordEncoder;    로그인 구현에서
     //private final CustomAuthorityUtils authorityUtils; 이건 시큐리티,권한할때
 
@@ -29,7 +31,8 @@ public class MemberService {
         this.memberRepository = memberRepository;
         this.beanUtils = beanUtils;
         //this.passwordEncoder = passwordEncoder; 로그인 구현에서
-    }
+   // private final PasswordEncoder passwordEncoder;
+    //private final CustomAuthorityUtils authorityUtils; 이건 시큐리티,권한할때
 
     public Member signinMember(Member member){
         return null;
@@ -39,9 +42,9 @@ public class MemberService {
         Member findMember = memberRepository.findByEmail(member.getEmail());
         Member.checkExistEmail(findMember);
 
-//        String encryptedPassword = passwordEncoder.encode(member.getPassword());
-//        member.setPassword(encryptedPassword);
-//
+        //String encryptedPassword = passwordEncoder.encode(member.getPassword());
+       // member.setPassword(encryptedPassword);
+
         return memberRepository.save(member);
     }
 
@@ -87,5 +90,13 @@ public class MemberService {
                 memberRepository.findById(memberId);
         return optionalMember.orElseThrow(() ->
                 new StackOverFlowException(ExceptionCode.MEMBER_NOT_FOUND));
+
+    //public Member findVerifiedMember(long memberId) {
+      //  Optional<Member> optionalMember =
+          //      memberRepository.findById(memberId);
+      //  Member findMember =
+        //        optionalMember.orElseThrow(() ->
+              //          new StackOverFlowException(ExceptionCode.MEMBER_NOT_FOUND));
+      //  return findMember;
     }
     }
