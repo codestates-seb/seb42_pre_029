@@ -6,6 +6,8 @@ import com.preproject.cloneStackOverflow.member.entity.Member;
 import com.preproject.cloneStackOverflow.question.entity.Question;
 import org.mapstruct.Mapper;
 
+import java.util.ArrayList;
+import java.util.List;
 
 
 @Mapper(componentModel = "spring")
@@ -19,4 +21,5 @@ public interface AnswerMapper {
     Answer answerPatchToAnswer(AnswerDto.Patch requestBody);
     AnswerDto.PatchResponse answerToPatchResponse(Answer answer);
     AnswerDto.GetResponse answerToGetResponse(Answer answer);
+
 }

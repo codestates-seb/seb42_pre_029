@@ -83,6 +83,7 @@ public class MemberService {
 
         memberRepository.delete(findMember);
     }
+
     @Transactional(readOnly = true)
     public Member findVerifiedMember(long memberId) {
 
@@ -91,12 +92,14 @@ public class MemberService {
         return optionalMember.orElseThrow(() ->
                 new StackOverFlowException(ExceptionCode.MEMBER_NOT_FOUND));
 
-    //public Member findVerifiedMember(long memberId) {
-      //  Optional<Member> optionalMember =
-          //      memberRepository.findById(memberId);
-      //  Member findMember =
-        //        optionalMember.orElseThrow(() ->
-              //          new StackOverFlowException(ExceptionCode.MEMBER_NOT_FOUND));
-      //  return findMember;
+
+//    public Member findVerifiedMember(long memberId) {
+//        Optional<Member> optionalMember =
+//                memberRepository.findById(memberId);
+//        Member findMember =
+//                optionalMember.orElseThrow(() ->
+//                        new StackOverFlowException(ExceptionCode.MEMBER_NOT_FOUND));
+//        return findMember;
+
     }
-    }
+}
