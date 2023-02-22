@@ -1,11 +1,30 @@
 import Button from '../../components/Button';
-// import { Link } from 'react-router-dom';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import MainLayout from '../../components/MainLayout';
 import styled from 'styled-components';
 import TextArea from '../../components/TextArea';
+import { useParams } from 'react-router-dom';
+import questions from '../../data/message_question.json';
+import answer from '../../data/message_answer.json';
+// import member from '../../data/message_member.json';
 
 function BoardDetail() {
+  // 데이터 불러오기
+  const params = useParams();
+  const { no } = params;
+  const [QuestData, setQuestData] = useState({});
+  const [ansData, setAnsData] = useState({});
+  useEffect(() => {
+    const questionData = questions.questions.filter(
+      e => e.questionid === +no,
+    )[0];
+    setQuestData(questionData);
+    const answerData = answer.answers.filter(e => e.answerid === +no)[0];
+    setAnsData(answerData);
+  }, []);
+
+  // 질문 추천
+
   const [QueVotes, setQueVotes] = useState(0);
   const QueVotesHandller = e => {
     let value = e.target.className;
@@ -13,6 +32,9 @@ function BoardDetail() {
     value === 'votesUp' ? (num += 1) : (num -= 1);
     setQueVotes(num);
   };
+
+  // 답변 추천
+
   const [AnsVotes, setAnsVotes] = useState(0);
   const ansVotesHandller = e => {
     let value = e.target.className;
@@ -20,14 +42,15 @@ function BoardDetail() {
     value === 'votesUp' ? (num += 1) : (num -= 1);
     setAnsVotes(num);
   };
+
   return (
     <>
       <MainLayout sideBar>
         <BoardDetailPageTitle>
-          <h2>Error print user.default swift 1</h2>
+          <h2>{QuestData.title}</h2>
           <EditInfo>
-            <span>Asked 2023.02.21</span>
-            <span>1 Viewed</span>
+            <span>{`${QuestData.createdAt} ago`}</span>
+            <span>{`${QuestData.view} view`}</span>
             <span>{`${QueVotes} votes`}</span>
           </EditInfo>
         </BoardDetailPageTitle>
@@ -42,13 +65,7 @@ function BoardDetail() {
                 <div className="votesDown"></div>
               </button>
             </VotesControl>
-            <Context>
-              I have two screens the first of login and the second shows the
-              user information. On the login screen I keep the user_id value in
-              user. defaults and when I go to the second screen I use that value
-              to ... What does the ... do in this React (using JSX) code and
-              what is it called?
-            </Context>
+            <Context>{QuestData.body}</Context>
           </Post>
           <Questioner>
             <span>Edit</span>
@@ -57,8 +74,17 @@ function BoardDetail() {
           </Questioner>
         </QuestionBody>
         <AnswerBody>
-          <span>{`${1} answer`}</span>
-          <TextArea className={'answer'}></TextArea>
+          <span>{`${QuestData.answercount} answer`}</span>
+          <TextArea
+            border={'1px solid var(--line-001)'}
+            width={'100%'}
+            height={'300px'}
+            margin={'20px 0 20px 0'}
+            borderRadius={'3px'}
+            padding={'24px'}
+            fontSize={'var(--font-size-lg)'}
+            fontColor={'var(--black-004)'}
+          ></TextArea>
           <Button
             bgColor={'var(--btn-default)'}
             textColor={'#fff'}
@@ -80,13 +106,7 @@ function BoardDetail() {
                 <div className="votesDown"></div>
               </button>
             </VotesControl>
-            <Context>
-              I have two screens the first of login and the second shows the
-              user information. On the login screen I keep the user_id value in
-              user. defaults and when I go to the second screen I use that value
-              to ... What does the ... do in this React (using JSX) code and
-              what is it called?
-            </Context>
+            <Context>{ansData.body}</Context>
           </Post>
         </AnswerBody>
       </MainLayout>
@@ -99,6 +119,7 @@ const BoardDetailPageTitle = styled.header`
     font-size: var(--font-size-h2);
     font-weight: 600;
     color: var(--black-001);
+    line-height: 40px;
   }
 `;
 
@@ -212,9 +233,6 @@ const AnswerBody = styled.section`
   & > span {
     font-size: var(--font-size-h3);
     color: var(--black-001);
-  }
-  & > .answer {
-    border: 1px solid #333;
   }
 `;
 export default BoardDetail;
