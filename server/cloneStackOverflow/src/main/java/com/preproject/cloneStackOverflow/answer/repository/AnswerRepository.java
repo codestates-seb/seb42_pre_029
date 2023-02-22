@@ -1,11 +1,8 @@
 package com.preproject.cloneStackOverflow.answer.repository;
 
 import com.preproject.cloneStackOverflow.answer.entity.Answer;
-import com.preproject.cloneStackOverflow.member.entity.Member;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
-
-import java.util.List;
+//import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
 
@@ -13,7 +10,7 @@ public interface AnswerRepository extends JpaRepository<Answer,Long> {
 
     int countByAnswerIdIn(List<Long> answerIds);
 
-    @Query(value ="SELECT a FROM Answer a WHERE a.memberId = :memberId")
-    List<Answer> findByMemberId(long memberId);
+    //@Query(value ="SELECT a FROM Answer a WHERE a.memberId = :memberId")
+    //List<Answer> findByMemberId(long memberId);
 
 }

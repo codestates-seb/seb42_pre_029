@@ -33,19 +33,23 @@ public class MemberController {
         this.memberService = memberService;
         this.memberMapper = mapper;
     }
-
-    @PostMapping("/login")
-    public ResponseEntity loginMember(){
-        return null;
+    @GetMapping("/members/save")
+    public String saveForm(){
+        return "memberpages/save";
     }
-    @PostMapping("/signup")
-    public ResponseEntity signupMember(@Valid @RequestBody MemberDto.Post requestBody){
-        Member member = memberMapper.memberPostToMember(requestBody);
-        Member createdMember = memberService.createMember(member);
-        URI location = UriCreator.createUri(MEMBER_DEFAULT_URL, createdMember.getMemberId());
-
-        return ResponseEntity.created(location).build();
-    }
+//
+//    @PostMapping("/login")
+//    public ResponseEntity loginMember(){
+//        return null;
+//    }
+//    @PostMapping("/signup")
+//    public ResponseEntity signupMember(@Valid @RequestBody MemberDto.Post requestBody){
+//        Member member = memberMapper.memberPostToMember(requestBody);
+//        Member createdMember = memberService.createMember(member);
+//        URI location = UriCreator.createUri(MEMBER_DEFAULT_URL, createdMember.getMemberId());
+//
+//        return ResponseEntity.created(location).build();
+//    }
     @PostMapping("/logout")
     public ResponseEntity logoutMember(){
         return null;
@@ -57,16 +61,6 @@ public class MemberController {
                 new SingleResponseDto<>(memberMapper.memberToMemberGetResponseDto(member))
                 , HttpStatus.OK);
     }
-//    @GetMapping
-//    public ResponseEntity getMembers(@Positive @RequestParam int page,
-//                                     @Positive @RequestParam int size){
-//        Page<Member> pageMembers = memberService.findMembers(page - 1, size);
-//        List<Member> members = pageMembers.getContent();
-//        return new ResponseEntity<>(
-//                new MultiResponseDto<>(memberMapper.membersToMemberGetResponseDtos(members),
-//                        pageMembers),
-//                HttpStatus.OK);
-//    }
     @GetMapping
     public ResponseEntity getMembers(){
         List<Member> members = memberService.findMembers();
