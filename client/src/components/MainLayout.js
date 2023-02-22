@@ -5,9 +5,9 @@ import Footer from './Footer';
 
 function MainLayout({ sideBar, children }) {
   return (
-    <LayoutContainer>
+    <LayoutContainer sideBar={sideBar}>
       <Header />
-      <ContentContainer>
+      <ContentContainer sideBar={sideBar}>
         {sideBar && <SideBar />}
         <main>{children}</main>
       </ContentContainer>
@@ -21,6 +21,7 @@ const LayoutContainer = styled.div`
     position: sticky;
     top: 0;
   }
+  background: ${({ sideBar }) => !sideBar && '#eff0f1'};
 `;
 
 const ContentContainer = styled.div`
@@ -31,8 +32,8 @@ const ContentContainer = styled.div`
   min-height: 100vh;
   & > main {
     flex-grow: 1;
-    padding: 60px;
-    padding-right: 0px;
+    padding: 60px 0px;
+    padding-left: ${({ sideBar }) => sideBar && '60px'};
   }
 `;
 
