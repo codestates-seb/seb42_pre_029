@@ -44,5 +44,7 @@ public class QuestionDto {
         private String body;
         private int view;
         private LocalDateTime createdAt;
+        private LocalDateTime modifiedAt;
+        private int answerCount;
     }
 }

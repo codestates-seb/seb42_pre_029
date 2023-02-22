@@ -1,15 +1,17 @@
 import MainLayout from '../../components/MainLayout';
 import Button from '../../components/Button';
-import styled from 'styled-components';
-
 import { Link } from 'react-router-dom';
+import styled from 'styled-components';
+import questions from '../../data/message_question.json';
+import { useEffect, useState } from 'react';
 
 function BoardList() {
-  const totalQuestion = 10000000;
-  const answer = 1;
-  const views = 1;
-  const votes = 1;
-  const arr = [1, 2, 3];
+  const [data, setData] = useState([]);
+  useEffect(() => {
+    setData(questions.questions);
+  }, []);
+  const totalQuestion = data.length;
+
   return (
     <MainLayout sideBar>
       <BoardListPageTitle>
@@ -28,41 +30,47 @@ function BoardList() {
         </Link>
       </BoardListPageTitle>
       <QuestionList>
-        {arr.map((e, i) => {
-          return (
-            <li key={i}>
-              <div className="container">
-                <Link className="h4" to="/board-detail">
-                  {`Error print user.default swift ${e}`}
-                </Link>
-                <div className="editor">
-                  <div className="editorInfo">
-                    <img
-                      src={`https://placeimg.com/200/100/people/${e}`}
-                      alt="practice"
-                    />
-                    <p>Andy Obusek</p>
+        {data.map(
+          ({
+            questionid,
+            title,
+            body,
+            createdAt,
+            modifiedAt,
+            view,
+            answercount,
+          }) => {
+            return (
+              <li key={questionid}>
+                <div className="container">
+                  <Link className="h4" to={`/board-detail/${questionid}`}>
+                    {title}
+                  </Link>
+                  <div className="editor">
+                    <div className="editorInfo">
+                      <img
+                        src={`https://placeimg.com/200/100/people/${questionid}`}
+                        alt="practice"
+                      />
+                      <p>Andy Obusek</p>
+                    </div>
+                    <span> {`${createdAt} ${modifiedAt}`}</span>
                   </div>
-                  <span> modified 21 mins ago</span>
                 </div>
-              </div>
-              <p>
-                I have two screens the first of login and the second shows the
-                user information. On the login screen I keep the user_id value
-                in user. defaults and when I go to the second screen I use that
-                value to ...
-              </p>
-              <div className="questionInfo">
-                <span>{`${answer} answer`}</span>
-                <div className="round"></div>
-                <span>{`${views} views`}</span>
-                <div className="round"></div>
-                <span>{`${votes} votes`}</span>
-              </div>
-            </li>
-          );
-        })}
+                <p>{body}</p>
+                <div className="questionInfo">
+                  <span>{`${answercount} answer`}</span>
+                  <div className="round"></div>
+                  <span>{`${view} views`}</span>
+                  <div className="round"></div>
+                  <span>{`${1} votes`}</span>
+                </div>
+              </li>
+            );
+          },
+        )}
       </QuestionList>
+      <PageNation></PageNation>
     </MainLayout>
   );
 }
@@ -112,6 +120,13 @@ const QuestionList = styled.ul`
         font-size: var(--font-size-h4);
         font-weight: 600;
         color: var(--main-001);
+        line-height: 28px;
+        max-width: 600px;
+        max-height: 60px;
+        overflow: hidden;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
       }
       & > .editor {
         display: flex;
@@ -152,6 +167,7 @@ const QuestionList = styled.ul`
       align-items: center;
       margin-top: 10px;
       & > span {
+        user-select: none;
         font-size: var(--font-size-sm);
         font-weight: 600;
         color: var(--main-002);
@@ -172,5 +188,5 @@ const QuestionList = styled.ul`
     }
   }
 `;
-
+const PageNation = styled.label``;
 export default BoardList;

@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.swing.text.html.Option;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -24,7 +25,6 @@ import java.util.stream.Collectors;
 @Transactional
 @Service
 public class QuestionService {
-    //private final Question question;
     private final QuestionRepository questionRepository;
     private final MemberService memberService;
     private final MemberRepository memberRepository;
@@ -42,8 +42,6 @@ public class QuestionService {
 
 
     public Question createQuestion(Question question){
-        //verifyQuestion(question);
-        //Question saveQuestion = saveQuestion(question);
         verifyExistsId(question.getQuestionId());
 
         return questionRepository.save(question);
@@ -52,38 +50,36 @@ public class QuestionService {
     public Question updateQuestion(Question question){
         Question findQuestion = findQuestion(question.getQuestionId());
 
-        //updateQuestion = findQuestion.changeQuestionInfo(question, beanUtils);
-        //return saveQuestion(updateQuestion);
-
-        Optional.ofNullable(question.getTitle()).ifPresent(title->findQuestion.setTitle(title));
-        Optional.ofNullable(question.getBody()).ifPresent(body->findQuestion.setBody(body));
+        Optional.ofNullable(question.getTitle()).ifPresent(findQuestion::setTitle);
+        Optional.ofNullable(question.getBody()).ifPresent(findQuestion::setBody);
         return saveQuestion(findQuestion);
     }
 
     public Question findQuestion(long questionId){
-        return questionRepository.findById(questionId).orElseThrow(() -> new StackOverFlowException(ExceptionCode.QUESTION_NOT_FOUND));
+        Question question = questionRepository.findById(questionId).orElseThrow(() -> new StackOverFlowException(ExceptionCode.QUESTION_NOT_FOUND));
+        question.setView(question.getView()+1);
+        question.setAnswerCount(answerCount(questionId));
+        return questionRepository.save(question);
     }
 
     public Page<Question> findQuestions(int page, int size){
         return questionRepository.findAll(PageRequest.of(page, size, Sort.by("questionId").descending()));
     }
 
-    /*@Transactional
-    public Question viewCount(long questionId){
-        //Question question = findQuestion(questionId);
-        .setView(Question.getView()+1);
-        return questionRepository.findById(questionId).orElseThrow(() -> new StackOverFlowException(ExceptionCode.QUESTION_NOT_FOUND));
-    }*/
+    public int viewCount(long questionId){
+        Question findView = findVerifiedQuestion(questionId);
+        return findView.getView();
+    }
 
     public long questionCount() {
         long question = questionRepository.count();
         return question;
     }
-    /*//Todo : answerCount 구현
-    public int answerCount(List<Long> quesiotnId){
-        question.getAnswers().stream().map(answer->answer.getAnswerId()).collect(Collectors.toList());
-        return questionRepository.countByQuestionIdIn(questionIds);
-    }*/
+
+    public int answerCount(long questionId){
+        Question findAnswers = findVerifiedQuestion(questionId);
+        return findAnswers.getAnswers().size();
+    }
 
     public void deleteQuestion(long questionId){
         Question findQuestion = findVerifiedQuestion(questionId);
@@ -96,7 +92,6 @@ public class QuestionService {
         return findQuestion;
     }
 
-
     private void verifyExistsId(long questionId) {
         Optional<Question> question = questionRepository.findById(questionId);
         if(question.isPresent()){
@@ -108,7 +103,4 @@ public class QuestionService {
         return questionRepository.save(question);
     }
 
-    private List<Long> getAnswers(Question question){
-        return question.getAnswers().stream().map(answer->answer.getAnswerId()).collect(Collectors.toList());
-    }
 }

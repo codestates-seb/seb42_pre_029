@@ -35,7 +35,7 @@ const GlobalInput = styled.input`
   padding: 8px;
   margin: 8px;
   width: ${({ width }) => width};
-  width: ${({ height }) => height};
+  height: ${({ height }) => height};
   font-size: var(--font-size-sm);
 
   &:focus {

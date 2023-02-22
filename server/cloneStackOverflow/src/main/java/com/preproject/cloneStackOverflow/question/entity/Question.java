@@ -61,10 +61,6 @@ public class Question extends Auditable {
         }
     }
 
-    public Question changeQuestionInfo(Question sourceQuestion, CustomBeanUtils<Question> beanUtils){
-        return beanUtils.copyNonNullProperties(sourceQuestion, this);
-    }
-
     public Question questionCount(long questionCount){
         this.questionCount = questionCount;
         return this;

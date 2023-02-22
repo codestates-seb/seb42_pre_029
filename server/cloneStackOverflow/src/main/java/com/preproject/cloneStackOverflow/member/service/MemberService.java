@@ -27,10 +27,10 @@ public class MemberService {
         this.memberRepository = memberRepository;
         this.beanUtils = beanUtils;
         //this.passwordEncoder = passwordEncoder; 로그인 구현에서
+        // private final PasswordEncoder passwordEncoder;
+        //private final CustomAuthorityUtils authorityUtils; 이건 시큐리티,권한할때
     }
-
-
-    public Member signinMember(Member member) {
+    public Member signinMember(Member member){
         return null;
     }
 

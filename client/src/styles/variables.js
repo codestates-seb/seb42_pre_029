@@ -15,12 +15,16 @@ const variables = css`
     --lbtn-default: #e3ecf3;
     --lbtn-hover: #cde9fe;
     --lbtn-selected: #b0dbfc;
+    --pbtn-default: #f49530;
+    --pbtn-hover: #ea7726;
+    --pbtn-selected: #ea6d1c;
 
     --black-001: #1d1d1b;
     --black-002: #333;
     --black-003: #53595f;
     --black-004: #888;
     --black-005: #ddd;
+    --black-006: #aaa;
 
     --line-001: #ccc;
     --line-002: #e4e4e4;
