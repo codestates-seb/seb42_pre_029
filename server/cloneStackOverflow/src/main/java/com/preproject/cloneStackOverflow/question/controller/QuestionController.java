@@ -91,11 +91,11 @@ public class QuestionController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
-    /*@GetMapping("/count/{question-id}")
+    @GetMapping("/count/{question-id}")
     // Todo : 답변수, AnswerService매핑 필요?
     public ResponseEntity getAnswerCount(@PathVariable("question-id") @Positive long questionId){
-        Question response = questionService.answerCount();
-        return new ResponseEntity<>(mapper.questionToQuestionResponseDto(response), HttpStatus.OK);
-    }*/
+        int response = questionService.answerCount(questionId);
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
 
 }

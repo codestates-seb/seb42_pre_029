@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.swing.text.html.Option;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -78,11 +79,11 @@ public class QuestionService {
         long question = questionRepository.count();
         return question;
     }
-    /*//Todo : answerCount 구현
-    public  answerCount(List<Long> quesiotnId){
-        question.getAnswers().stream().map(answer->answer.getAnswerId()).collect(Collectors.toList());
-        return questionRepository.countByQuestionIdIn(questionIds);
-    }*/
+
+    public int answerCount(long questionId){
+        Question findAnswers = findVerifiedQuestion(questionId);;
+        return findAnswers.getAnswers().size();
+    }
 
     public void deleteQuestion(long questionId){
         Question findQuestion = findVerifiedQuestion(questionId);
@@ -95,13 +96,6 @@ public class QuestionService {
         return findQuestion;
     }
 
-    /*private void verifyQuestion(Question question){
-        memberService.findMember(question.getMember().getMemberId());
-        List<Answer> answers = question.getAnswers();
-        int existAnswerCount = answerService.findAnswerCount(answers);
-        Answer.checkNotFoundAnswers(answers.size(), existAnswerCount);
-    }*/
-
     private void verifyExistsId(long questionId) {
         Optional<Question> question = questionRepository.findById(questionId);
         if(question.isPresent()){
@@ -113,7 +107,4 @@ public class QuestionService {
         return questionRepository.save(question);
     }
 
-    private List<Long> getAnswers(Question question){
-        return question.getAnswers().stream().map(answer->answer.getAnswerId()).collect(Collectors.toList());
-    }
 }
