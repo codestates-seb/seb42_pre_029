@@ -49,6 +49,15 @@ const GlobalTextArea = styled.textarea`
     outline: none;
     box-shadow: 0px 0px 3px 0.5px var(--main-002);
     border-color: none;
+    color: var(--black-002);
+    font-family: 'pretendard';
+    font-size: var(--font-size-md);
+  }
+  &::placeholder {
+    color: ${({ placeholder }) => (placeholder ? 'var(--black-005)' : null)};
+    font-family: ${({ placeholder }) => (placeholder ? 'pretendard' : null)};
+    font-size: ${({ placeholder }) =>
+      placeholder ? 'var(--font-size-md)' : null};
   }
 `;
 
