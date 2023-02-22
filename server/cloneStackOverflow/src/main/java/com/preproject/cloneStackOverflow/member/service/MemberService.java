@@ -34,7 +34,6 @@ public class MemberService {
         // private final PasswordEncoder passwordEncoder;
         //private final CustomAuthorityUtils authorityUtils; 이건 시큐리티,권한할때
     }
-
     public Member signinMember(Member member){
         return null;
     }
@@ -93,6 +92,7 @@ public class MemberService {
         return optionalMember.orElseThrow(() ->
                 new StackOverFlowException(ExceptionCode.MEMBER_NOT_FOUND));
 
+
 //    public Member findVerifiedMember(long memberId) {
 //        Optional<Member> optionalMember =
 //                memberRepository.findById(memberId);
@@ -100,5 +100,6 @@ public class MemberService {
 //                optionalMember.orElseThrow(() ->
 //                        new StackOverFlowException(ExceptionCode.MEMBER_NOT_FOUND));
 //        return findMember;
+
     }
-    }
+}

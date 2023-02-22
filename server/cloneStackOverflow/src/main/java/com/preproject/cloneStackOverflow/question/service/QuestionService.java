@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.swing.text.html.Option;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -61,29 +62,28 @@ public class QuestionService {
     }
 
     public Question findQuestion(long questionId){
-        return questionRepository.findById(questionId).orElseThrow(() -> new StackOverFlowException(ExceptionCode.QUESTION_NOT_FOUND));
+        Question question = questionRepository.findById(questionId).orElseThrow(() -> new StackOverFlowException(ExceptionCode.QUESTION_NOT_FOUND));
+        question.setView(question.getView()+1);
+        return questionRepository.save(question);
     }
 
     public Page<Question> findQuestions(int page, int size){
         return questionRepository.findAll(PageRequest.of(page, size, Sort.by("questionId").descending()));
     }
 
-    /*@Transactional
     public Question viewCount(long questionId){
-        //Question question = findQuestion(questionId);
-        .setView(Question.getView()+1);
         return questionRepository.findById(questionId).orElseThrow(() -> new StackOverFlowException(ExceptionCode.QUESTION_NOT_FOUND));
-    }*/
+    }
 
     public long questionCount() {
         long question = questionRepository.count();
         return question;
     }
-    /*//Todo : answerCount 구현
-    public int answerCount(List<Long> quesiotnId){
-        question.getAnswers().stream().map(answer->answer.getAnswerId()).collect(Collectors.toList());
-        return questionRepository.countByQuestionIdIn(questionIds);
-    }*/
+
+    public int answerCount(long questionId){
+        Question findAnswers = findVerifiedQuestion(questionId);;
+        return findAnswers.getAnswers().size();
+    }
 
     public void deleteQuestion(long questionId){
         Question findQuestion = findVerifiedQuestion(questionId);
@@ -107,7 +107,4 @@ public class QuestionService {
         return questionRepository.save(question);
     }
 
-    private List<Long> getAnswers(Question question){
-        return question.getAnswers().stream().map(answer->answer.getAnswerId()).collect(Collectors.toList());
-    }
 }

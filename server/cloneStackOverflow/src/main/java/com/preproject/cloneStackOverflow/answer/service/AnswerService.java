@@ -78,11 +78,9 @@ public class AnswerService {
         return optionalAnswer.orElseThrow(() ->
                 new StackOverFlowException(ExceptionCode.ANSWER_NOT_FOUND));
 
+        //return answerRepository.findByMemberId(findMember.getMemberId());
+        List<Answer> answerList = new ArrayList<>();
+        return answerList;
     }
 
-    public int findAnswerCount(List<Answer> answers){
-        List<Long> answerIds = answers.stream().map(answer -> answer.getAnswerId()).collect(Collectors.toList());
-
-        return answerRepository.countByAnswerIdIn(answerIds);
-    }
 }

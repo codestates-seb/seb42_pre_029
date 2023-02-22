@@ -9,9 +9,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import java.util.List;
 
 public interface AnswerRepository extends JpaRepository<Answer,Long> {
-
     int countByAnswerIdIn(List<Long> answerIds);
 
     List<Answer> findByMember(Member member);
-
 }
