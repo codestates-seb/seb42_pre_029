@@ -1,15 +1,18 @@
 import MainLayout from '../../components/MainLayout';
 import Button from '../../components/Button';
-import styled from 'styled-components';
-
 import { Link } from 'react-router-dom';
+import styled from 'styled-components';
+// import { useState } from 'react';
 
 function BoardList() {
   const totalQuestion = 10000000;
   const answer = 1;
   const views = 1;
   const votes = 1;
-  const arr = [1, 2, 3];
+  const arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18];
+  // const [limit, setLimit] = useState(10);
+  // const [page, setPage] = useState(1);
+  // const offset = (page - 1) * limit;
   return (
     <MainLayout sideBar>
       <BoardListPageTitle>
@@ -63,6 +66,7 @@ function BoardList() {
           );
         })}
       </QuestionList>
+      <PageNation></PageNation>
     </MainLayout>
   );
 }
@@ -152,6 +156,7 @@ const QuestionList = styled.ul`
       align-items: center;
       margin-top: 10px;
       & > span {
+        user-select: none;
         font-size: var(--font-size-sm);
         font-weight: 600;
         color: var(--main-002);
@@ -172,5 +177,5 @@ const QuestionList = styled.ul`
     }
   }
 `;
-
+const PageNation = styled.label``;
 export default BoardList;
