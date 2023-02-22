@@ -11,6 +11,7 @@ function Button({
   height,
   width,
   fontSize,
+  fontWeignt,
   padding,
 }) {
   return (
@@ -26,6 +27,7 @@ function Button({
         width={width}
         fontSize={fontSize}
         padding={padding}
+        fontWeignt={fontWeignt}
       >
         {text}
       </GlobalButton>
@@ -37,7 +39,8 @@ const GlobalButton = styled.button`
   height: ${({ height }) => (height ? height : '32px')};
   width: ${({ width }) => (width ? width : 'auto')};
   font-size: ${({ fontSize }) => (fontSize ? fontSize : 'var(--font-size-sm)')};
-  padding: ${({ padding }) => (padding ? padding : 'auto')};
+  font-weight: ${({ fontWeignt }) => (fontWeignt ? fontWeignt : 400)};
+  padding: ${({ padding }) => (padding ? padding : 0)};
   border: ${({ border }) => (border ? border : null)};
   border-radius: 3px;
   background-color: ${({ bgColor }) =>
