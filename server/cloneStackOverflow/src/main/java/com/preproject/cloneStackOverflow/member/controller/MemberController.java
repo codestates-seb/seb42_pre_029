@@ -11,8 +11,10 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
 import javax.validation.constraints.Positive;
@@ -20,7 +22,7 @@ import java.net.URI;
 import java.util.List;
 
 
-@RequestMapping("/v1/members")
+@RequestMapping("/members")
 @RestController
 @Validated
 @Slf4j
@@ -33,15 +35,25 @@ public class MemberController {
         this.memberService = memberService;
         this.memberMapper = mapper;
     }
-    @GetMapping("/members/save")
-    public String saveForm(){
-        return "memberpages/save";
+    //회원가입 페이지 출력 요청
+    @GetMapping("/save")
+    public ModelAndView saveForm(){
+        ModelAndView mav = new ModelAndView("save");
+        return mav;
     }
-//
-//    @PostMapping("/login")
-//    public ResponseEntity loginMember(){
-//        return null;
-//    }
+    //회원가입 post 요청
+    @PostMapping("/save")
+    public ModelAndView save(@Valid MemberDto.signup requestBody){
+        ModelAndView mav = new ModelAndView("save");
+        System.out.println("Member Registration Successfully");
+        return mav;
+    }
+
+    @GetMapping("/{member-id}/my-page")
+    public ModelAndView myPage(){
+        ModelAndView mav = new ModelAndView("my-page");
+        return mav;
+    }
 //    @PostMapping("/signup")
 //    public ResponseEntity signupMember(@Valid @RequestBody MemberDto.Post requestBody){
 //        Member member = memberMapper.memberPostToMember(requestBody);
@@ -50,9 +62,10 @@ public class MemberController {
 //
 //        return ResponseEntity.created(location).build();
 //    }
-    @PostMapping("/logout")
-    public ResponseEntity logoutMember(){
-        return null;
+    @GetMapping("/logout")
+    public ModelAndView logoutMember(){
+        ModelAndView mav = new ModelAndView("logout");
+        return mav;
     }
     @GetMapping("/{member-id}")
     public ResponseEntity getMember(@PathVariable("member-id") @Positive long memberId){

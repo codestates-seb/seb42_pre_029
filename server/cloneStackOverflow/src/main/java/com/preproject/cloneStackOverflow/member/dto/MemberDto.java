@@ -28,12 +28,21 @@ public class MemberDto {
         private String username;
     }
     public static class login {
+        @Email
         private String email;
-
+        @NotBlank
         private String password;
     }
 
-    public static class logout{
+    @Getter
+    @Setter
+    public static class signup{
+        @Email
+        private String email;
+
+        private String username;
+
+        private String password;
 
     }
     @Getter
