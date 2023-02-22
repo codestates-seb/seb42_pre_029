@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="layouts/main-layout">
+<head>
+    <meta charset="UTF-8">
+    <title>my-page</title>
+</head>
+<body>
+ <form action="/members/{member-id}/my-page" method="get">
+  <div layout:fragment="content">
+  <h2>마이페이지는 로그인한 사용자만 접근할 수 있습니다.</h2>
+  </div>
+ </form>
+</body>
+</html>

@@ -30,7 +30,7 @@ public class Question extends Auditable {
     @NotBlank(message = "Insert Text.")
     @Column(length = 1000, nullable = false)
     private String body;
-    @Setter
+    //@Setter
     @ManyToOne
     @JoinColumn(name = "MEMBER_ID")
     private Member member;

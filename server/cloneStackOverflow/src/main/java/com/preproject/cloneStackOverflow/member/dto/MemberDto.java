@@ -1,18 +1,18 @@
 package com.preproject.cloneStackOverflow.member.dto;
 
+import com.preproject.cloneStackOverflow.member.entity.Member;
 import com.preproject.cloneStackOverflow.validator.NotSpace;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.springframework.util.Assert;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 import java.util.regex.Matcher;
-
 public class MemberDto {
-
     @Getter
     @NoArgsConstructor
     public static class Post {
@@ -28,12 +28,21 @@ public class MemberDto {
         private String username;
     }
     public static class login {
+        @Email
         private String email;
-
+        @NotBlank
         private String password;
     }
 
-    public static class logout{
+    @Getter
+    @Setter
+    public static class signup{
+        @Email
+        private String email;
+
+        private String username;
+
+        private String password;
 
     }
     @Getter
@@ -53,8 +62,8 @@ public class MemberDto {
         @NotSpace
         private String username;
 
-        @Pattern(regexp = "^((19|20)\\\\d\\\\d)?([/.])?(0[1-9]|1[012])([/.])?(0[1-9]|[12][0-9]|3[01])$",
-                message = "예시)96년 2월 13일생은 19960213, 공백은 없어야 합니다.")
+//        @Pattern(regexp = "^((19|20)\\\\d\\\\d)?([-/.])?(0[1-9]|1[012])([-/.])?(0[1-9]|[12][0-9]|3[01])$",
+//                message = "예시)96년 2월 13일생은 19960213, 공백은 없어야 합니다.")
         private String birth;
 
         @Pattern(regexp = "^010-\\d{3,4}-\\d{4}$",
@@ -78,4 +87,5 @@ public class MemberDto {
         private String birth;
         private String phone;
     }
+
 }
