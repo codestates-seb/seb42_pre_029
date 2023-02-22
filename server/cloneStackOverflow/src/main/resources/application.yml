@@ -4,7 +4,10 @@ spring:
       enabled: true
       path: /h2
   datasource:
-    url: jdbc:h2:mem:test
+    url: jdbc:h2:mem:test&useLegacyDatetimeCode=false
+  sql:
+    init:
+      schema-locations: classpath*:db/h2/schema.sql
   jpa:
     hibernate:
       ddl-auto: create
@@ -12,6 +15,6 @@ spring:
     properties:
       hibernate:
         format_sql: true
-  sql:
-    init:
-      data-locations: classpath*:db/h2/data.sql
+        jdbc:
+          time_zone: UTC
+

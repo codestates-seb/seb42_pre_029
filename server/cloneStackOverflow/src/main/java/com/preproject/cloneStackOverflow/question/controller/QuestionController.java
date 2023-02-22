@@ -81,8 +81,8 @@ public class QuestionController {
 
     @GetMapping("/view/{question-id}")
     public ResponseEntity getViewCount(@PathVariable("question-id") @Positive long questionId){
-        Question response = questionService.viewCount(questionId);
-        return new ResponseEntity<>(new SingleResponseDto<>(mapper.questionToQuestionResponseDto(response)), HttpStatus.OK);
+        int response = questionService.viewCount(questionId);
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     @GetMapping("/count")

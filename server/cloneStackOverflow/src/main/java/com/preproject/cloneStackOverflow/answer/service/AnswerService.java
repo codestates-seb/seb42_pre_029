@@ -79,8 +79,6 @@ public class AnswerService {
                 new StackOverFlowException(ExceptionCode.ANSWER_NOT_FOUND));
 
         //return answerRepository.findByMemberId(findMember.getMemberId());
-        List<Answer> answerList = new ArrayList<>();
-        return answerList;
     }
 
 }
