@@ -32,7 +32,6 @@ function Header() {
             <Button
               bgColor={'var(--btn-default)'}
               textColor={'#fff'}
-              border={'1px solid #83A6C4'}
               hover={'var(--btn-hover)'}
               active={'var(--btn-selected)'}
               text={'sign up'}
