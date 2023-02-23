@@ -73,8 +73,8 @@ function BoardList() {
                     <span>{`${answercount} answer`}</span>
                     <div className="round"></div>
                     <span>{`${view} views`}</span>
-                    <div className="round"></div>
-                    <span>{`${1} votes`}</span>
+                    {/* <div className="round"></div>
+                    <span>{`${1} votes`}</span> */}
                   </div>
                 </li>
               );
