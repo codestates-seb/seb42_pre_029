@@ -48,11 +48,20 @@ function BoardDetail() {
       <MainLayout sideBar>
         <BoardDetailPageTitle>
           <h2>{QuestData.title}</h2>
-          <EditInfo>
-            <span>{`${QuestData.createdAt} ago`}</span>
-            <span>{`${QuestData.view} view`}</span>
-            <span>{`${QueVotes} votes`}</span>
-          </EditInfo>
+          <EditLayout>
+            <Editor>
+              <img
+                src={`https://placeimg.com/200/100/people/${QuestData.questionid}`}
+                alt="practice"
+              />
+              <p>Andy Obusek</p>
+            </Editor>
+            <EditInfo>
+              <span>{`${QuestData.createdAt} ago`}</span>
+              <span>{`${QuestData.view} view`}</span>
+              <span>{`${QueVotes} votes`}</span>
+            </EditInfo>
+          </EditLayout>
         </BoardDetailPageTitle>
         <QuestionBody>
           <Post>
@@ -122,7 +131,30 @@ const BoardDetailPageTitle = styled.header`
     line-height: 40px;
   }
 `;
-
+const EditLayout = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-end;
+  border-bottom: 1px solid var(--line-002);
+  padding-bottom: 30px;
+`;
+const Editor = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  > img {
+    width: 16px;
+    height: 16px;
+    margin-right: 6px;
+    border-radius: 3px;
+  }
+  > p {
+    font-size: var(--font-size-sm);
+    color: #0075cf;
+    margin-right: 8px;
+  }
+`;
 const EditInfo = styled.div`
   display: flex;
   flex-direction: row;
@@ -130,8 +162,7 @@ const EditInfo = styled.div`
   font-size: var(--font-size-md);
   color: var(--black-004);
   margin-top: 30px;
-  border-bottom: 1px solid var(--line-002);
-  padding-bottom: 30px;
+
   & > span {
     margin-right: 16px;
   }

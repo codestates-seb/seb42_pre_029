@@ -1,9 +1,11 @@
 import styled from 'styled-components';
 
-function Pagination({ total, limit, page, setPage }) {
+//? Props = 전체 데이터 갯수, 보여줄 페이지 수, 현재 페이지, 페이지 상태변경 함수, 보여줄 페이지 상태변경 함수
+function Pagenation({ total, limit, page, setPage, setLimit }) {
   const numPages = Math.ceil(total / limit);
+  console.log(total);
   return (
-    <>
+    <PagenationLayout>
       <Nav>
         <NumBtn onClick={() => setPage(page - 1)} disabled={page === 1}>
           &lt;
@@ -20,15 +22,36 @@ function Pagination({ total, limit, page, setPage }) {
             </NumBtn>
           ))}
         <NumBtn onClick={() => setPage(page + 1)} disabled={page === numPages}>
-          &gt;
+          Next
         </NumBtn>
       </Nav>
-    </>
+      <PerPage>
+        per page &nbsp;
+        <select
+          type="number"
+          value={limit}
+          onChange={({ target: { value } }) => setLimit(Number(value))}
+        >
+          <option value="5">5</option>
+          <option value="10">10</option>
+          <option value="20">20</option>
+          <option value="50">50</option>
+          <option value="100">100</option>
+        </select>
+      </PerPage>
+    </PagenationLayout>
   );
 }
 
+const PagenationLayout = styled.article`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+`;
 const Nav = styled.nav`
   display: flex;
+  flex-direction: row;
   justify-content: center;
   align-items: center;
   gap: 4px;
@@ -36,32 +59,43 @@ const Nav = styled.nav`
 `;
 
 const NumBtn = styled.button`
-  border: none;
-  border-radius: 8px;
-  padding: 8px;
+  border: 1px solid var(--line-003);
+  border-radius: 3px;
+  padding: 4px 10px;
   margin: 0;
-  background: black;
-  color: white;
-  font-size: 1rem;
+  color: var(--black-003);
+  font-size: var(--font-size-md);
+  background: none;
 
   &:hover {
-    background: tomato;
     cursor: pointer;
-    transform: translateY(-2px);
+    background: var(--black-005);
   }
 
   &[disabled] {
-    background: grey;
     cursor: revert;
     transform: revert;
   }
 
   &[aria-current] {
-    background: deeppink;
     font-weight: bold;
+    color: white;
+    background-color: var(--main-002);
     cursor: revert;
     transform: revert;
   }
 `;
 
-export default Pagination;
+const PerPage = styled.label`
+  color: var(--black-002);
+  font-size: var(--font-size-md);
+  & > select {
+    border: 1px solid var(--line-003);
+    border-radius: 3px;
+    padding: 4px 10px;
+    margin: 0;
+    color: var(--black-003);
+    font-size: var(--font-size-md);
+  }
+`;
+export default Pagenation;

@@ -1,5 +1,5 @@
 import MainLayout from '../../components/MainLayout';
-// import Button from '../../components/Button';
+import Button from '../../components/Button';
 import styled from 'styled-components';
 import TextArea from '../../components/TextArea';
 function BoardWrite() {
@@ -16,6 +16,7 @@ function BoardWrite() {
               non-programming question? See the topics here to find a relevant
               site.
             </p>
+            ``
           </div>
           <div className="tipRule">
             <span>Steps</span>
@@ -66,6 +67,7 @@ function BoardWrite() {
             fontSize={'var(--font-size-md)'}
             fontColor={'var(--black-004)'}
           />
+          <Button text={'Submit'} textColor={'white'} width={'80px'} />
         </TextField>
       </BoardWriteBody>
     </MainLayout>
@@ -139,7 +141,8 @@ const TextField = styled.article`
   border: 1px solid var(--line-002);
   border-radius: 8px;
   padding: 24px;
-  margin-top: 40px;
+  margin-top: 20px;
+  background: white;
   > span {
     font-size: var(--font-size-h6);
     color: var(--black-001);
