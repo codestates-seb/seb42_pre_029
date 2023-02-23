@@ -13,7 +13,7 @@ function BoardDetail() {
   const params = useParams();
   const { no } = params;
   const [QuestData, setQuestData] = useState({});
-  const [ansData, setAnsData] = useState({});
+  const [ansData, setAnsData] = useState([]);
   const [userData, setUserData] = useState({});
   useEffect(() => {
     const questionData = questions.questions.filter(
@@ -22,32 +22,30 @@ function BoardDetail() {
     setQuestData(questionData);
     const answerData = answer.answers.filter(
       e => e.questionid === questionData.questionid,
-    )[0];
-    console.log(answerData);
+    );
     setAnsData(answerData);
     const membersData = member.members.filter(
-      e => e.memberid === QuestData.memberid,
+      e => e.memberid === questionData.memberid,
     )[0];
-    console.log(QuestData.memberid);
     setUserData(membersData);
   }, []);
-  // 질문 추천
-  const [QueVotes, setQueVotes] = useState(0);
-  const QueVotesHandller = e => {
-    let value = e.target.className;
-    let num = QueVotes;
-    value === 'votesUp' ? (num += 1) : (num -= 1);
-    setQueVotes(num);
-  };
+  // // 질문 추천
+  // const [QueVotes, setQueVotes] = useState(0);
+  // const QueVotesHandller = e => {
+  //   let value = e.target.className;
+  //   let num = QueVotes;
+  //   value === 'votesUp' ? (num += 1) : (num -= 1);
+  //   setQueVotes(num);
+  // };
 
-  // 답변 추천
-  const [AnsVotes, setAnsVotes] = useState(0);
-  const ansVotesHandller = e => {
-    let value = e.target.className;
-    let num = AnsVotes;
-    value === 'votesUp' ? (num += 1) : (num -= 1);
-    setAnsVotes(num);
-  };
+  // // 답변 추천
+  // const [AnsVotes, setAnsVotes] = useState(0);
+  // const ansVotesHandller = e => {
+  //   let value = e.target.className;
+  //   let num = AnsVotes;
+  //   value === 'votesUp' ? (num += 1) : (num -= 1);
+  //   setAnsVotes(num);
+  // };
 
   //답변 작성
   const [inputAnswer, setInputAnswer] = useState('');
@@ -61,7 +59,7 @@ function BoardDetail() {
       createdAt: new Date(),
       modifiedAt: new Date(),
     };
-    answer.answers = [...answer.answers, newAnswerData];
+    setAnsData([...ansData, newAnswerData]);
     console.log(answer.answers);
   };
 
@@ -81,13 +79,13 @@ function BoardDetail() {
             <EditInfo>
               <span>{`${QuestData.createdAt} ago`}</span>
               <span>{`${QuestData.view} view`}</span>
-              <span>{`${QueVotes} votes`}</span>
+              {/* <span>{`${QueVotes} votes`}</span> */}
             </EditInfo>
           </EditLayout>
         </BoardDetailPageTitle>
         <QuestionBody>
           <Post>
-            <VotesControl>
+            {/* <VotesControl>
               <button onClick={e => QueVotesHandller(e)}>
                 <div className="votesUp"></div>
               </button>
@@ -95,7 +93,7 @@ function BoardDetail() {
               <button onClick={e => QueVotesHandller(e)}>
                 <div className="votesDown"></div>
               </button>
-            </VotesControl>
+            </VotesControl> */}
             <Context>{QuestData.body}</Context>
           </Post>
           <Questioner>
@@ -105,7 +103,7 @@ function BoardDetail() {
           </Questioner>
         </QuestionBody>
         <AnswerBody>
-          <span>{`${QuestData.answercount} answer`}</span>
+          <span>{`${ansData.length} answer`}</span>
           <TextArea
             border={'1px solid var(--line-001)'}
             width={'100%'}
@@ -129,19 +127,22 @@ function BoardDetail() {
             width={'120px'}
             onClick={answerSubmit}
           />
-
-          <Post>
-            <VotesControl>
-              <button onClick={e => ansVotesHandller(e)}>
-                <div className="votesUp"></div>
-              </button>
-              <span>{AnsVotes}</span>
-              <button onClick={e => ansVotesHandller(e)}>
-                <div className="votesDown"></div>
-              </button>
-            </VotesControl>
-            <Context>{ansData.body}</Context>
-          </Post>
+          {ansData.map(({ body }, i) => {
+            return (
+              <Post key={i}>
+                {/* <VotesControl>
+                  <button onClick={e => ansVotesHandller(e)}>
+                    <div className="votesUp"></div>
+                  </button>
+                  <span>{AnsVotes}</span>
+                  <button onClick={e => ansVotesHandller(e)}>
+                    <div className="votesDown"></div>
+                  </button>
+                </VotesControl> */}
+                <Context>{body}</Context>
+              </Post>
+            );
+          })}
         </AnswerBody>
       </MainLayout>
     </>
@@ -208,6 +209,12 @@ const Post = styled.article`
   flex-direction: row;
   align-items: flex-start;
   margin-top: 40px;
+  border-bottom: 1px solid var(--line-002);
+  padding-bottom: 30px;
+  :last-child {
+    border-bottom: none;
+    padding-bottom: none;
+  }
 `;
 
 const Context = styled.p`
@@ -215,43 +222,43 @@ const Context = styled.p`
   color: var(--black-002);
   line-height: 26px;
 `;
+//vote 기능 css
+// const VotesControl = styled.article`
+//   display: flex;
+//   flex-direction: column;
+//   align-items: center;
+//   margin-right: 30px;
+//   & > button {
+//     background: none;
+//     & > .votesUp {
+//       width: 0px;
+//       height: 0px;
+//       border-bottom: 18px solid var(--black-005);
+//       border-left: 24px solid transparent;
+//       border-right: 24px solid transparent;
+//       cursor: pointer;
+//       margin-bottom: 10px;
+//     }
+//   }
+//   & > span {
+//     font-size: var(--font-size-h4);
+//     color: var(--black-004);
+//     text-align: center;
+//   }
 
-const VotesControl = styled.article`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-right: 30px;
-  & > button {
-    background: none;
-    & > .votesUp {
-      width: 0px;
-      height: 0px;
-      border-bottom: 18px solid var(--black-005);
-      border-left: 24px solid transparent;
-      border-right: 24px solid transparent;
-      cursor: pointer;
-      margin-bottom: 10px;
-    }
-  }
-  & > span {
-    font-size: var(--font-size-h4);
-    color: var(--black-004);
-    text-align: center;
-  }
-
-  & > button {
-    background: none;
-    & > .votesDown {
-      width: 0px;
-      height: 0px;
-      border-top: 18px solid var(--black-005);
-      border-left: 24px solid transparent;
-      border-right: 24px solid transparent;
-      cursor: pointer;
-      margin-top: 10px;
-    }
-  }
-`;
+//   & > button {
+//     background: none;
+//     & > .votesDown {
+//       width: 0px;
+//       height: 0px;
+//       border-top: 18px solid var(--black-005);
+//       border-left: 24px solid transparent;
+//       border-right: 24px solid transparent;
+//       cursor: pointer;
+//       margin-top: 10px;
+//     }
+//   }
+// `;
 
 const Questioner = styled.article`
   display: flex;
