@@ -13,10 +13,12 @@ function Button({
   fontSize,
   fontWeignt,
   padding,
+  onClick,
 }) {
   return (
     <>
       <GlobalButton
+        onClick={onClick}
         type={type}
         border={border}
         bgColor={bgColor}

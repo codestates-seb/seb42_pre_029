@@ -4,20 +4,29 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import questions from '../../data/message_question.json';
 import { useEffect, useState } from 'react';
+import Pagenation from '../../components/Pagenation';
 
 function BoardList() {
+  // 질문데이터 받아오기
   const [data, setData] = useState([]);
+  const [limit, setLimit] = useState(10);
+  const [page, setPage] = useState(1);
+  const offset = (page - 1) * limit;
+  const total = data.length;
+  console.log(offset);
+
   useEffect(() => {
     setData(questions.questions);
   }, []);
-  const totalQuestion = data.length;
+
+  // 현재페이지 보여주기
 
   return (
     <MainLayout sideBar>
       <BoardListPageTitle>
         <div>
           <h1>All Questions</h1>
-          <p>{`${totalQuestion} Questions`}</p>
+          <p>{`${total} Questions`}</p>
         </div>
         <Link to="/board-write">
           <Button
@@ -30,47 +39,56 @@ function BoardList() {
         </Link>
       </BoardListPageTitle>
       <QuestionList>
-        {data.map(
-          ({
-            questionid,
-            title,
-            body,
-            createdAt,
-            modifiedAt,
-            view,
-            answercount,
-          }) => {
-            return (
-              <li key={questionid}>
-                <div className="container">
-                  <Link className="h4" to={`/board-detail/${questionid}`}>
-                    {title}
-                  </Link>
-                  <div className="editor">
-                    <div className="editorInfo">
-                      <img
-                        src={`https://placeimg.com/200/100/people/${questionid}`}
-                        alt="practice"
-                      />
-                      <p>Andy Obusek</p>
+        {data
+          .slice(offset, offset + limit)
+          .map(
+            ({
+              questionid,
+              title,
+              body,
+              createdAt,
+              modifiedAt,
+              view,
+              answercount,
+            }) => {
+              return (
+                <li key={questionid}>
+                  <div className="container">
+                    <Link className="h4" to={`/board-detail/${questionid}`}>
+                      {title}
+                    </Link>
+                    <div className="editor">
+                      <div className="editorInfo">
+                        <img
+                          src={`https://placeimg.com/200/100/people/${questionid}`}
+                          alt="practice"
+                        />
+                        <p>Andy Obusek</p>
+                      </div>
+                      <span> {`${createdAt} ${modifiedAt}`}</span>
                     </div>
-                    <span> {`${createdAt} ${modifiedAt}`}</span>
                   </div>
-                </div>
-                <p>{body}</p>
-                <div className="questionInfo">
-                  <span>{`${answercount} answer`}</span>
-                  <div className="round"></div>
-                  <span>{`${view} views`}</span>
-                  <div className="round"></div>
-                  <span>{`${1} votes`}</span>
-                </div>
-              </li>
-            );
-          },
-        )}
+                  <p>{body}</p>
+                  <div className="questionInfo">
+                    <span>{`${answercount} answer`}</span>
+                    <div className="round"></div>
+                    <span>{`${view} views`}</span>
+                    <div className="round"></div>
+                    <span>{`${1} votes`}</span>
+                  </div>
+                </li>
+              );
+            },
+          )}
       </QuestionList>
-      <PageNation></PageNation>
+
+      <Pagenation
+        limit={limit}
+        setPage={setPage}
+        total={total}
+        page={page}
+        setLimit={setLimit}
+      />
     </MainLayout>
   );
 }
@@ -188,5 +206,4 @@ const QuestionList = styled.ul`
     }
   }
 `;
-const PageNation = styled.label``;
 export default BoardList;
