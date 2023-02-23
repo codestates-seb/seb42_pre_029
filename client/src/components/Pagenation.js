@@ -3,7 +3,6 @@ import styled from 'styled-components';
 //? Props = 전체 데이터 갯수, 보여줄 페이지 수, 현재 페이지, 페이지 상태변경 함수, 보여줄 페이지 상태변경 함수
 function Pagenation({ total, limit, page, setPage, setLimit }) {
   const numPages = Math.ceil(total / limit);
-  console.log(total);
   return (
     <PagenationLayout>
       <Nav>
@@ -35,8 +34,6 @@ function Pagenation({ total, limit, page, setPage, setLimit }) {
           <option value="5">5</option>
           <option value="10">10</option>
           <option value="20">20</option>
-          <option value="50">50</option>
-          <option value="100">100</option>
         </select>
       </PerPage>
     </PagenationLayout>

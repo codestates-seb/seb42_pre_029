@@ -45,6 +45,8 @@ const GlobalTextArea = styled.textarea`
   border-radius: ${({ borderRadius }) => (borderRadius ? borderRadius : 0)};
   font-size: ${({ fontSize }) => (fontSize ? fontSize : 'var(--font-size-md)')};
   color: ${({ fontColor }) => (fontColor ? fontColor : 'var(--black-002)')};
+  font-family: 'pretendard';
+  resize: none;
   &:focus {
     outline: none;
     box-shadow: 0px 0px 3px 0.5px var(--main-002);

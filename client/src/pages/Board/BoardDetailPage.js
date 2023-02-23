@@ -6,7 +6,7 @@ import TextArea from '../../components/TextArea';
 import { useParams } from 'react-router-dom';
 import questions from '../../data/message_question.json';
 import answer from '../../data/message_answer.json';
-// import member from '../../data/message_member.json';
+import member from '../../data/message_member.json';
 
 function BoardDetail() {
   // 데이터 불러오기
@@ -14,17 +14,24 @@ function BoardDetail() {
   const { no } = params;
   const [QuestData, setQuestData] = useState({});
   const [ansData, setAnsData] = useState({});
+  const [userData, setUserData] = useState({});
   useEffect(() => {
     const questionData = questions.questions.filter(
       e => e.questionid === +no,
     )[0];
     setQuestData(questionData);
-    const answerData = answer.answers.filter(e => e.answerid === +no)[0];
+    const answerData = answer.answers.filter(
+      e => e.questionid === questionData.questionid,
+    )[0];
+    console.log(answerData);
     setAnsData(answerData);
+    const membersData = member.members.filter(
+      e => e.memberid === QuestData.memberid,
+    )[0];
+    console.log(QuestData.memberid);
+    setUserData(membersData);
   }, []);
-
   // 질문 추천
-
   const [QueVotes, setQueVotes] = useState(0);
   const QueVotesHandller = e => {
     let value = e.target.className;
@@ -34,13 +41,28 @@ function BoardDetail() {
   };
 
   // 답변 추천
-
   const [AnsVotes, setAnsVotes] = useState(0);
   const ansVotesHandller = e => {
     let value = e.target.className;
     let num = AnsVotes;
     value === 'votesUp' ? (num += 1) : (num -= 1);
     setAnsVotes(num);
+  };
+
+  //답변 작성
+  const [inputAnswer, setInputAnswer] = useState('');
+  const answerHandller = e => {
+    setInputAnswer(e.target.value);
+  };
+  const answerSubmit = () => {
+    let newAnswerData = {
+      answerid: answer.answers.length + 1,
+      body: inputAnswer,
+      createdAt: new Date(),
+      modifiedAt: new Date(),
+    };
+    answer.answers = [...answer.answers, newAnswerData];
+    console.log(answer.answers);
   };
 
   return (
@@ -54,7 +76,7 @@ function BoardDetail() {
                 src={`https://placeimg.com/200/100/people/${QuestData.questionid}`}
                 alt="practice"
               />
-              <p>Andy Obusek</p>
+              <p>{userData.name}</p>
             </Editor>
             <EditInfo>
               <span>{`${QuestData.createdAt} ago`}</span>
@@ -91,8 +113,10 @@ function BoardDetail() {
             margin={'20px 0 20px 0'}
             borderRadius={'3px'}
             padding={'24px'}
-            fontSize={'var(--font-size-lg)'}
-            fontColor={'var(--black-004)'}
+            fontSize={'var(--font-size-md)'}
+            fontColor={'var(--black-002)'}
+            placeholder={'please input your answer'}
+            onChange={e => answerHandller(e)}
           ></TextArea>
           <Button
             bgColor={'var(--btn-default)'}
@@ -103,6 +127,7 @@ function BoardDetail() {
             type={'positive'}
             Height={'32px'}
             width={'120px'}
+            onClick={answerSubmit}
           />
 
           <Post>

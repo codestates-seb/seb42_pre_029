@@ -13,6 +13,7 @@ function BoardList() {
   const [page, setPage] = useState(1);
   const offset = (page - 1) * limit;
   const total = data.length;
+  console.log(offset);
 
   useEffect(() => {
     setData(questions.questions);
