@@ -77,8 +77,6 @@ public class AnswerService {
         Optional<Answer> optionalAnswer = answerRepository.findById(answerId);
         return optionalAnswer.orElseThrow(() ->
                 new StackOverFlowException(ExceptionCode.ANSWER_NOT_FOUND));
-
-        //return answerRepository.findByMemberId(findMember.getMemberId());
     }
 
 }

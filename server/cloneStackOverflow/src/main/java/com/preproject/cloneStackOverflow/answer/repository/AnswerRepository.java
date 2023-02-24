@@ -1,6 +1,7 @@
 package com.preproject.cloneStackOverflow.answer.repository;
 
 import com.preproject.cloneStackOverflow.answer.entity.Answer;
+import com.preproject.cloneStackOverflow.member.entity.Member;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 

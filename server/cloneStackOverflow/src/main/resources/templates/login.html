@@ -6,9 +6,15 @@ layout:decorate="layouts/common-layout">
     <meta charset="UTF-8">
     <title>login</title>
 </head>
+<body>
 <div class="container" layout:fragment="content">
-    <form action="/auths/login-form" method="post">
+    <!--<form action="/auths/login-form" method="post">-->
+    <form action="/members/my-page" method="post"> <!--로그인경로 securityconfiguration과 맞춰야함-->
         <!-- 로그인 실패에 대한 메시지 표시 -->
+        <div class="row alert alert-danger center" role="alert" th:if="${param.error != null}">
+            <div>로그인 인증에 실패했습니다.</div>
+        </div><!--추가-->
+
         <div class="row">
             <div class="col-xs-2">
                 <input type="email" name="username"  class="form-control" placeholder="Email" />
@@ -23,7 +29,7 @@ layout:decorate="layouts/common-layout">
         <button class="btn btn-outline-secondary" style="margin-top: 20px">로그인</button>
     </form>
     <div style="margin-top: 20px">
-        <a href="/members/register">회원가입</a>
+        <a href="/members/save-form">회원가입</a>
     </div>
 </div>
 </body>

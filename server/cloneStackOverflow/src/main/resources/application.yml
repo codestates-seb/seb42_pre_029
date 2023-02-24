@@ -7,6 +7,8 @@ spring:
       path: /h2
   datasource:
     url: jdbc:h2:mem:test&useLegacyDatetimeCode=false
+    driver-class-name: org.h2.Driver
+    username: sa
   sql:
     init:
       schema-locations: classpath*:db/h2/schema.sql
@@ -20,3 +22,8 @@ spring:
         jdbc:
           time_zone: UTC
 
+#관리자 이메일 정의
+
+mail:
+  address:
+    admin: admin@gmail.com

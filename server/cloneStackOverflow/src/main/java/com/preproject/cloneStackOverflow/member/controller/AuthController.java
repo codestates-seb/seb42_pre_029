@@ -12,7 +12,7 @@ import javax.validation.Valid;
 @Controller
 @RequestMapping("/auths")
 public class AuthController {
-    @GetMapping("/login")
+    @GetMapping("/login-form")
     public String loginForm() {
         return "login";
     }
@@ -28,16 +28,4 @@ public class AuthController {
         return "home";
     }
 }
-    //    @GetMapping("/login")
-//    public ModelAndView loginForm(){
-//        ModelAndView mav = new ModelAndView("login");
-//        System.out.println("Member Login Successful");
-//        return mav;
-//    }
-//    @PostMapping("/login")
-//    public ModelAndView login(@Valid MemberDto.login requestBody){
-//        ModelAndView mav = new ModelAndView("save");
-//        System.out.println("Member Registration Successfully");
-//        return mav;
-//    }
 
