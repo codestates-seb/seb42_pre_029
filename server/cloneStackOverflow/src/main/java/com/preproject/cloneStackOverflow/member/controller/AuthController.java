@@ -25,7 +25,7 @@ public class AuthController {
     @PostMapping("/login")
     public String login() {
         System.out.println("Login successfully!");
-        return "home";
+        return "my-page";
     }
 }
 
