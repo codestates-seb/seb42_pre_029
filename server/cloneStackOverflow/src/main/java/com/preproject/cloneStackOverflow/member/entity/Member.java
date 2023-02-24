@@ -25,7 +25,7 @@ public class Member {
     @Column(nullable = false, updatable = false, unique = true)
     private String email;
 
-    @Column(length = 20, nullable = false)
+    @Column(length = 100, nullable = false)
     private String password;
 
     @Column(length = 10, nullable = false, unique = true)
@@ -37,6 +37,23 @@ public class Member {
     @Column(length = 13, unique = true)
     private String phone;
 
+    @ElementCollection(fetch = FetchType.EAGER)
+    private List<String> roles = new ArrayList<>();
+
+    public Member(String email) {
+        this.email = email;
+    }
+
+    public Member(String email, String username, String password) {
+        this.email = email;
+        this.username= username;
+        this.password = password;
+    }
+
+    public String getName() {
+        return getEmail();
+    }
+
     @Setter(AccessLevel.NONE)
     @OneToMany(mappedBy = "member")
     private List<Question> Questions = new ArrayList<>();
@@ -44,12 +61,7 @@ public class Member {
     @Setter(AccessLevel.NONE)
     @OneToMany(mappedBy = "member")
     private List<Answer> Answers = new ArrayList<>();
-//    public void setQuestion(Question Question) {
-//        this.qnaQuestions.add(qnaQuestion);
-//        if (qnaQuestion.getMember() != this) {
-//            qnaQuestion.setMember(this);
-//        }
-//    }
+
     public Member changeMemberInfo(Member sourceMember, CustomBeanUtils<Member> customBeanUtils) {
         return customBeanUtils.copyNonNullProperties(sourceMember, this);
     }
@@ -66,9 +78,9 @@ public class Member {
         }
     }
 
-    public Member(String email, String password, String username) {
-        this.email = email;
-        this.password = password;
-        this.username = username;
+    public enum MemberRole {
+        ROLE_USER,
+        ROLE_ADMIN
     }
+
 }

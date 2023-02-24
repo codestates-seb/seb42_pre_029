@@ -38,8 +38,8 @@ public class QuestionDto {
     @AllArgsConstructor
     public static class Response {
         private long questionId;
-        private long memberId;
-        private long answerId;
+        //private long memberId;
+        //private long answerId;
         private String title;
         private String body;
         private int view;

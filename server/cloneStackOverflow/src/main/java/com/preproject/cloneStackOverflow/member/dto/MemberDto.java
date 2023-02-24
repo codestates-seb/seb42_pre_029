@@ -14,7 +14,7 @@ import javax.validation.constraints.Pattern;
 import java.util.regex.Matcher;
 public class MemberDto {
     @Getter
-    @NoArgsConstructor
+    @Setter
     public static class Post {
         @NotBlank
         @Email
