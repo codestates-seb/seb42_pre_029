@@ -44,7 +44,7 @@ function SignUpForm() {
     if (!values.password) {
       errors.password = 'Password cannot be empty.';
     } else if (!passwordRegex.test(values.password)) {
-      errors.password = 'Password must have valid email form.';
+      errors.password = 'Password must have valid password form.';
     }
     return errors;
   };

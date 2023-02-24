@@ -43,7 +43,7 @@ function LoginForm() {
     if (!values.password) {
       errors.password = 'Password cannot be empty.';
     } else if (!passwordRegex.test(values.password)) {
-      errors.password = 'Password must have valid email form.';
+      errors.password = 'Password must have valid password form.';
     }
     return errors;
   };
@@ -66,7 +66,7 @@ function LoginForm() {
         <InputField
           type="password"
           id="password"
-          value={formValues.email}
+          value={formValues.password}
           onChange={onChange}
         />
         <ErrorMessage>{formErrors.password}</ErrorMessage>
