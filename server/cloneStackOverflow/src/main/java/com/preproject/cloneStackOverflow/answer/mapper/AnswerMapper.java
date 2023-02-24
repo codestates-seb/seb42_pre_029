@@ -12,12 +12,7 @@ import java.util.List;
 
 @Mapper(componentModel = "spring")
 public interface AnswerMapper {
-    default Answer answerPostToAnswer(AnswerDto.Post answerPostDto){
-        Answer answer = new Answer();
-        answer.setBody(answerPostDto.getBody());
-
-        return answer;
-    }
+    Answer answerPostToAnswer(AnswerDto.Post answerPostDto);
     Answer answerPatchToAnswer(AnswerDto.Patch requestBody);
     AnswerDto.PatchResponse answerToPatchResponse(Answer answer);
     AnswerDto.GetResponse answerToGetResponse(Answer answer);
