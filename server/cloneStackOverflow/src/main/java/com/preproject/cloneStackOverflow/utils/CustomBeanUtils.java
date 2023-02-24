@@ -26,6 +26,7 @@ public class CustomBeanUtils<T> {
             // JPA Lazy 로딩 특성으로 인해 연관된 컬렉션의 조회 쿼리가 발생하므로 컬렉션의 경우 패스한다.
             if (propertyName.equals("List")) {
                 continue;
+
             }
             //Object sourceProperty = src.getPropertyValue(field.getName());
 //            if (sourceProperty instanceof Money && ((Money) sourceProperty).getValue() != null) {

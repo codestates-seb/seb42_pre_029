@@ -7,6 +7,7 @@ import com.preproject.cloneStackOverflow.member.dto.MemberDto;
 import com.preproject.cloneStackOverflow.member.entity.Member;
 import com.preproject.cloneStackOverflow.member.repository.MemberRepository;
 import com.preproject.cloneStackOverflow.utils.CustomBeanUtils;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -21,6 +22,7 @@ public class MemberService {
 
     //private final PasswordEncoder passwordEncoder;    로그인 구현에서
     //private final CustomAuthorityUtils authorityUtils; 이건 시큐리티,권한할때
+
 
     public MemberService(MemberRepository memberRepository, CustomBeanUtils<Member> beanUtils
     ) {

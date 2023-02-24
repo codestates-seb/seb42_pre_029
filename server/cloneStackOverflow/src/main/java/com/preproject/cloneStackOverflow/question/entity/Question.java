@@ -71,4 +71,9 @@ public class Question extends Auditable {
         return this;
     }
 
+
+    public Question(String title, String body) {
+        this.title = title;
+        this.body = body;
+    }
 }

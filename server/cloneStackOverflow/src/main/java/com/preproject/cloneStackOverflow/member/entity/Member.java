@@ -65,4 +65,10 @@ public class Member {
             throw new StackOverFlowException(ExceptionCode.MEMBER_EXISTS);
         }
     }
+
+    public Member(String email, String password, String username) {
+        this.email = email;
+        this.password = password;
+        this.username = username;
+    }
 }
