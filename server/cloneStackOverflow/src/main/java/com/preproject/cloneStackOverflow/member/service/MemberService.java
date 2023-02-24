@@ -6,6 +6,7 @@ import com.preproject.cloneStackOverflow.exception.StackOverFlowException;
 import com.preproject.cloneStackOverflow.member.entity.Member;
 import com.preproject.cloneStackOverflow.member.repository.MemberRepository;
 import com.preproject.cloneStackOverflow.utils.CustomBeanUtils;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -18,7 +19,13 @@ public class MemberService {
     protected final MemberRepository memberRepository;
     private final CustomBeanUtils<Member> beanUtils;
 
-    public MemberService(MemberRepository memberRepository, CustomBeanUtils<Member> beanUtils) {
+    //private final PasswordEncoder passwordEncoder;    로그인 구현에서
+    //private final CustomAuthorityUtils authorityUtils; 이건 시큐리티,권한할때
+
+
+    public MemberService(MemberRepository memberRepository, CustomBeanUtils<Member> beanUtils
+    ) {
+
         this.memberRepository = memberRepository;
         this.beanUtils = beanUtils;
     }

@@ -26,6 +26,7 @@ public class AnswerService {
     private final QuestionService questionService;
     private final AnswerMapper mapper;
 
+
     public AnswerService(AnswerRepository answerRepository, MemberService memberService, QuestionService questionService, AnswerMapper mapper) {
         this.answerRepository = answerRepository;
         this.memberService = memberService;
@@ -33,11 +34,10 @@ public class AnswerService {
         this.mapper = mapper;
     }
 
-    public Answer createAnswer(AnswerDto.Post answerPost){
-        Question findQuestion = questionService.findVerifiedQuestion(answerPost.getQuestionId());
-        Member findMember = memberService.findVerifiedMember(answerPost.getMemberId());
+    public Answer createAnswer(Answer answer,long memberId, long questionId){
+        Question findQuestion = questionService.findVerifiedQuestion(questionId);
+        Member findMember = memberService.findVerifiedMember(memberId);
 
-        Answer answer = mapper.answerPostToAnswer(answerPost);
         answer.setMember(findMember);
         answer.setQuestion(findQuestion);
 
@@ -77,6 +77,7 @@ public class AnswerService {
         Optional<Answer> optionalAnswer = answerRepository.findById(answerId);
         return optionalAnswer.orElseThrow(() ->
                 new StackOverFlowException(ExceptionCode.ANSWER_NOT_FOUND));
+        //return answerRepository.findByMemberId(findMember.getMemberId());
     }
 
 }

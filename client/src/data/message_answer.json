@@ -1,33 +1,52 @@
 {
-    "answers": [{
-        "answerid" : 1,
-        "body" : "Having developed a pipeline transform, I might want to write a test that applies the new transform to a given small dataset and compares the result with an expected result. How do I comfortable",
-        "createdAt" : "date",
-        "modifiedAt" : "date"
-    },{
-       "answerid" : 2,
-        "body" : "I have floating-point numbers stored as strings. During serialization to JSON, I want to convert those strings to numbers. For example, the strings a='1.001' and b='0.1' must be ",
-        "createdAt" : "date",
-        "modifiedAt" : "date"
-    },{
-        "answerid" : 3,
-        "body" : "I have two autocompleteinputs but i want them to use same listview to look nicer. The app i am developing looks like lyft in lyft they use two text inputs in destination selection screen. How i ca",
-        "createdAt" : "date",
-        "modifiedAt" : "date"
-    },{
-        "answerid" : 4,
-        "body" : "I'm making high order component for @expo/vector-icons and trying to define the general type for its props. There are several objects inside module (MaterialCommunityIcons, MaterialIcons",
-        "createdAt" : "date",
-        "modifiedAt" : "date"
-    },{
-        "answerid" : 5,
-        "body" : "I have clone the code from github and now I am running npm i --legacy-peer-deps to install node modules in it but it is taking too much time also it gives error everytime. What should I do? I have",
-        "createdAt" : "date",
-        "modifiedAt" : "date"
-    },{
-      "answerid" : 6,
-      "body" : "I am trying to fetch nested JSON objects and JSON List from Database using QueryDSL. I have used a native query with LISTAGG and JSON_OBJECT. Native Query : SELECT",
-      "createdAt" : "date",
-      "modifiedAt" : "date"
-  }]
+  "answers": [
+    {
+      "questionid": 1,
+      "memberid": 1,
+      "answerid": 1,
+      "body": "Having developed a pipeline transform, I might want to write a test that applies the new transform to a given small dataset and compares the result with an expected result. How do I comfortable",
+      "createdAt": "date",
+      "modifiedAt": "date"
+    },
+    {
+      "questionid": 2,
+      "memberid": 2,
+      "answerid": 2,
+      "body": "I have floating-point numbers stored as strings. During serialization to JSON, I want to convert those strings to numbers. For example, the strings a='1.001' and b='0.1' must be ",
+      "createdAt": "date",
+      "modifiedAt": "date"
+    },
+    {
+      "questionid": 3,
+      "memberid": 3,
+      "answerid": 3,
+      "body": "I have two autocompleteinputs but i want them to use same listview to look nicer. The app i am developing looks like lyft in lyft they use two text inputs in destination selection screen. How i ca",
+      "createdAt": "date",
+      "modifiedAt": "date"
+    },
+    {
+      "questionid": 4,
+      "memberid": 4,
+      "answerid": 4,
+      "body": "I'm making high order component for @expo/vector-icons and trying to define the general type for its props. There are several objects inside module (MaterialCommunityIcons, MaterialIcons",
+      "createdAt": "date",
+      "modifiedAt": "date"
+    },
+    {
+      "questionid": 5,
+      "memberid": 5,
+      "answerid": 5,
+      "body": "I have clone the code from github and now I am running npm i --legacy-peer-deps to install node modules in it but it is taking too much time also it gives error everytime. What should I do? I have",
+      "createdAt": "date",
+      "modifiedAt": "date"
+    },
+    {
+      "questionid": 5,
+      "memberid": 5,
+      "answerid": 6,
+      "body": "I am trying to fetch nested JSON objects and JSON List from Database using QueryDSL. I have used a native query with LISTAGG and JSON_OBJECT. Native Query : SELECT",
+      "createdAt": "date",
+      "modifiedAt": "date"
+    }
+  ]
 }

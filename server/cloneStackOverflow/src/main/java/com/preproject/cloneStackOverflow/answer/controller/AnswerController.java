@@ -31,7 +31,8 @@ public class AnswerController {
 
     @PostMapping
     public ResponseEntity postAnswer(@Valid @RequestBody AnswerDto.Post answerPostDto){
-        Answer answer = answerService.createAnswer(answerPostDto);
+        Answer answer = answerService.createAnswer(mapper.answerPostToAnswer(answerPostDto)
+                ,answerPostDto.getMemberId(),answerPostDto.getQuestionId());
 
         URI location = UriCreator.createUri(ANSWER_DEFAULT_URL, answer.getAnswerId());
 
