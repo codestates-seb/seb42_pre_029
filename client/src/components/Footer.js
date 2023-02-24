@@ -1,9 +1,9 @@
 import styled from 'styled-components';
-
+import logoDark from '../assets/logoDark.svg';
 function Footer() {
   return (
     <FooterContainer>
-      <img src="img/logoDark.svg" alt="logo" />
+      <img src={logoDark} alt="logo" />
       <Members>
         <Member
           href="https://github.com/gwoongchoi"

@@ -13,7 +13,7 @@ function App() {
       <GlobalStyle />
       <Routes>
         <Route path="/" element={<BoardList />} />
-        <Route path="/board-detail" element={<BoardDetail />} />
+        <Route path="/board-detail/:no" element={<BoardDetail />} />
         <Route path="/board-write" element={<BoardWrite />} />
         <Route path="/my-page" element={<MyPage />} />
         <Route path="/login" element={<LogIn />} />

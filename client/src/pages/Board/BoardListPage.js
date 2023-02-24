@@ -1,21 +1,32 @@
 import MainLayout from '../../components/MainLayout';
 import Button from '../../components/Button';
-import styled from 'styled-components';
-
 import { Link } from 'react-router-dom';
+import styled from 'styled-components';
+import questions from '../../data/message_question.json';
+import { useEffect, useState } from 'react';
+import Pagenation from '../../components/Pagenation';
 
 function BoardList() {
-  const totalQuestion = 10000000;
-  const answer = 1;
-  const views = 1;
-  const votes = 1;
-  const arr = [1, 2, 3];
+  // 질문데이터 받아오기
+  const [data, setData] = useState([]);
+  const [limit, setLimit] = useState(10);
+  const [page, setPage] = useState(1);
+  const offset = (page - 1) * limit;
+  const total = data.length;
+  console.log(offset);
+
+  useEffect(() => {
+    setData(questions.questions);
+  }, []);
+
+  // 현재페이지 보여주기
+
   return (
     <MainLayout sideBar>
       <BoardListPageTitle>
         <div>
           <h1>All Questions</h1>
-          <p>{`${totalQuestion} Questions`}</p>
+          <p>{`${total} Questions`}</p>
         </div>
         <Link to="/board-write">
           <Button
@@ -28,41 +39,56 @@ function BoardList() {
         </Link>
       </BoardListPageTitle>
       <QuestionList>
-        {arr.map((e, i) => {
-          return (
-            <li key={i}>
-              <div className="container">
-                <Link className="h4" to="/board-detail">
-                  {`Error print user.default swift ${e}`}
-                </Link>
-                <div className="editor">
-                  <div className="editorInfo">
-                    <img
-                      src={`https://placeimg.com/200/100/people/${e}`}
-                      alt="practice"
-                    />
-                    <p>Andy Obusek</p>
+        {data
+          .slice(offset, offset + limit)
+          .map(
+            ({
+              questionid,
+              title,
+              body,
+              createdAt,
+              modifiedAt,
+              view,
+              answercount,
+            }) => {
+              return (
+                <li key={questionid}>
+                  <div className="container">
+                    <Link className="h4" to={`/board-detail/${questionid}`}>
+                      {title}
+                    </Link>
+                    <div className="editor">
+                      <div className="editorInfo">
+                        <img
+                          src={`https://placeimg.com/200/100/people/${questionid}`}
+                          alt="practice"
+                        />
+                        <p>Andy Obusek</p>
+                      </div>
+                      <span> {`${createdAt} ${modifiedAt}`}</span>
+                    </div>
                   </div>
-                  <span> modified 21 mins ago</span>
-                </div>
-              </div>
-              <p>
-                I have two screens the first of login and the second shows the
-                user information. On the login screen I keep the user_id value
-                in user. defaults and when I go to the second screen I use that
-                value to ...
-              </p>
-              <div className="questionInfo">
-                <span>{`${answer} answer`}</span>
-                <div className="round"></div>
-                <span>{`${views} views`}</span>
-                <div className="round"></div>
-                <span>{`${votes} votes`}</span>
-              </div>
-            </li>
-          );
-        })}
+                  <p>{body}</p>
+                  <div className="questionInfo">
+                    <span>{`${answercount} answer`}</span>
+                    <div className="round"></div>
+                    <span>{`${view} views`}</span>
+                    {/* <div className="round"></div>
+                    <span>{`${1} votes`}</span> */}
+                  </div>
+                </li>
+              );
+            },
+          )}
       </QuestionList>
+
+      <Pagenation
+        limit={limit}
+        setPage={setPage}
+        total={total}
+        page={page}
+        setLimit={setLimit}
+      />
     </MainLayout>
   );
 }
@@ -112,6 +138,13 @@ const QuestionList = styled.ul`
         font-size: var(--font-size-h4);
         font-weight: 600;
         color: var(--main-001);
+        line-height: 28px;
+        max-width: 600px;
+        max-height: 60px;
+        overflow: hidden;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
       }
       & > .editor {
         display: flex;
@@ -152,6 +185,7 @@ const QuestionList = styled.ul`
       align-items: center;
       margin-top: 10px;
       & > span {
+        user-select: none;
         font-size: var(--font-size-sm);
         font-weight: 600;
         color: var(--main-002);
@@ -172,5 +206,4 @@ const QuestionList = styled.ul`
     }
   }
 `;
-
 export default BoardList;

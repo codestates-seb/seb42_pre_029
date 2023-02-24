@@ -1,17 +1,19 @@
 import Button from './Button';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import searchImg from '../assets/search.svg';
+import logoImg from '../assets/logo.svg';
 
 function Header() {
   return (
     <>
       <GNB>
         <Link to="/">
-          <img src="img/logo.svg" alt="logo" />{' '}
+          <img src={logoImg} alt="logo" />
         </Link>
         <div className="search_container">
           <input type="text"></input>
-          <img src="img/search.svg" alt="search" />
+          <img src={searchImg} alt="search" />
         </div>
 
         <div className="Button_container">
@@ -32,7 +34,6 @@ function Header() {
             <Button
               bgColor={'var(--btn-default)'}
               textColor={'#fff'}
-              border={'1px solid #83A6C4'}
               hover={'var(--btn-hover)'}
               active={'var(--btn-selected)'}
               text={'sign up'}

@@ -23,7 +23,9 @@ public class MemberService {
     //private final PasswordEncoder passwordEncoder;    로그인 구현에서
     //private final CustomAuthorityUtils authorityUtils; 이건 시큐리티,권한할때
 
-    public MemberService(MemberRepository memberRepository, CustomBeanUtils<Member> beanUtils) {
+
+    public MemberService(MemberRepository memberRepository, CustomBeanUtils<Member> beanUtils
+    ) {
         this.memberRepository = memberRepository;
         this.beanUtils = beanUtils;
         //this.passwordEncoder = passwordEncoder; 로그인 구현에서

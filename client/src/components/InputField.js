@@ -1,47 +1,30 @@
 import styled from 'styled-components';
 
-function InputField({
-  type,
-  label,
-  placeholder,
-  value,
-  onChange,
-  width,
-  height,
-}) {
+function InputField({ type, id, placeholder, value, onChange, width, height }) {
   return (
-    <>
-      <label>
-        {label}
-        <GlobalInput
-          type={type}
-          value={value}
-          onChange={onChange}
-          placeholder={placeholder}
-          width={width}
-          height={height}
-        />
-      </label>
-    </>
+    <GlobalInput
+      type={type}
+      id={id}
+      placeholder={placeholder}
+      value={value}
+      onChange={onChange}
+      width={width}
+      height={height}
+    />
   );
 }
 
 const GlobalInput = styled.input`
-  background: none;
   border: 1px solid var(--line-001);
   border-radius: 3px;
-  display: block;
-  box-sizing: border-box;
   padding: 8px;
-  margin: 8px;
-  width: ${({ width }) => width};
-  width: ${({ height }) => height};
-  font-size: var(--font-size-sm);
+  width: ${({ width }) => (width ? width : '320px')};
+  height: ${({ height }) => (height ? height : '40px')};
 
   &:focus {
     outline: none;
-    box-shadow: 0px 0px 3px 0.5px var(--main-002);
-    border-color: none;
+    border-color: var(--main-002);
+    box-shadow: 0px 0px 1px 3px var(--main-003);
   }
 `;
 

@@ -1,3 +1,5 @@
+server:
+  port: 8080
 spring:
   h2:
     console:
@@ -5,6 +7,9 @@ spring:
       path: /h2
   datasource:
     url: jdbc:h2:mem:test&useLegacyDatetimeCode=false
+  sql:
+    init:
+      schema-locations: classpath*:db/h2/schema.sql
   jpa:
     hibernate:
       ddl-auto: create
@@ -14,6 +19,3 @@ spring:
         format_sql: true
         jdbc:
           time_zone: UTC
-  sql:
-    init:
-      data-locations: classpath*:db/h2/data.sql

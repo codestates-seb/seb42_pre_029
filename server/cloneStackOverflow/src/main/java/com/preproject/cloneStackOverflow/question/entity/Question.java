@@ -30,7 +30,7 @@ public class Question extends Auditable {
     @NotBlank(message = "Insert Text.")
     @Column(length = 1000, nullable = false)
     private String body;
-    @Setter
+    //@Setter
     @ManyToOne
     @JoinColumn(name = "MEMBER_ID")
     private Member member;
@@ -59,10 +59,6 @@ public class Question extends Auditable {
         if(!this.member.getQuestions().contains(this)){
             this.member.getQuestions().add(this);
         }
-    }
-
-    public Question changeQuestionInfo(Question sourceQuestion, CustomBeanUtils<Question> beanUtils){
-        return beanUtils.copyNonNullProperties(sourceQuestion, this);
     }
 
     public Question questionCount(long questionCount){
