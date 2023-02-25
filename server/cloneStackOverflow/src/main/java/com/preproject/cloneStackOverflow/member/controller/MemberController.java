@@ -5,6 +5,7 @@ import com.preproject.cloneStackOverflow.member.entity.Member;
 import com.preproject.cloneStackOverflow.member.mapper.MemberMapper;
 import com.preproject.cloneStackOverflow.member.service.MemberService;
 import com.preproject.cloneStackOverflow.response.SingleResponseDto;
+import com.preproject.cloneStackOverflow.utils.UriCreator;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
 import javax.validation.constraints.Positive;
+import java.net.URI;
 import java.util.List;
 
 
@@ -23,7 +25,7 @@ import java.util.List;
 @Validated
 @Slf4j
 public class MemberController {
-    private final static String MEMBER_DEFAULT_URL = "/v1/members";
+    private final static String MEMBER_DEFAULT_URL = "/members";
     private final MemberService memberService;
     private final MemberMapper memberMapper;
 
@@ -38,13 +40,22 @@ public class MemberController {
         return mav;
     }
 
-    @PostMapping("/save")
-    public ModelAndView save(@ModelAttribute @Valid MemberDto.Post requestBody){
+//    @PostMapping("/save")
+//    public ModelAndView save(@ModelAttribute @Valid MemberDto.Post requestBody){
+//        Member member = memberMapper.memberPostToMember(requestBody);
+//        memberService.createMember(member);
+//        ModelAndView mav = new ModelAndView("index");
+//        System.out.println("Member Registration Success");
+//        return mav;
+//    }
+    @PostMapping//("/save")
+    public ResponseEntity postMember(@Valid @RequestBody MemberDto.Post requestBody) {
         Member member = memberMapper.memberPostToMember(requestBody);
-        memberService.createMember(member);
-        ModelAndView mav = new ModelAndView("index");
-        System.out.println("Member Registration Success");
-        return mav;
+
+        Member createdMember = memberService.createMember(member);
+        URI location = UriCreator.createUri(MEMBER_DEFAULT_URL, createdMember.getMemberId());
+
+        return ResponseEntity.created(location).build();
     }
 
     @GetMapping("/my-page")

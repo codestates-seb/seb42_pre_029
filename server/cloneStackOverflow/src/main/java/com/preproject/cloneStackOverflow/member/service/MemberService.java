@@ -1,12 +1,14 @@
 package com.preproject.cloneStackOverflow.member.service;
 
-
 import com.preproject.cloneStackOverflow.exception.ExceptionCode;
 import com.preproject.cloneStackOverflow.exception.StackOverFlowException;
+import com.preproject.cloneStackOverflow.helper.event.MemberRegistrationApplicationEvent;
+import com.preproject.cloneStackOverflow.member.auth.utils.CustomAuthorityUtils;
 import com.preproject.cloneStackOverflow.member.entity.Member;
 import com.preproject.cloneStackOverflow.member.repository.MemberRepository;
-import com.preproject.cloneStackOverflow.utils.CustomBeanUtils;
 
+import org.springframework.context.ApplicationEventPublisher;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -16,26 +18,36 @@ import java.util.Optional;
 
 @Service
 public class MemberService {
-    protected final MemberRepository memberRepository;
-    private final CustomBeanUtils<Member> beanUtils;
+    private final MemberRepository memberRepository;
+    private final ApplicationEventPublisher publisher;
+    private final PasswordEncoder passwordEncoder;
+    private final CustomAuthorityUtils authorityUtils;
 
-    //private final PasswordEncoder passwordEncoder;    로그인 구현에서
-    //private final CustomAuthorityUtils authorityUtils; 이건 시큐리티,권한할때
 
-
-    public MemberService(MemberRepository memberRepository, CustomBeanUtils<Member> beanUtils
-    ) {
-
+    public MemberService(MemberRepository memberRepository,
+                         ApplicationEventPublisher publisher,
+                         PasswordEncoder passwordEncoder,
+                         CustomAuthorityUtils authorityUtils) {
         this.memberRepository = memberRepository;
-        this.beanUtils = beanUtils;
+        this.publisher = publisher;
+        this.passwordEncoder = passwordEncoder;
+        this.authorityUtils = authorityUtils;
     }
     public Member signinMember(Member member){
         return null;
     }
 
     public Member createMember(Member member) {
-        Optional<Member> findMember = memberRepository.findByEmail(member.getEmail());
-        return memberRepository.save(member);
+        verifyExistsEmail(member.getEmail());
+        String encryptedPassword = passwordEncoder.encode(member.getPassword());
+        member.setPassword(encryptedPassword);
+        List<String> roles = authorityUtils.createRoles(member.getEmail());
+        member.setRoles(roles);
+
+        Member savedMember = memberRepository.save(member);
+
+        publisher.publishEvent(new MemberRegistrationApplicationEvent(savedMember));
+        return savedMember;
     }
 
     public Member signoutMember(Member member) {
@@ -83,4 +95,11 @@ public class MemberService {
         return optionalMember.orElseThrow(() ->
                 new StackOverFlowException(ExceptionCode.MEMBER_NOT_FOUND));
     }
+
+    private void verifyExistsEmail(String email) {
+        Optional<Member> member = memberRepository.findByEmail(email);
+        if (member.isPresent())
+            throw new StackOverFlowException(ExceptionCode.MEMBER_EXISTS);
+    }
+
 }

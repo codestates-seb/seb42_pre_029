@@ -9,7 +9,7 @@ layout:decorate="layouts/common-layout">
 <body>
 <div class="container" layout:fragment="content">
     <!--<form action="/auths/login-form" method="post">-->
-    <form action="/members/my-page" method="post"> <!--로그인경로 securityconfiguration과 맞춰야함-->
+    <form action="/auths/login" method="post">
         <!-- 로그인 실패에 대한 메시지 표시 -->
         <div class="row alert alert-danger center" role="alert" th:if="${param.error != null}">
             <div>로그인 인증에 실패했습니다.</div>

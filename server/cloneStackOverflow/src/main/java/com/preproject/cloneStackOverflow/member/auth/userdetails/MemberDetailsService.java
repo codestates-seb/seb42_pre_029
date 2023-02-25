@@ -1,8 +1,8 @@
-package com.preproject.cloneStackOverflow.member.auth;
+package com.preproject.cloneStackOverflow.member.auth.userdetails;
 
-import com.preproject.cloneStackOverflow.exception.ExceptionCode;
 import com.preproject.cloneStackOverflow.exception.StackOverFlowException;
-import com.preproject.cloneStackOverflow.member.auth.utils.HelloAuthorityUtils;
+import com.preproject.cloneStackOverflow.exception.ExceptionCode;
+import com.preproject.cloneStackOverflow.member.auth.utils.CustomAuthorityUtils;
 import com.preproject.cloneStackOverflow.member.entity.Member;
 import com.preproject.cloneStackOverflow.member.repository.MemberRepository;
 import org.springframework.security.core.GrantedAuthority;
@@ -14,28 +14,31 @@ import org.springframework.stereotype.Component;
 import java.util.Collection;
 import java.util.Optional;
 
+/**
+ * - Custom UserDetails 사용
+ * - User Role을 DB에서 조회한 후, HelloAuthorityUtils로 Spring Security에게 Role 정보 제공
+ */
 @Component
-public class HelloUserDetailsService implements UserDetailsService {
+public class MemberDetailsService implements UserDetailsService {
     private final MemberRepository memberRepository;
-    private final HelloAuthorityUtils authorityUtils;
+    private final CustomAuthorityUtils authorityUtils;
 
-    public HelloUserDetailsService(MemberRepository memberRepository, HelloAuthorityUtils authorityUtils) {
+    public MemberDetailsService(MemberRepository memberRepository, CustomAuthorityUtils authorityUtils) {
         this.memberRepository = memberRepository;
         this.authorityUtils = authorityUtils;
     }
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-    Optional<Member> member = memberRepository.findByEmail(username);
-    Member findMember = member.orElseThrow(() -> new StackOverFlowException(ExceptionCode.MEMBER_NOT_FOUND));
+        Optional<Member> optionalMember = memberRepository.findByEmail(username);
+        Member findMember = optionalMember.orElseThrow(() -> new StackOverFlowException(ExceptionCode.MEMBER_NOT_FOUND));
 
-    return new HelloUserDetails(findMember);
+        return new MemberDetails(findMember);
     }
 
-    private final class HelloUserDetails extends Member implements UserDetails {
-        HelloUserDetails(Member member) {
+    private final class MemberDetails extends Member implements UserDetails {
+        MemberDetails(Member member) {
             setMemberId(member.getMemberId());
-            setUsername(member.getUsername());
             setEmail(member.getEmail());
             setPassword(member.getPassword());
             setRoles(member.getRoles());
