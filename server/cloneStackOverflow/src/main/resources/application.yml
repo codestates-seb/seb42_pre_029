@@ -1,5 +1,8 @@
 server:
   port: 8080
+  servlet:
+    encoding:
+      force-response: true
 spring:
   h2:
     console:
@@ -21,6 +24,12 @@ spring:
         format_sql: true
         jdbc:
           time_zone: UTC
+logging:
+  level:
+    org:
+      springframework:
+        orm:
+          jpa: DEBUG
 
 #관리자 이메일 정의
 

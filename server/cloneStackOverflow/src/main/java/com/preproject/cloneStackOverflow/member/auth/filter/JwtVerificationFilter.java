@@ -1,7 +1,7 @@
 package com.preproject.cloneStackOverflow.member.auth.filter;
 
 import com.preproject.cloneStackOverflow.member.auth.jwt.JwtTokenizer;
-import com.preproject.cloneStackOverflow.member.auth.utils.HelloAuthorityUtils;
+import com.preproject.cloneStackOverflow.member.auth.utils.CustomAuthorityUtils;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.security.SignatureException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -20,11 +20,11 @@ import java.util.Map;
 
 public class JwtVerificationFilter extends OncePerRequestFilter {  // (1)
     private final JwtTokenizer jwtTokenizer;
-    private final HelloAuthorityUtils authorityUtils;
+    private final CustomAuthorityUtils authorityUtils;
 
     // (2)
     public JwtVerificationFilter(JwtTokenizer jwtTokenizer,
-                                 HelloAuthorityUtils authorityUtils) {
+                                 CustomAuthorityUtils authorityUtils) {
         this.jwtTokenizer = jwtTokenizer;
         this.authorityUtils = authorityUtils;
     }

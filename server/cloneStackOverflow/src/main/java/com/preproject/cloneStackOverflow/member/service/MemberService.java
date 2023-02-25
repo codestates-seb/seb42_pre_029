@@ -3,7 +3,7 @@ package com.preproject.cloneStackOverflow.member.service;
 import com.preproject.cloneStackOverflow.exception.ExceptionCode;
 import com.preproject.cloneStackOverflow.exception.StackOverFlowException;
 import com.preproject.cloneStackOverflow.helper.event.MemberRegistrationApplicationEvent;
-import com.preproject.cloneStackOverflow.member.auth.utils.HelloAuthorityUtils;
+import com.preproject.cloneStackOverflow.member.auth.utils.CustomAuthorityUtils;
 import com.preproject.cloneStackOverflow.member.entity.Member;
 import com.preproject.cloneStackOverflow.member.repository.MemberRepository;
 
@@ -18,16 +18,16 @@ import java.util.Optional;
 
 @Service
 public class MemberService {
-    protected final MemberRepository memberRepository;
+    private final MemberRepository memberRepository;
     private final ApplicationEventPublisher publisher;
     private final PasswordEncoder passwordEncoder;
-    private final HelloAuthorityUtils authorityUtils;
+    private final CustomAuthorityUtils authorityUtils;
 
 
     public MemberService(MemberRepository memberRepository,
                          ApplicationEventPublisher publisher,
                          PasswordEncoder passwordEncoder,
-                         HelloAuthorityUtils authorityUtils) {
+                         CustomAuthorityUtils authorityUtils) {
         this.memberRepository = memberRepository;
         this.publisher = publisher;
         this.passwordEncoder = passwordEncoder;

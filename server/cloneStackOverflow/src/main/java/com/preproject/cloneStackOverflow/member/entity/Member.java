@@ -28,13 +28,13 @@ public class Member {
     @Column(length = 100, nullable = false)
     private String password;
 
-    @Column(length = 10, nullable = false, unique = true)
+    @Column(length = 100, nullable = false, unique = true)
     private String username;
 
-    @Column(length = 10)
+    @Column(length = 100)
     private String birth;
 
-    @Column(length = 13, unique = true)
+    @Column(length = 100, unique = true)
     private String phone;
 
     @ElementCollection(fetch = FetchType.EAGER)
@@ -50,7 +50,7 @@ public class Member {
         this.password = password;
     }
 
-    public String getName() {
+    public String getUsername() {
         return getEmail();
     }
 

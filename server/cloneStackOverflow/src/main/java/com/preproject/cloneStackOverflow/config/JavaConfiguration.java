@@ -1,6 +1,6 @@
 package com.preproject.cloneStackOverflow.config;
 
-import com.preproject.cloneStackOverflow.member.auth.utils.HelloAuthorityUtils;
+import com.preproject.cloneStackOverflow.member.auth.utils.CustomAuthorityUtils;
 import com.preproject.cloneStackOverflow.member.service.MemberService;
 import com.preproject.cloneStackOverflow.member.repository.MemberRepository;
 import org.springframework.context.ApplicationEventPublisher;
@@ -16,7 +16,7 @@ public class JavaConfiguration {
     public MemberService MemberService(MemberRepository memberRepository,
                                        ApplicationEventPublisher publisher,
                                        PasswordEncoder passwordEncoder,
-                                       HelloAuthorityUtils authorityUtils) {
+                                       CustomAuthorityUtils authorityUtils) {
         return new MemberService(memberRepository, publisher, passwordEncoder, authorityUtils);
     }
 }

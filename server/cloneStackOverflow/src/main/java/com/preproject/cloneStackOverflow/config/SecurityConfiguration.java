@@ -7,7 +7,7 @@ import com.preproject.cloneStackOverflow.member.auth.handler.MemberAuthenticatio
 import com.preproject.cloneStackOverflow.member.auth.handler.MemberAuthenticationFailureHandler;
 import com.preproject.cloneStackOverflow.member.auth.handler.MemberAuthenticationSuccessHandler;
 import com.preproject.cloneStackOverflow.member.auth.jwt.JwtTokenizer;
-import com.preproject.cloneStackOverflow.member.auth.utils.HelloAuthorityUtils;
+import com.preproject.cloneStackOverflow.member.auth.utils.CustomAuthorityUtils;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -34,10 +34,10 @@ import static org.springframework.security.config.Customizer.withDefaults;
 @EnableWebSecurity(debug = true)
 public class SecurityConfiguration {
     private final JwtTokenizer jwtTokenizer;
-    private final HelloAuthorityUtils authorityUtils; // 추가
+    private final CustomAuthorityUtils authorityUtils; // 추가
 
     public SecurityConfiguration(JwtTokenizer jwtTokenizer,
-                                   HelloAuthorityUtils authorityUtils) {
+                                   CustomAuthorityUtils authorityUtils) {
         this.jwtTokenizer = jwtTokenizer;
         this.authorityUtils = authorityUtils;
     }
@@ -63,18 +63,8 @@ public class SecurityConfiguration {
                                 .antMatchers(HttpMethod.POST, "/*/members").permitAll()
                                 .antMatchers(HttpMethod.PATCH, "/*/members/**").hasRole("USER")
                                 .antMatchers(HttpMethod.GET, "/*/members").hasRole("ADMIN")
-//                    .mvcMatchers(HttpMethod.GET, "/*/members").hasRole("ADMIN")
                                 .antMatchers(HttpMethod.GET, "/*/members/**").hasAnyRole("USER", "ADMIN")
                                 .antMatchers(HttpMethod.DELETE, "/*/members/**").hasRole("USER")
-                                .antMatchers(HttpMethod.POST, "/*/coffees").hasRole("ADMIN")
-                                .antMatchers(HttpMethod.PATCH, "/*/coffees/**").hasRole("ADMIN")
-                                .antMatchers(HttpMethod.GET, "/*/coffees/**").hasAnyRole("USER", "ADMIN")
-                                .antMatchers(HttpMethod.GET, "/*/coffees").permitAll()
-                                .antMatchers(HttpMethod.DELETE, "/*/coffees").hasRole("ADMIN")
-                                .antMatchers(HttpMethod.POST, "/*/orders").hasRole("USER")
-                                .antMatchers(HttpMethod.PATCH, "/*/orders").hasAnyRole("USER", "ADMIN")
-                                .antMatchers(HttpMethod.GET, "/*/orders/**").hasAnyRole("USER", "ADMIN")
-                                .antMatchers(HttpMethod.DELETE, "/*/orders").hasRole("USER")
                                 .anyRequest().permitAll()
                 );
         return http.build();
@@ -102,7 +92,7 @@ public class SecurityConfiguration {
             AuthenticationManager authenticationManager = builder.getSharedObject(AuthenticationManager.class);
 
             JwtAuthenticationFilter jwtAuthenticationFilter = new JwtAuthenticationFilter(authenticationManager, jwtTokenizer);
-            jwtAuthenticationFilter.setFilterProcessesUrl("/v11/auth/login");
+            jwtAuthenticationFilter.setFilterProcessesUrl("/auth/login");
             jwtAuthenticationFilter.setAuthenticationSuccessHandler(new MemberAuthenticationSuccessHandler());
             jwtAuthenticationFilter.setAuthenticationFailureHandler(new MemberAuthenticationFailureHandler());
 

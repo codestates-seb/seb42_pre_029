@@ -2,7 +2,7 @@ package com.preproject.cloneStackOverflow.member.auth.userdetails;
 
 import com.preproject.cloneStackOverflow.exception.StackOverFlowException;
 import com.preproject.cloneStackOverflow.exception.ExceptionCode;
-import com.preproject.cloneStackOverflow.member.auth.utils.HelloAuthorityUtils;
+import com.preproject.cloneStackOverflow.member.auth.utils.CustomAuthorityUtils;
 import com.preproject.cloneStackOverflow.member.entity.Member;
 import com.preproject.cloneStackOverflow.member.repository.MemberRepository;
 import org.springframework.security.core.GrantedAuthority;
@@ -21,9 +21,9 @@ import java.util.Optional;
 @Component
 public class MemberDetailsService implements UserDetailsService {
     private final MemberRepository memberRepository;
-    private final HelloAuthorityUtils authorityUtils;
+    private final CustomAuthorityUtils authorityUtils;
 
-    public MemberDetailsService(MemberRepository memberRepository, HelloAuthorityUtils authorityUtils) {
+    public MemberDetailsService(MemberRepository memberRepository, CustomAuthorityUtils authorityUtils) {
         this.memberRepository = memberRepository;
         this.authorityUtils = authorityUtils;
     }
