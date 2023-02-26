@@ -1,8 +1,38 @@
+import { useEffect, useState } from 'react';
 import MainLayout from '../../components/MainLayout';
 import Button from '../../components/Button';
 import styled from 'styled-components';
 import TextArea from '../../components/TextArea';
+import questData from '../../data/message_question.json';
+
 function BoardWrite() {
+  const [titleValue, setTitleValue] = useState('');
+  const [bodyValue, setBodyValue] = useState('');
+  const [data, setData] = useState([]);
+  useEffect(() => {
+    setData(questData.questions);
+  }, []);
+  const titleHandller = e => {
+    setTitleValue(e.target.value);
+  };
+  const bodyHandller = e => {
+    setBodyValue(e.target.value);
+  };
+  const submit = () => {
+    let newQuestionData = {
+      memberid: data.length + 1,
+      questionid: questData.questions.length + 1,
+      title: titleValue,
+      body: bodyValue,
+      createdAt: new Date(),
+      modifiedAt: new Date(),
+      view: Math.random(),
+      answercount: Math.random(),
+    };
+    setData([...data, newQuestionData]);
+    setTitleValue('');
+    setBodyValue('');
+  };
   return (
     <MainLayout>
       <BoardWriteHeader>
@@ -40,6 +70,7 @@ function BoardWrite() {
             Be specific and imagine you’re asking a question to another person.
           </p>
           <TextArea
+            value={titleValue}
             placeholder={'title'}
             border={'1px solid var(--line-001)'}
             width={'100%'}
@@ -48,6 +79,7 @@ function BoardWrite() {
             borderRadius={'3px'}
             fontSize={'var(--font-size-md)'}
             fontColor={'var(--black-004)'}
+            onChange={titleHandller}
           />
         </TextField>
         <TextField>
@@ -57,6 +89,7 @@ function BoardWrite() {
             Minimum 20 characters.
           </p>
           <TextArea
+            value={bodyValue}
             placeholder={'What are the details of your problem?'}
             border={'1px solid var(--line-001)'}
             width={'100%'}
@@ -66,8 +99,14 @@ function BoardWrite() {
             padding={'14px'}
             fontSize={'var(--font-size-md)'}
             fontColor={'var(--black-004)'}
+            onChange={bodyHandller}
           />
-          <Button text={'Submit'} textColor={'white'} width={'80px'} />
+          <Button
+            text={'Submit'}
+            textColor={'white'}
+            width={'80px'}
+            onClick={submit}
+          />
         </TextField>
       </BoardWriteBody>
     </MainLayout>
