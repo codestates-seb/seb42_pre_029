@@ -71,3 +71,8 @@ bootJar {
 		into 'src/main/resources/static/docs'
 	}
 }
+
+tasks.withType(Test) {
+    scanForTestClasses = false
+    include "*/Test.class"
+}
