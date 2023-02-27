@@ -4,6 +4,7 @@ import com.preproject.cloneStackOverflow.answer.entity.Answer;
 import com.preproject.cloneStackOverflow.answer.service.AnswerService;
 import com.preproject.cloneStackOverflow.exception.ExceptionCode;
 import com.preproject.cloneStackOverflow.exception.StackOverFlowException;
+import com.preproject.cloneStackOverflow.member.entity.Member;
 import com.preproject.cloneStackOverflow.member.repository.MemberRepository;
 import com.preproject.cloneStackOverflow.member.service.MemberService;
 import com.preproject.cloneStackOverflow.question.entity.Question;
@@ -62,9 +63,14 @@ public class QuestionService {
         return questionRepository.save(question);
     }
 
-    public Page<Question> findQuestions(int page, int size){
-        return questionRepository.findAll(PageRequest.of(page, size, Sort.by("questionId").descending()));
+//    public Page<Question> findQuestions(int page, int size){
+//        return questionRepository.findAll(PageRequest.of(page, size, Sort.by("questionId").descending()));
+//    }
+    @Transactional(readOnly = true)
+    public List<Question> findQuestions() {
+        return (List<Question>) questionRepository.findAll();
     }
+
 
     public int viewCount(long questionId){
         Question findView = findVerifiedQuestion(questionId);
