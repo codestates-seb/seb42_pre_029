@@ -4,6 +4,22 @@ import styled from 'styled-components';
 
 const EditModal = ({ open, onClose }) => {
   if (!open) return null;
+  const handlePhoneNumChange = e => {
+    const rawPhoneNum = e.target.value;
+    const formattedPhoneNum = rawPhoneNum.replace(
+      /(\d{3})(\d{4})(\d{4})/,
+      '$1-$2-$3',
+    );
+    e.target.value = formattedPhoneNum;
+  };
+  const handleBirthDateChange = e => {
+    const rawBirthDate = e.target.value;
+    const formattedBirthDate = rawBirthDate.replace(
+      /(\d{4})(\d{2})(\d{2})/,
+      '$1.$2.$3',
+    );
+    e.target.value = formattedBirthDate;
+  };
   return (
     <Overlay>
       <div className="modalContainer">
@@ -35,6 +51,7 @@ const EditModal = ({ open, onClose }) => {
             fontSize={'var(--font-size-md)'}
             fontColor={'var(--black-002)'}
             placeholder={'010-1234-5678'}
+            onChange={handlePhoneNumChange}
           />
           <p>E-mail</p>
           <TextArea
@@ -59,6 +76,7 @@ const EditModal = ({ open, onClose }) => {
             fontSize={'var(--font-size-md)'}
             fontColor={'var(--black-002)'}
             placeholder={'1990.00.00'}
+            onChange={handleBirthDateChange}
           />
         </div>
         <div className="button">
@@ -110,8 +128,8 @@ const Overlay = styled.div`
   }
   & .closeBtn {
     position: fixed;
-    top: 15px;
-    right: 15px;
+    top: 35px;
+    right: 30px;
     cursor: pointer;
     color: var(--black-004);
     font-weight: bold;
