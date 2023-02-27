@@ -23,7 +23,7 @@ const EditModal = ({ open, onClose }) => {
   return (
     <Overlay>
       <div className="modalContainer">
-        <button onClick={onClose} className="closeBtn">
+        <button onClick={onClose} className="closeBtn" aria-label="Close">
           X
         </button>
         <div className="h2">Edit your profile</div>
