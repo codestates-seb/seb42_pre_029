@@ -10,6 +10,7 @@ import myImg from '../../assets/myImg.svg';
 import phonenum from '../../assets/phonenum.svg';
 import mail from '../../assets/mail.svg';
 import birthday from '../../assets/birthday.svg';
+import EditModal from '../MyPage/EditModal';
 // import Members from '../../data/message_member.json';
 
 function MyPage() {
@@ -19,6 +20,7 @@ function MyPage() {
   const [page, setPage] = useState(1);
   const offset = (page - 1) * limit;
   const total = questionsData.length;
+  const [openModal, setOpenModal] = useState(false);
 
   useEffect(() => {
     setQuestionsData(questions.questions);
@@ -29,82 +31,93 @@ function MyPage() {
   }, []);
 
   return (
-    <MainLayout sideBar>
-      <UserInfoContainer>
-        <img src={myImg} alt="myImg" />
-        <UserInfoWrapper>
-          <h2>열글자이상넘어가면놉</h2>
-          <div>
-            <img src={phonenum} alt="phone" />
-            <span>010-1234-5678</span>
-            <img src={mail} alt="e-mail" />
-            <span>codestates@gmail.com</span>
-            <img src={birthday} alt="birthday" />
-            <span>1990.00.00</span>
-          </div>
-        </UserInfoWrapper>
-        <Button
-          text={'Edit Profile'}
-          textColor={'#fff'}
-          bgColor={'var(--main-002)'}
-          width={'4vw'}
+    <>
+      <EditModal open={openModal} onClose={() => setOpenModal(false)} />
+      <MainLayout sideBar>
+        <UserInfoContainer>
+          <img src={myImg} alt="myImg" />
+          <UserInfoWrapper>
+            <h2>열글자이상넘어가면놉</h2>
+            <div>
+              <img src={phonenum} alt="phone" />
+              <span>010-1234-5678</span>
+              <img src={mail} alt="e-mail" />
+              <span>codestates@gmail.com</span>
+              <img src={birthday} alt="birthday" />
+              <span>1990.00.00</span>
+            </div>
+          </UserInfoWrapper>
+          <Button
+            onClick={() => setOpenModal(true)}
+            text={'Edit Profile'}
+            textColor={'#fff'}
+            bgColor={'var(--main-002)'}
+            width={'4vw'}
+            height={'35px'}
+            fontSize={'var(--font-size-md)'}
+            hover={'#f0820e'}
+            active={'#d1710a'}
+          />
+        </UserInfoContainer>
+        <QuestionContainer>
+          <h2>Question</h2>
+          <QuestionInfo>
+            {questionsData
+              .slice(offset, offset + limit)
+              .map(({ questionid, title, createdAt }) => {
+                return (
+                  <li key={questionid}>
+                    <div className="qcontainer">
+                      <span className="qnumber"> 0{questionid} </span>
+                      <Link
+                        className="qlist"
+                        to={`/board-detail/${questionid}`}
+                      >
+                        {title}
+                      </Link>
+                      <span className="qdate"> {`${createdAt}`}</span>
+                    </div>
+                  </li>
+                );
+              })}
+          </QuestionInfo>
+        </QuestionContainer>
+        <Pagenation
+          limit={limit}
+          setLimit={setLimit}
+          page={page}
+          setPage={setPage}
+          total={total}
         />
-      </UserInfoContainer>
-      <QuestionContainer>
-        <h2>Question</h2>
-        <QuestionInfo>
-          {questionsData
-            .slice(offset, offset + limit)
-            .map(({ questionid, title, createdAt }) => {
-              return (
-                <li key={questionid}>
-                  <div className="qcontainer">
-                    <span className="qnumber"> 0{questionid} </span>
-                    <Link className="qlist" to={`/board-detail/${questionid}`}>
-                      {title}
-                    </Link>
-                    <span className="qdate"> {`${createdAt}`}</span>
-                  </div>
-                </li>
-              );
-            })}
-        </QuestionInfo>
-      </QuestionContainer>
-      <Pagenation
-        limit={limit}
-        setPage={setPage}
-        page={page}
-        setLimit={setLimit}
-        total={total}
-      />
-      <AnswerContainer>
-        <h2>Answer</h2>
-        <AnswerInfo>
-          {answersData
-            .slice(offset, offset + limit)
-            .map(({ answerid, body, createdAt }) => {
-              return (
-                <li key={answerid}>
-                  <div className="acontainer">
-                    <span className="anumber"> 0{answerid} </span>
-                    <Link className="alist" to={`/board-detail/${answerid}`}>
-                      {body}
-                    </Link>
-                    <span className="adate"> {`${createdAt}`}</span>
-                  </div>
-                </li>
-              );
-            })}
-        </AnswerInfo>
-      </AnswerContainer>
-      <Pagenation
-        limit={limit}
-        setPage={setPage}
-        page={page}
-        setLimit={setLimit}
-        total={total}
-      />
-    </MainLayout>
+        <AnswerContainer>
+          <h2>Answer</h2>
+          <AnswerInfo>
+            {answersData
+              .slice(offset, offset + limit)
+              .map(({ answerid, body, createdAt }) => {
+                return (
+                  <li key={answerid}>
+                    <div className="acontainer">
+                      <span className="anumber"> 0{answerid} </span>
+                      <Link className="alist" to={`/board-detail/${answerid}`}>
+                        {body}
+                      </Link>
+                      <span className="adate"> {`${createdAt}`}</span>
+                    </div>
+                  </li>
+                );
+              })}
+          </AnswerInfo>
+        </AnswerContainer>
+        <Pagenation
+          limit={limit}
+          setLimit={setLimit}
+          page={page}
+          setPage={setPage}
+          total={total}
+        />
+      </MainLayout>
+    </>
   );
 }
 
