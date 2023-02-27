@@ -3,19 +3,16 @@ import { useEffect, useState } from 'react';
 import MainLayout from '../../components/MainLayout';
 import styled from 'styled-components';
 import TextArea from '../../components/TextArea';
-import { useParams, useLocation } from 'react-router-dom';
-import member from '../../data/message_member.json';
+import { useParams } from 'react-router-dom';
+import axios from 'axios';
 
 function BoardDetail() {
-  // 데이터 불러오기
+  //todo 데이터 불러오기
   const params = useParams();
-  const qData = useLocation().state.state;
   const { no } = params;
   const [QuestData, setQuestData] = useState({});
   const [ansData, setAnsData] = useState([]);
-  const [userData, setUserData] = useState({});
-
-  // // 질문 추천
+  //todo 질문 추천
   // const [QueVotes, setQueVotes] = useState(0);
   // const QueVotesHandller = e => {
   //   let value = e.target.className;
@@ -32,9 +29,8 @@ function BoardDetail() {
   //   value === 'votesUp' ? (num += 1) : (num -= 1);
   //   setAnsVotes(num);
   // };
-
-  //todo 답변 작성
   const [inputAnswer, setInputAnswer] = useState('');
+  //todo 답변 작성
   const answerHandller = e => {
     if (e.target.value !== '') setInputAnswer(e.target.value);
   };
@@ -45,43 +41,38 @@ function BoardDetail() {
       createdAt: new Date(),
       modifiedAt: new Date(),
     };
-    if (inputAnswer !== '') setAnsData([...ansData, newAnswerData]);
+    if (inputAnswer.length >= 20) setAnsData([...ansData, newAnswerData]);
+    else alert('20글자 이상 입력해 주세요.');
     setInputAnswer('');
   };
 
   useEffect(() => {
-    const questionData = qData.filter(e => e.questionid === +no)[0];
-    setQuestData(questionData);
-    fetch('http://localhost:3002/answers')
-      .then(res => res.json())
-      .then(data => setAnsData(data))
-      .catch(err => console.log(err));
-    fetch('http://localhost:3003/members')
-      .then(res => res.json())
-      .then(data => setUserData(data))
-      .catch(err => console.log(err));
-    const answerData = ansData.filter(
-      e => e.questionid === questionData.questionid,
-    );
-    setAnsData(answerData);
-    const membersData = member.members.filter(
-      e => e.memberid === questionData.memberid,
-    )[0];
-    setUserData(membersData);
-    fetch('http://localhost:3002/answers', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        answerid: ansData.length + 1,
-        body: inputAnswer,
-        createdAt: new Date(),
-        modifiedAt: new Date(),
-      }),
-    }).then(response => console.log(response));
+    const loadData = async () => {
+      // eslint-disable-next-line import/no-named-as-default-member
+      axios
+        .all([
+          axios.get('http://localhost:3001/questions'),
+          axios.get('http://localhost:3002/answers'),
+        ])
+        .then(
+          // eslint-disable-next-line import/no-named-as-default-member
+          axios.spread((question, answer) => {
+            // console.log(question.data, answer.data, member.data);
+            setQuestData(
+              question.data.filter(data => data.questionid === +no)[0],
+            );
+            setAnsData(answer.data.filter(data => data.questionid === +no));
+          }),
+        )
+        .catch(err => console.log(err));
+    };
+    loadData();
   }, []);
 
+  //todo 질문 삭제&수정 구현
+
+  const deleteQuestion = () => {};
+  // console.log(userData);
   return (
     <>
       <MainLayout sideBar>
@@ -93,7 +84,7 @@ function BoardDetail() {
                 src={`https://placeimg.com/200/100/people/${QuestData.questionid}`}
                 alt="practice"
               />
-              <p>{userData.name}</p>
+              <p>{'Andy Obusek'}</p>
             </Editor>
             <EditInfo>
               <span>{`${QuestData.createdAt} ago`}</span>
@@ -115,11 +106,13 @@ function BoardDetail() {
             </VotesControl> */}
             <Context>{QuestData.body}</Context>
           </Post>
-          <Questioner>
-            <span>Edit</span>
+          <PostHanddle>
+            <button type="text">Edit</button>
             <div className="round"></div>
-            <span>Delete</span>
-          </Questioner>
+            <button type="text" onClick={deleteQuestion}>
+              Delete
+            </button>
+          </PostHanddle>
         </QuestionBody>
         <AnswerBody>
           <span>{`${ansData.length} answer`}</span>
@@ -159,7 +152,28 @@ function BoardDetail() {
                     <div className="votesDown"></div>
                   </button>
                 </VotesControl> */}
+                <AnsEditor>
+                  <Editor>
+                    <img
+                      src={`https://placeimg.com/200/100/people/${ansData.questionid}`}
+                      alt="practice"
+                    />
+                    <p>{'Andy Obusek'}</p>
+                  </Editor>
+                  <EditInfo>
+                    <span>{`${QuestData.createdAt} ago`}</span>
+                    <span>{`${QuestData.view} view`}</span>
+                    {/* <span>{`${QueVotes} votes`}</span> */}
+                  </EditInfo>
+                </AnsEditor>
                 <Context>{body}</Context>
+                <PostHanddle>
+                  <button type="text">Edit</button>
+                  <div className="round"></div>
+                  <button type="text" onClick={deleteQuestion}>
+                    Delete
+                  </button>
+                </PostHanddle>
               </Post>
             );
           })}
@@ -188,7 +202,7 @@ const EditLayout = styled.div`
 const Editor = styled.div`
   display: flex;
   flex-direction: row;
-  align-items: center;
+  align-items: flex-end;
   > img {
     width: 16px;
     height: 16px;
@@ -196,7 +210,7 @@ const Editor = styled.div`
     border-radius: 3px;
   }
   > p {
-    font-size: var(--font-size-sm);
+    font-size: var(--font-size-md);
     color: #0075cf;
     margin-right: 8px;
   }
@@ -222,25 +236,36 @@ const QuestionBody = styled.section`
   flex-direction: column;
   border-bottom: 1px solid var(--line-002);
   padding-bottom: 30px;
+  & > article {
+    border: none;
+    padding-bottom: 0px;
+  }
 `;
 
 const Post = styled.article`
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   align-items: flex-start;
   margin-top: 40px;
   border-bottom: 1px solid var(--line-002);
   padding-bottom: 30px;
-  :last-child {
-    border-bottom: none;
-    padding-bottom: none;
-  }
 `;
 
 const Context = styled.p`
   font-size: var(--font-size-lg);
   color: var(--black-002);
   line-height: 26px;
+  margin-bottom: 30px;
+`;
+const AnsEditor = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-bottom: 30px;
+  padding-bottom: 30px;
+  border-top: 1px solid var(--black-006);
+  border-bottom: 1px solid var(--line-002);
 `;
 //vote 기능 css
 // const VotesControl = styled.article`
@@ -280,18 +305,21 @@ const Context = styled.p`
 //   }
 // `;
 
-const Questioner = styled.article`
+const PostHanddle = styled.article`
   display: flex;
   flex-direction: row;
-  justify-content: flex-end;
+  justify-content: flex-start;
   align-items: center;
-  margin-top: 24px;
-  & > span {
+  & > button {
     user-select: none;
     font-size: var(--font-size-md);
     color: var(--black-004);
+    background: none;
     margin: 0px 8px;
     cursor: pointer;
+    :first-child {
+      padding-left: 0;
+    }
     :active {
       color: var(--main-001);
     }
