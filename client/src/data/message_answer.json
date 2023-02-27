@@ -41,8 +41,8 @@
       "modifiedAt": "date"
     },
     {
-      "questionid": 5,
-      "memberid": 5,
+      "questionid": 6,
+      "memberid": 6,
       "answerid": 6,
       "body": "I am trying to fetch nested JSON objects and JSON List from Database using QueryDSL. I have used a native query with LISTAGG and JSON_OBJECT. Native Query : SELECT",
       "createdAt": "date",

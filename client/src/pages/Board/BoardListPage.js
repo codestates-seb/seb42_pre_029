@@ -2,21 +2,21 @@ import MainLayout from '../../components/MainLayout';
 import Button from '../../components/Button';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import questions from '../../data/message_question.json';
-import { useEffect, useState } from 'react';
+import { useState, useEffect } from 'react';
 import Pagenation from '../../components/Pagenation';
-
+import axios from 'axios';
 function BoardList() {
-  // 질문데이터 받아오기
   const [data, setData] = useState([]);
   const [limit, setLimit] = useState(10);
   const [page, setPage] = useState(1);
   const offset = (page - 1) * limit;
   const total = data.length;
-  console.log(offset);
 
   useEffect(() => {
-    setData(questions.questions);
+    axios
+      .get('http://localhost:3001/questions')
+      .then(data => setData(data.data))
+      .catch(err => console.log(err));
   }, []);
 
   // 현재페이지 보여주기
@@ -28,7 +28,7 @@ function BoardList() {
           <h1>All Questions</h1>
           <p>{`${total} Questions`}</p>
         </div>
-        <Link to="/board-write">
+        <Link to={'/board-write'}>
           <Button
             bgColor={'var(--main-002)'}
             textColor={'#fff'}
@@ -73,8 +73,6 @@ function BoardList() {
                     <span>{`${answercount} answer`}</span>
                     <div className="round"></div>
                     <span>{`${view} views`}</span>
-                    {/* <div className="round"></div>
-                    <span>{`${1} votes`}</span> */}
                   </div>
                 </li>
               );
