@@ -50,9 +50,17 @@ public class Member {
         this.password = password;
     }
 
-    public String getUsername() {
-        return getEmail();
+    public Member(String email, String password, String username, String birth, String phone) {
+        this.email = email;
+        this.password = password;
+        this.username = username;
+        this.birth = birth;
+        this.phone = phone;
     }
+
+//    public String getUsername() {
+//        return getEmail();
+//    }
 
     @Setter(AccessLevel.NONE)
     @OneToMany(mappedBy = "member")

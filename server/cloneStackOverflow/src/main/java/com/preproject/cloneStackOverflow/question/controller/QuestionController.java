@@ -1,5 +1,6 @@
 package com.preproject.cloneStackOverflow.question.controller;
 
+import com.preproject.cloneStackOverflow.member.entity.Member;
 import com.preproject.cloneStackOverflow.member.service.MemberService;
 import com.preproject.cloneStackOverflow.question.dto.QuestionDto;
 import com.preproject.cloneStackOverflow.question.entity.Question;
@@ -27,11 +28,12 @@ import java.net.URI;
 import java.util.List;
 
 @RestController
-@RequestMapping("/v1/questions")
+@CrossOrigin
+@RequestMapping("/questions")
 @Validated
 @Slf4j
 public class QuestionController {
-    private final static String QUESTION_DEFAULT_URL = "/v1/questions";
+    private final static String QUESTION_DEFAULT_URL = "/questions";
     private final QuestionService questionService;
     private final QuestionMapper mapper;
     private final MemberService memberService;
@@ -64,15 +66,20 @@ public class QuestionController {
         return new ResponseEntity<>(new SingleResponseDto<>(mapper.questionToQuestionResponseDto(response)), HttpStatus.OK);
     }
 
+//    @GetMapping
+//    public ResponseEntity getQuestions(@Positive @RequestParam int page,
+//                                       @Positive @RequestParam int size){
+//        Page<Question> pageQuestions = questionService.findQuestions(page - 1, size);
+//        List<Question> questions = pageQuestions.getContent();
+//
+//        return new ResponseEntity<>(new MultiResponseDto<>(mapper.questionsToQuestionResponseDtos(questions), pageQuestions), HttpStatus.OK);
+//    }
+
     @GetMapping
-    public ResponseEntity getQuestions(@Positive @RequestParam int page,
-                                       @Positive @RequestParam int size){
-        Page<Question> pageQuestions = questionService.findQuestions(page - 1, size);
-        List<Question> questions = pageQuestions.getContent();
-
-        return new ResponseEntity<>(new MultiResponseDto<>(mapper.questionsToQuestionResponseDtos(questions), pageQuestions), HttpStatus.OK);
+    public ResponseEntity getQuestions(){
+        List<Question> questions = questionService.findQuestions();
+        return new ResponseEntity<>(questions, HttpStatus.OK);
     }
-
     @DeleteMapping("/{question-id}")
     public ResponseEntity deleteQuestion(@PathVariable("question-id") @Positive long questionId){
         questionService.deleteQuestion(questionId);
