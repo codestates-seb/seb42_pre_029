@@ -3,32 +3,18 @@ import { useEffect, useState } from 'react';
 import MainLayout from '../../components/MainLayout';
 import styled from 'styled-components';
 import TextArea from '../../components/TextArea';
-import { useParams } from 'react-router-dom';
-import questions from '../../data/message_question.json';
-import answer from '../../data/message_answer.json';
+import { useParams, useLocation } from 'react-router-dom';
 import member from '../../data/message_member.json';
 
 function BoardDetail() {
   // 데이터 불러오기
   const params = useParams();
+  const qData = useLocation().state.state;
   const { no } = params;
   const [QuestData, setQuestData] = useState({});
   const [ansData, setAnsData] = useState([]);
   const [userData, setUserData] = useState({});
-  useEffect(() => {
-    const questionData = questions.questions.filter(
-      e => e.questionid === +no,
-    )[0];
-    setQuestData(questionData);
-    const answerData = answer.answers.filter(
-      e => e.questionid === questionData.questionid,
-    );
-    setAnsData(answerData);
-    const membersData = member.members.filter(
-      e => e.memberid === questionData.memberid,
-    )[0];
-    setUserData(membersData);
-  }, []);
+
   // // 질문 추천
   // const [QueVotes, setQueVotes] = useState(0);
   // const QueVotesHandller = e => {
@@ -47,21 +33,54 @@ function BoardDetail() {
   //   setAnsVotes(num);
   // };
 
-  //답변 작성
+  //todo 답변 작성
   const [inputAnswer, setInputAnswer] = useState('');
   const answerHandller = e => {
-    setInputAnswer(e.target.value);
+    if (e.target.value !== '') setInputAnswer(e.target.value);
   };
   const answerSubmit = () => {
     let newAnswerData = {
-      answerid: answer.answers.length + 1,
+      answerid: ansData.length + 1,
       body: inputAnswer,
       createdAt: new Date(),
       modifiedAt: new Date(),
     };
-    setAnsData([...ansData, newAnswerData]);
-    console.log(answer.answers);
+    if (inputAnswer !== '') setAnsData([...ansData, newAnswerData]);
+    setInputAnswer('');
   };
+
+  useEffect(() => {
+    const questionData = qData.filter(e => e.questionid === +no)[0];
+    setQuestData(questionData);
+    fetch('http://localhost:3002/answers')
+      .then(res => res.json())
+      .then(data => setAnsData(data))
+      .catch(err => console.log(err));
+    fetch('http://localhost:3003/members')
+      .then(res => res.json())
+      .then(data => setUserData(data))
+      .catch(err => console.log(err));
+    const answerData = ansData.filter(
+      e => e.questionid === questionData.questionid,
+    );
+    setAnsData(answerData);
+    const membersData = member.members.filter(
+      e => e.memberid === questionData.memberid,
+    )[0];
+    setUserData(membersData);
+    fetch('http://localhost:3002/answers', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        answerid: ansData.length + 1,
+        body: inputAnswer,
+        createdAt: new Date(),
+        modifiedAt: new Date(),
+      }),
+    }).then(response => console.log(response));
+  }, []);
 
   return (
     <>
@@ -105,6 +124,7 @@ function BoardDetail() {
         <AnswerBody>
           <span>{`${ansData.length} answer`}</span>
           <TextArea
+            value={inputAnswer}
             border={'1px solid var(--line-001)'}
             width={'100%'}
             height={'300px'}
