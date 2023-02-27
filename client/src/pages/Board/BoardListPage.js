@@ -4,20 +4,20 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { useState, useEffect } from 'react';
 import Pagenation from '../../components/Pagenation';
-
+import axios from 'axios';
 function BoardList() {
   const [data, setData] = useState([]);
   const [limit, setLimit] = useState(10);
   const [page, setPage] = useState(1);
   const offset = (page - 1) * limit;
+  const total = data.length;
 
   useEffect(() => {
-    fetch('http://localhost:3001/questions')
-      .then(res => res.json())
-      .then(data => setData(data))
+    axios
+      .get('http://localhost:3001/questions')
+      .then(data => setData(data.data))
       .catch(err => console.log(err));
   }, []);
-  const total = data.length;
 
   // 현재페이지 보여주기
 
@@ -54,11 +54,7 @@ function BoardList() {
               return (
                 <li key={questionid}>
                   <div className="container">
-                    <Link
-                      className="h4"
-                      to={`/board-detail/${questionid}`}
-                      state={{ state: data }}
-                    >
+                    <Link className="h4" to={`/board-detail/${questionid}`}>
                       {title}
                     </Link>
                     <div className="editor">
