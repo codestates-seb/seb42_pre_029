@@ -22,6 +22,7 @@ import java.util.List;
 
 @RequestMapping("/members")
 @RestController
+@CrossOrigin
 @Validated
 @Slf4j
 public class MemberController {
@@ -84,6 +85,7 @@ public class MemberController {
     @PatchMapping("/{member-id}")
     public ResponseEntity patchMember(@PathVariable("member-id") @Positive long memberId,
                                       @Valid @RequestBody MemberDto.Patch requestBody){
+        requestBody.setMemberId(memberId);
         Member member =
                 memberService.updateMember(memberMapper.memberPatchDtoToMember(requestBody));
 

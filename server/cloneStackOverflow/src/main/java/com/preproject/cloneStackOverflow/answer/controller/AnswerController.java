@@ -17,10 +17,11 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
+@CrossOrigin
 @Validated
-@RequestMapping("/v1/answers")
+@RequestMapping("/answers")
 public class AnswerController {
-    private final static String ANSWER_DEFAULT_URL = "/v1/answers";
+    private final static String ANSWER_DEFAULT_URL = "/answers";
     private final AnswerService answerService;
     private final AnswerMapper mapper;
 
