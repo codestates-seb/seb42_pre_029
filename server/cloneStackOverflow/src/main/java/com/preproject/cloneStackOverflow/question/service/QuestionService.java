@@ -1,5 +1,6 @@
 package com.preproject.cloneStackOverflow.question.service;
 
+import com.preproject.cloneStackOverflow.answer.entity.Answer;
 import com.preproject.cloneStackOverflow.exception.ExceptionCode;
 import com.preproject.cloneStackOverflow.exception.StackOverFlowException;
 import com.preproject.cloneStackOverflow.member.entity.Member;
@@ -11,6 +12,7 @@ import com.preproject.cloneStackOverflow.utils.CustomBeanUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -62,6 +64,15 @@ public class QuestionService {
         return (List<Question>) questionRepository.findAll();
     }
 
+    public List<String> findMemberQuestions(long memberId){
+        Member findMember = memberService.findVerifiedMember(memberId);
+        List<Question> questionList = questionRepository.findByMember(findMember);
+        List<String> list = new ArrayList<>();
+        for(Question question : questionList){
+            list.add(question.getBody());
+        }
+        return list;
+    }
 
     public int viewCount(long questionId){
         Question findView = findVerifiedQuestion(questionId);

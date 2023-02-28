@@ -62,6 +62,14 @@ public class QuestionController {
         List<Question> questions = questionService.findQuestions();
         return new ResponseEntity<>(mapper.questionsToQuestionResponseDtos(questions), HttpStatus.OK);
     }
+
+    @GetMapping("/member/{member-id}")
+    public ResponseEntity getMemberQuestions(@PathVariable("member-id") @Positive long memberId){
+        List<String> memberQuestions = questionService.findMemberQuestions(memberId);
+
+        return new ResponseEntity<>(memberQuestions, HttpStatus.OK);
+    }
+
     @DeleteMapping("/{question-id}")
     public ResponseEntity deleteQuestion(@PathVariable("question-id") @Positive long questionId){
         questionService.deleteQuestion(questionId);
