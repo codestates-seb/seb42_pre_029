@@ -100,4 +100,8 @@ public class QuestionService {
         return questionRepository.save(question);
     }
 
+    // My-Page구현시 사용할 것
+//    public List<Question> getQuestionListByMember(Member member) {
+//        return questionRepository.findByMember(member);
+//    }
 }

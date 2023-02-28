@@ -1,5 +1,6 @@
 package com.preproject.cloneStackOverflow.question.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.preproject.cloneStackOverflow.answer.entity.Answer;
 import com.preproject.cloneStackOverflow.audit.Auditable;
 import com.preproject.cloneStackOverflow.member.entity.Member;
@@ -24,7 +25,7 @@ public class Question extends Auditable {
     @Column(length = 1000, nullable = false)
     private String title;
     @NotBlank(message = "Insert Text.")
-    @Column(length = 1000, nullable = false)
+    @Column(length = 100000, nullable = false)
     private String body;
     @ManyToOne
     @JoinColumn(name = "MEMBER_ID")
