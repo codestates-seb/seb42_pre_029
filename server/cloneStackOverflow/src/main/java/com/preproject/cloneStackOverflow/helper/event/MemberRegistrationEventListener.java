@@ -26,7 +26,6 @@ public class MemberRegistrationEventListener {
     @EventListener
     public void listen(MemberRegistrationApplicationEvent event) throws Exception {
         try {
-            // 전송할 메시지를 생성했다고 가정.
             String message = "any email message";
             emailSender.sendEmail(message);
         } catch (MailSendException e) {

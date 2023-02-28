@@ -10,8 +10,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.List;
-import java.util.Stack;
 
 @Entity
 @Getter
@@ -39,13 +37,18 @@ public class Answer extends Auditable {
 
     public void addMember(Member member){
         this.member = member;
+        if(!member.getAnswers().contains(this)){
+            member.getAnswers().add(this);
+        }
     }
 
     public void addQuestion(Question question) {
         this.question = question;
+        if(!member.getAnswers().contains(this)){
+            member.getAnswers().add(this);
+        }
     }
 
-    // 추가
     public static void checkNotFoundAnswers(int sourceAnswerCount, int targetAnswerCount) {
         if (sourceAnswerCount != targetAnswerCount) {
             throw new StackOverFlowException(ExceptionCode.ANSWER_NOT_FOUND);

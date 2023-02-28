@@ -35,21 +35,7 @@ public class MemberController {
         this.memberMapper = mapper;
     }
 
-    @GetMapping("/save-form")
-    public ModelAndView saveForm(){
-        ModelAndView mav = new ModelAndView("save");
-        return mav;
-    }
-
-//    @PostMapping("/save")
-//    public ModelAndView save(@ModelAttribute @Valid MemberDto.Post requestBody){
-//        Member member = memberMapper.memberPostToMember(requestBody);
-//        memberService.createMember(member);
-//        ModelAndView mav = new ModelAndView("index");
-//        System.out.println("Member Registration Success");
-//        return mav;
-//    }
-    @PostMapping//("/save")
+    @PostMapping
     public ResponseEntity postMember(@Valid @RequestBody MemberDto.Post requestBody) {
         Member member = memberMapper.memberPostToMember(requestBody);
 
@@ -59,17 +45,6 @@ public class MemberController {
         return ResponseEntity.created(location).build();
     }
 
-    @GetMapping("/my-page")
-    public ModelAndView myPage(){
-        ModelAndView mav = new ModelAndView("my-page");
-        return mav;
-    }
-
-    @GetMapping("/logout")
-    public ModelAndView logoutMember(){
-        ModelAndView mav = new ModelAndView("logout");
-        return mav;
-    }
     @GetMapping("/{member-id}")
     public ResponseEntity getMember(@PathVariable("member-id") @Positive long memberId){
         Member member = memberService.findMember(memberId);
@@ -80,8 +55,9 @@ public class MemberController {
     @GetMapping
     public ResponseEntity getMembers(){
         List<Member> members = memberService.findMembers();
-        return new ResponseEntity<>(members, HttpStatus.OK);
+        return new ResponseEntity<>(memberMapper.membersToMemberGetResponseDtos(members), HttpStatus.OK);
     }
+
     @PatchMapping("/{member-id}")
     public ResponseEntity patchMember(@PathVariable("member-id") @Positive long memberId,
                                       @Valid @RequestBody MemberDto.Patch requestBody){

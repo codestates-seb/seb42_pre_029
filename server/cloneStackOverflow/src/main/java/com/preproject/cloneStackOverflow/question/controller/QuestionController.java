@@ -1,24 +1,15 @@
 package com.preproject.cloneStackOverflow.question.controller;
 
-import com.preproject.cloneStackOverflow.member.entity.Member;
 import com.preproject.cloneStackOverflow.member.service.MemberService;
 import com.preproject.cloneStackOverflow.question.dto.QuestionDto;
 import com.preproject.cloneStackOverflow.question.entity.Question;
 import com.preproject.cloneStackOverflow.question.mapper.QuestionMapper;
-import com.preproject.cloneStackOverflow.question.repository.QuestionRepository;
 import com.preproject.cloneStackOverflow.question.service.QuestionService;
-import com.preproject.cloneStackOverflow.response.MultiResponseDto;
 import com.preproject.cloneStackOverflow.response.SingleResponseDto;
 import com.preproject.cloneStackOverflow.utils.UriCreator;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
-import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.transaction.annotation.Transactional;
-import org.springframework.ui.Model;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -46,10 +37,10 @@ public class QuestionController {
 
     @PostMapping
     public ResponseEntity postQuestion(@Valid @RequestBody QuestionDto.Post requestBody){
-        Question question = mapper.questionPostDtoToQuestion(requestBody);
-        Question createQuestion = questionService.createQuestion(question);
+        Question question = questionService.createQuestion(mapper.questionPostDtoToQuestion(requestBody)
+                ,requestBody.getMemberId());
 
-        URI location = UriCreator.createUri(QUESTION_DEFAULT_URL, createQuestion.getQuestionId());
+        URI location = UriCreator.createUri(QUESTION_DEFAULT_URL, question.getQuestionId());
 
         return ResponseEntity.created(location).build();
     }
@@ -66,19 +57,10 @@ public class QuestionController {
         return new ResponseEntity<>(new SingleResponseDto<>(mapper.questionToQuestionResponseDto(response)), HttpStatus.OK);
     }
 
-//    @GetMapping
-//    public ResponseEntity getQuestions(@Positive @RequestParam int page,
-//                                       @Positive @RequestParam int size){
-//        Page<Question> pageQuestions = questionService.findQuestions(page - 1, size);
-//        List<Question> questions = pageQuestions.getContent();
-//
-//        return new ResponseEntity<>(new MultiResponseDto<>(mapper.questionsToQuestionResponseDtos(questions), pageQuestions), HttpStatus.OK);
-//    }
-
     @GetMapping
     public ResponseEntity getQuestions(){
         List<Question> questions = questionService.findQuestions();
-        return new ResponseEntity<>(questions, HttpStatus.OK);
+        return new ResponseEntity<>(mapper.questionsToQuestionResponseDtos(questions), HttpStatus.OK);
     }
     @DeleteMapping("/{question-id}")
     public ResponseEntity deleteQuestion(@PathVariable("question-id") @Positive long questionId){
@@ -99,7 +81,6 @@ public class QuestionController {
     }
 
     @GetMapping("/count/{question-id}")
-    // Todo : 답변수, AnswerService매핑 필요?
     public ResponseEntity getAnswerCount(@PathVariable("question-id") @Positive long questionId){
         int response = questionService.answerCount(questionId);
         return new ResponseEntity<>(response, HttpStatus.OK);

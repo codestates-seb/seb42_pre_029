@@ -1,7 +1,5 @@
 package com.preproject.cloneStackOverflow.question.service;
 
-import com.preproject.cloneStackOverflow.answer.entity.Answer;
-import com.preproject.cloneStackOverflow.answer.service.AnswerService;
 import com.preproject.cloneStackOverflow.exception.ExceptionCode;
 import com.preproject.cloneStackOverflow.exception.StackOverFlowException;
 import com.preproject.cloneStackOverflow.member.entity.Member;
@@ -10,18 +8,11 @@ import com.preproject.cloneStackOverflow.member.service.MemberService;
 import com.preproject.cloneStackOverflow.question.entity.Question;
 import com.preproject.cloneStackOverflow.question.repository.QuestionRepository;
 import com.preproject.cloneStackOverflow.utils.CustomBeanUtils;
-import org.apache.catalina.security.SecurityUtil;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.swing.text.html.Option;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Transactional
 @Service
@@ -42,8 +33,11 @@ public class QuestionService {
     }
 
 
-    public Question createQuestion(Question question){
+    public Question createQuestion(Question question, long memberId){
         verifyExistsId(question.getQuestionId());
+        Member findMember = memberService.findVerifiedMember(memberId);
+
+        question.setMember(findMember);
 
         return questionRepository.save(question);
     }
@@ -63,9 +57,6 @@ public class QuestionService {
         return questionRepository.save(question);
     }
 
-//    public Page<Question> findQuestions(int page, int size){
-//        return questionRepository.findAll(PageRequest.of(page, size, Sort.by("questionId").descending()));
-//    }
     @Transactional(readOnly = true)
     public List<Question> findQuestions() {
         return (List<Question>) questionRepository.findAll();
