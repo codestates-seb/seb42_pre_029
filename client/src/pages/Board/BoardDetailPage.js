@@ -5,14 +5,17 @@ import styled from 'styled-components';
 import TextArea from '../../components/TextArea';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
+import EditModal from './EditModal';
 
 function BoardDetail() {
-  //todo 데이터 불러오기
   const params = useParams();
   const { no } = params;
   const [QuestData, setQuestData] = useState({});
+  const [qUser, setQUser] = useState({});
   const [ansData, setAnsData] = useState([]);
-  //todo 질문 추천
+  const [openModal, setOpenModal] = useState(false);
+
+  // todo1. 질문 추천
   // const [QueVotes, setQueVotes] = useState(0);
   // const QueVotesHandller = e => {
   //   let value = e.target.className;
@@ -21,7 +24,7 @@ function BoardDetail() {
   //   setQueVotes(num);
   // };
 
-  // // 답변 추천
+  // todo2. 답변 추천
   // const [AnsVotes, setAnsVotes] = useState(0);
   // const ansVotesHandller = e => {
   //   let value = e.target.className;
@@ -29,52 +32,106 @@ function BoardDetail() {
   //   value === 'votesUp' ? (num += 1) : (num -= 1);
   //   setAnsVotes(num);
   // };
+
+  // todo3. 답변 작성
+
   const [inputAnswer, setInputAnswer] = useState('');
-  //todo 답변 작성
+
   const answerHandller = e => {
     if (e.target.value !== '') setInputAnswer(e.target.value);
   };
+
   const answerSubmit = () => {
-    let newAnswerData = {
-      answerid: ansData.length + 1,
+    let data = {
       body: inputAnswer,
-      createdAt: new Date(),
-      modifiedAt: new Date(),
+      questionId: QuestData.questionid,
+      memberId: QuestData.questionid,
     };
-    if (inputAnswer.length >= 20) setAnsData([...ansData, newAnswerData]);
-    else alert('20글자 이상 입력해 주세요.');
+
+    if (inputAnswer.length >= 20) {
+      axios
+        .post(
+          `http://ec2-3-35-235-136.ap-northeast-2.compute.amazonaws.com:8080/answers`,
+          data,
+        )
+        .then(res => console.log(res))
+        .catch(err => console.log(err));
+    } else alert('20글자 이상 입력해 주세요.');
     setInputAnswer('');
   };
 
+  // todo4. 데이터 불러오기
+
   useEffect(() => {
-    const loadData = async () => {
-      // eslint-disable-next-line import/no-named-as-default-member
-      axios
-        .all([
-          axios.get('http://localhost:3001/questions'),
-          axios.get('http://localhost:3002/answers'),
-        ])
-        .then(
-          // eslint-disable-next-line import/no-named-as-default-member
-          axios.spread((question, answer) => {
-            // console.log(question.data, answer.data, member.data);
-            setQuestData(
-              question.data.filter(data => data.questionid === +no)[0],
-            );
-            setAnsData(answer.data.filter(data => data.questionid === +no));
-          }),
-        )
-        .catch(err => console.log(err));
-    };
-    loadData();
+    axios
+      .get(
+        `http://ec2-3-35-235-136.ap-northeast-2.compute.amazonaws.com:8080/questions/${no}`,
+      )
+      .then(({ data }) => setQuestData(data.data))
+      .catch(err => console.log(err));
+    // 답변 데이터 받아오기
+    axios
+      .get(
+        `http://ec2-3-35-235-136.ap-northeast-2.compute.amazonaws.com:8080/answers/${no}`,
+      )
+      .then(data =>
+        Array.isArray(data.data)
+          ? setAnsData([...data.data])
+          : setAnsData([data.data]),
+      )
+      .catch(err => console.log(err));
+    axios
+      .get(
+        `http://ec2-3-35-235-136.ap-northeast-2.compute.amazonaws.com:8080/members/1`,
+      )
+      .then(({ data }) => {
+        setQUser(data.data);
+        console.log(data);
+      });
   }, []);
 
-  //todo 질문 삭제&수정 구현
+  //todo5. 질문 삭제&수정 구현
 
-  const deleteQuestion = () => {};
-  // console.log(userData);
+  const deleteQuestion = () => {
+    axios.delete(
+      `http://ec2-3-35-235-136.ap-northeast-2.compute.amazonaws.com:8080/questions/${no}`,
+    );
+    window.location.href = '/';
+  };
+
+  //todo6. 현재 시간 기준으로 얼마나 지났는지 계산
+  function timeForToday(value) {
+    const today = new Date();
+    const timeValue = new Date(value);
+
+    const betweenTime = Math.floor(
+      (today.getTime() - timeValue.getTime()) / 1000 / 60,
+    );
+    if (betweenTime < 1) return '방금전';
+    if (betweenTime < 60) {
+      return `${betweenTime} minute ago`;
+    }
+
+    const betweenTimeHour = Math.floor(betweenTime / 60);
+    if (betweenTimeHour < 24) {
+      return `${betweenTimeHour} hour ago`;
+    }
+
+    const betweenTimeDay = Math.floor(betweenTime / 60 / 24);
+    if (betweenTimeDay < 365) {
+      return `${betweenTimeDay} day ago`;
+    }
+
+    return `${Math.floor(betweenTimeDay / 365)} year ago`;
+  }
+
   return (
     <>
+      <EditModal
+        open={openModal}
+        onClose={() => setOpenModal(false)}
+        title={'Edit Your Question'}
+      />
       <MainLayout sideBar>
         <BoardDetailPageTitle>
           <h2>{QuestData.title}</h2>
@@ -84,10 +141,10 @@ function BoardDetail() {
                 src={`https://placeimg.com/200/100/people/${QuestData.questionid}`}
                 alt="practice"
               />
-              <p>{'Andy Obusek'}</p>
+              <p>{qUser.username}</p>
             </Editor>
             <EditInfo>
-              <span>{`${QuestData.createdAt} ago`}</span>
+              <span>{`${timeForToday(QuestData.createdAt)}`}</span>
               <span>{`${QuestData.view} view`}</span>
               {/* <span>{`${QueVotes} votes`}</span> */}
             </EditInfo>
@@ -107,7 +164,9 @@ function BoardDetail() {
             <Context>{QuestData.body}</Context>
           </Post>
           <PostHanddle>
-            <button type="text">Edit</button>
+            <button type="text" onClick={() => setOpenModal(true)}>
+              Edit
+            </button>
             <div className="round"></div>
             <button type="text" onClick={deleteQuestion}>
               Delete
@@ -140,7 +199,8 @@ function BoardDetail() {
             width={'120px'}
             onClick={answerSubmit}
           />
-          {ansData.map(({ body }, i) => {
+          {ansData.map(({ body, createdAt, view }, i) => {
+            console.log(body);
             return (
               <Post key={i}>
                 {/* <VotesControl>
@@ -155,14 +215,14 @@ function BoardDetail() {
                 <AnsEditor>
                   <Editor>
                     <img
-                      src={`https://placeimg.com/200/100/people/${ansData.questionid}`}
+                      src={`https://placeimg.com/200/100/people/${no}`}
                       alt="practice"
                     />
                     <p>{'Andy Obusek'}</p>
                   </Editor>
                   <EditInfo>
-                    <span>{`${QuestData.createdAt} ago`}</span>
-                    <span>{`${QuestData.view} view`}</span>
+                    <span>{`${timeForToday(createdAt)}`}</span>
+                    <span>{`${view} view`}</span>
                     {/* <span>{`${QueVotes} votes`}</span> */}
                   </EditInfo>
                 </AnsEditor>

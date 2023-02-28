@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import { useState, useEffect } from 'react';
 import Pagenation from '../../components/Pagenation';
 import axios from 'axios';
+
 function BoardList() {
   const [data, setData] = useState([]);
   const [limit, setLimit] = useState(10);
@@ -12,14 +13,16 @@ function BoardList() {
   const offset = (page - 1) * limit;
   const total = data.length;
 
+  //todo.1 questions 데이터 불러오기
+
   useEffect(() => {
     axios
-      .get('http://localhost:3001/questions')
-      .then(data => setData(data.data))
+      .get(
+        'http://ec2-3-35-235-136.ap-northeast-2.compute.amazonaws.com:8080/questions',
+      )
+      .then(({ data }) => setData(data))
       .catch(err => console.log(err));
   }, []);
-
-  // 현재페이지 보여주기
 
   return (
     <MainLayout sideBar>
@@ -28,56 +31,49 @@ function BoardList() {
           <h1>All Questions</h1>
           <p>{`${total} Questions`}</p>
         </div>
-        <Link to={'/board-write'}>
+        <Link to={`/board-write`}>
           <Button
             bgColor={'var(--main-002)'}
             textColor={'#fff'}
             text={'Ask Question'}
             type={'positive'}
-            width={'6vw'}
+            width={'82px'}
+            height={'34px'}
+            hover="var(--pbtn-hover)"
+            active="var(--pbtn-selected)"
           />
         </Link>
       </BoardListPageTitle>
       <QuestionList>
         {data
           .slice(offset, offset + limit)
-          .map(
-            ({
-              questionid,
-              title,
-              body,
-              createdAt,
-              modifiedAt,
-              view,
-              answercount,
-            }) => {
-              return (
-                <li key={questionid}>
-                  <div className="container">
-                    <Link className="h4" to={`/board-detail/${questionid}`}>
-                      {title}
-                    </Link>
-                    <div className="editor">
-                      <div className="editorInfo">
-                        <img
-                          src={`https://placeimg.com/200/100/people/${questionid}`}
-                          alt="practice"
-                        />
-                        <p>Andy Obusek</p>
-                      </div>
-                      <span> {`${createdAt} ${modifiedAt}`}</span>
+          .map(({ questionId, title, body, createdAt, view, answercount }) => {
+            return (
+              <li key={questionId}>
+                <div className="container">
+                  <Link className="h4" to={`/board-detail/${questionId}`}>
+                    {title}
+                  </Link>
+                  <div className="editor">
+                    <div className="editorInfo">
+                      <img
+                        src={`https://placeimg.com/200/100/people/${questionId}`}
+                        alt="practice"
+                      />
+                      <p>Andy Obusek</p>
                     </div>
+                    <span> {`${createdAt}`}</span>
                   </div>
-                  <p>{body}</p>
-                  <div className="questionInfo">
-                    <span>{`${answercount} answer`}</span>
-                    <div className="round"></div>
-                    <span>{`${view} views`}</span>
-                  </div>
-                </li>
-              );
-            },
-          )}
+                </div>
+                <p>{body}</p>
+                <div className="questionInfo">
+                  <span>{`${answercount} answer`}</span>
+                  <div className="round"></div>
+                  <span>{`${view} views`}</span>
+                </div>
+              </li>
+            );
+          })}
       </QuestionList>
 
       <Pagenation
