@@ -1,16 +1,29 @@
 import { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { login, reset } from '../../features/auth/authSlice';
 import styled from 'styled-components';
 import Card from '../../components/Card';
 import InputBox from '../../components/InputBox';
 import Label from '../../components/Label';
 import InputField from '../../components/InputField';
 import Button from '../../components/Button';
+import Loading from '../../components/Loading';
 
 function LoginForm() {
-  const initialValues = { email: '', password: '' };
+  const initialValues = { username: '', password: '' };
   const [formValues, setFormValues] = useState(initialValues);
   const [formErrors, setFormErrors] = useState({});
   const [isSubmit, setIsSubmit] = useState(false);
+
+  const { username, password } = formValues;
+
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const { user, isLoading, isError, isSuccess, message } = useSelector(
+    state => state.auth,
+  );
 
   const onChange = e => {
     const { id, value } = e.target;
@@ -21,6 +34,13 @@ function LoginForm() {
     e.preventDefault();
     setFormErrors(checkValid(formValues));
     setIsSubmit(true);
+
+    const userData = {
+      username,
+      password,
+    };
+
+    dispatch(login(userData));
   };
 
   useEffect(() => {
@@ -30,15 +50,31 @@ function LoginForm() {
     }
   }, [formErrors]);
 
+  useEffect(() => {
+    if (isError) {
+      console.log(message);
+    }
+
+    if (isSuccess || user) {
+      navigate('/login');
+    }
+
+    dispatch(reset());
+  }, [user, isError, isSuccess, message, navigate, dispatch]);
+
+  if (isLoading) {
+    return <Loading />;
+  }
+
   const checkValid = values => {
     const errors = {};
-    const emailRegex = /^[a-zA-Z0-9+-_.]+@[a-zA-Z0-9_-]+\.[a-zA-Z-.]+$/;
+    const usernameRegex = /^[a-zA-Z0-9+-_.]+@[a-zA-Z0-9_-]+\.[a-zA-Z-.]+$/;
     const passwordRegex = /^.*(?=^.{8,20}$)(?=.*\d)(?=.*[a-zA-Z]).*$/;
 
-    if (!values.email) {
-      errors.email = 'Email cannot be empty.';
-    } else if (!emailRegex.test(values.email)) {
-      errors.email = 'The email is not a valid email address.';
+    if (!values.username) {
+      errors.username = 'Email cannot be empty.';
+    } else if (!usernameRegex.test(values.username)) {
+      errors.username = 'The email is not a valid email address.';
     }
     if (!values.password) {
       errors.password = 'Password cannot be empty.';
@@ -53,12 +89,12 @@ function LoginForm() {
       <InputForm onSubmit={onSubmit}>
         <InputBox
           type="text"
-          id="email"
+          id="username"
           title="Email"
-          value={formValues.email}
+          value={formValues.username}
           onChange={onChange}
         />
-        <ErrorMessage>{formErrors.email}</ErrorMessage>
+        <ErrorMessage>{formErrors.username}</ErrorMessage>
         <PasswordContainer>
           <Label id="password">Password</Label>
           <a href="https://stackoverflow.com/">Forgot password?</a>

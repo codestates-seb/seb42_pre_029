@@ -1,50 +1,76 @@
 import Button from './Button';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { logout, reset } from '../features/auth/authSlice';
 import searchImg from '../assets/search.svg';
 import logoImg from '../assets/logo.svg';
 
 function Header() {
-  return (
-    <>
-      <GNB>
-        <Link to="/">
-          <img src={logoImg} alt="logo" />
-        </Link>
-        <div className="search_container">
-          <input type="text"></input>
-          <img src={searchImg} alt="search" />
-        </div>
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { user } = useSelector(state => state.auth);
 
+  const onLogout = () => {
+    dispatch(logout());
+    dispatch(reset());
+    navigate('/');
+  };
+
+  return (
+    <GNB>
+      <Link to="/">
+        <img src={logoImg} alt="logo" />
+      </Link>
+      <div className="search_container">
+        <input type="text"></input>
+        <img src={searchImg} alt="search" />
+      </div>
+      {user ? (
+        <div>
+          <Button
+            onClick={onLogout}
+            textColor={'#487299'}
+            bgColor={'var(--lbtn-default)'}
+            border={'1px solid #83A6C4'}
+            hover={'var(--lbtn-hover)'}
+            active={'var(--lbtn-selected)'}
+            text={'Log out'}
+            type={'positive'}
+            Height={'32px'}
+            width={'81px'}
+          />
+        </div>
+      ) : (
         <div className="Button_container">
           <Link to="/login">
             <Button
-              bgColor={'var(--lbtn-default)'}
               textColor={'#487299'}
+              bgColor={'var(--lbtn-default)'}
               border={'1px solid #83A6C4'}
               hover={'var(--lbtn-hover)'}
               active={'var(--lbtn-selected)'}
-              text={'log in'}
+              text={'Log in'}
               type={'positive'}
               Height={'32px'}
-              width={'81px'}
+              width={'80px'}
             />
           </Link>
           <Link to="/signup">
             <Button
-              bgColor={'var(--btn-default)'}
               textColor={'#fff'}
+              bgColor={'var(--btn-default)'}
               hover={'var(--btn-hover)'}
               active={'var(--btn-selected)'}
-              text={'sign up'}
+              text={'Sign up'}
               type={'positive'}
               Height={'32px'}
-              width={'81px'}
+              width={'80px'}
             />
           </Link>
         </div>
-      </GNB>
-    </>
+      )}
+    </GNB>
   );
 }
 
