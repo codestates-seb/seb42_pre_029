@@ -1,17 +1,13 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import MainLayout from '../../components/MainLayout';
 import Button from '../../components/Button';
 import styled from 'styled-components';
 import TextArea from '../../components/TextArea';
-import questData from '../../data/message_question.json';
+import axios from 'axios';
 
 function BoardWrite() {
   const [titleValue, setTitleValue] = useState('');
   const [bodyValue, setBodyValue] = useState('');
-  const [data, setData] = useState([]);
-  useEffect(() => {
-    setData(questData.questions);
-  }, []);
   const titleHandller = e => {
     setTitleValue(e.target.value);
   };
@@ -19,20 +15,20 @@ function BoardWrite() {
     setBodyValue(e.target.value);
   };
   const submit = () => {
-    let newQuestionData = {
-      memberid: data.length + 1,
-      questionid: questData.questions.length + 1,
+    let data = {
+      memberId: 1,
       title: titleValue,
       body: bodyValue,
-      createdAt: new Date(),
-      modifiedAt: new Date(),
-      view: Math.random(),
-      answercount: Math.random(),
     };
-    setData([...data, newQuestionData]);
-    setTitleValue('');
-    setBodyValue('');
+    axios
+      .post(
+        'http://ec2-3-35-235-136.ap-northeast-2.compute.amazonaws.com:8080/questions',
+        data,
+      )
+      .then(res => console.log(res));
+    window.location.href = '/';
   };
+
   return (
     <MainLayout>
       <BoardWriteHeader>
