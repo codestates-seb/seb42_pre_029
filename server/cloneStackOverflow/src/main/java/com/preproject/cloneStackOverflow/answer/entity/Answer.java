@@ -1,5 +1,6 @@
 package com.preproject.cloneStackOverflow.answer.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.preproject.cloneStackOverflow.audit.Auditable;
 import com.preproject.cloneStackOverflow.exception.ExceptionCode;
 import com.preproject.cloneStackOverflow.exception.StackOverFlowException;
@@ -20,7 +21,7 @@ public class Answer extends Auditable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long answerId;
 
-    @Column(nullable = false, length = 2000)
+    @Column(nullable = false, length = 10000)
     private String body;
 
     @ManyToOne

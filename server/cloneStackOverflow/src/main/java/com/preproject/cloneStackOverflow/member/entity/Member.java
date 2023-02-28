@@ -1,11 +1,13 @@
 package com.preproject.cloneStackOverflow.member.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.preproject.cloneStackOverflow.answer.entity.Answer;
 import com.preproject.cloneStackOverflow.exception.ExceptionCode;
 import com.preproject.cloneStackOverflow.exception.StackOverFlowException;
 import com.preproject.cloneStackOverflow.question.entity.Question;
 import com.preproject.cloneStackOverflow.utils.CustomBeanUtils;
 import lombok.*;
+import org.hibernate.annotations.BatchSize;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -63,6 +65,7 @@ public class Member {
     private List<Question> Questions = new ArrayList<>();
 
     @Setter(AccessLevel.NONE)
+    @BatchSize(size=10)
     @OneToMany(mappedBy = "member")
     private List<Answer> Answers = new ArrayList<>();
 

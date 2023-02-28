@@ -75,6 +75,7 @@ public class MemberDto {
     @Getter
     @AllArgsConstructor
     public static class GetResponse{
+        private String memberId;
         private String email;
         private String username;
         private String birth;
