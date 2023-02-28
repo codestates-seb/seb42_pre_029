@@ -1,17 +1,14 @@
 package com.preproject.cloneStackOverflow.member.dto;
 
-import com.preproject.cloneStackOverflow.member.entity.Member;
 import com.preproject.cloneStackOverflow.validator.NotSpace;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.util.Assert;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
-import java.util.regex.Matcher;
+
 public class MemberDto {
     @Getter
     @Setter
@@ -62,11 +59,11 @@ public class MemberDto {
         @NotSpace
         private String username;
 
-//        @Pattern(regexp = "^((19|20)\\\\d\\\\d)?([-/.])?(0[1-9]|1[012])([-/.])?(0[1-9]|[12][0-9]|3[01])$",
-//                message = "예시)96년 2월 13일생은 19960213, 공백은 없어야 합니다.")
+        @Pattern(regexp = "^(19[0-9][0-9]|20\\d{2})(0[0-9]|1[0-2])(0[1-9]|[1-2][0-9]|3[0-1])$",
+                message = "예시)96년 2월 13일생은 19960213, 공백은 없어야 합니다.")
         private String birth;
 
-        @Pattern(regexp = "^010-\\d{3,4}-\\d{4}$",
+        @Pattern(regexp = "^010\\d{3,4}\\d{4}$",
                 message = "휴대폰 번호는 010으로 시작하는 11자리 숫자와 '-'로 구성되어야 합니다")
         private String phone;
 

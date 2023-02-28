@@ -1,6 +1,5 @@
 package com.preproject.cloneStackOverflow.answer.service;
 
-import com.preproject.cloneStackOverflow.answer.dto.AnswerDto;
 import com.preproject.cloneStackOverflow.answer.entity.Answer;
 import com.preproject.cloneStackOverflow.answer.mapper.AnswerMapper;
 import com.preproject.cloneStackOverflow.exception.ExceptionCode;
@@ -10,13 +9,11 @@ import com.preproject.cloneStackOverflow.member.entity.Member;
 import com.preproject.cloneStackOverflow.member.service.MemberService;
 import com.preproject.cloneStackOverflow.question.entity.Question;
 import com.preproject.cloneStackOverflow.question.service.QuestionService;
-import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 public class AnswerService {
@@ -38,8 +35,8 @@ public class AnswerService {
         Question findQuestion = questionService.findVerifiedQuestion(questionId);
         Member findMember = memberService.findVerifiedMember(memberId);
 
-        answer.setMember(findMember);
-        answer.setQuestion(findQuestion);
+        answer.addMember(findMember);
+        answer.addQuestion(findQuestion);
 
         return answerRepository.save(answer);
     }
@@ -77,7 +74,6 @@ public class AnswerService {
         Optional<Answer> optionalAnswer = answerRepository.findById(answerId);
         return optionalAnswer.orElseThrow(() ->
                 new StackOverFlowException(ExceptionCode.ANSWER_NOT_FOUND));
-        //return answerRepository.findByMemberId(findMember.getMemberId());
     }
 
 }

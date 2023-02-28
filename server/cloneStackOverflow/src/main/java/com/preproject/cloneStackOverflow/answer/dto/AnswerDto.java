@@ -2,13 +2,10 @@ package com.preproject.cloneStackOverflow.answer.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
 import java.time.LocalDateTime;
-import java.util.List;
 
 public class AnswerDto {
 
@@ -52,6 +49,7 @@ public class AnswerDto {
     public static class GetResponse {
         @NotNull
         String body;
+        private Long memberId;
         private LocalDateTime createdAt;
         private LocalDateTime modifiedAt;
 

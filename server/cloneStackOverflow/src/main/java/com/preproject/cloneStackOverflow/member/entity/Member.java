@@ -58,10 +58,6 @@ public class Member {
         this.phone = phone;
     }
 
-//    public String getUsername() {
-//        return getEmail();
-//    }
-
     @Setter(AccessLevel.NONE)
     @OneToMany(mappedBy = "member")
     private List<Question> Questions = new ArrayList<>();

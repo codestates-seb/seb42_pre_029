@@ -14,10 +14,6 @@ import org.springframework.stereotype.Component;
 import java.util.Collection;
 import java.util.Optional;
 
-/**
- * - Custom UserDetails 사용
- * - User Role을 DB에서 조회한 후, HelloAuthorityUtils로 Spring Security에게 Role 정보 제공
- */
 @Component
 public class MemberDetailsService implements UserDetailsService {
     private final MemberRepository memberRepository;

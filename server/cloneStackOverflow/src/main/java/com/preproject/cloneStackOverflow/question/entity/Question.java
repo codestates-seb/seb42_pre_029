@@ -3,17 +3,13 @@ package com.preproject.cloneStackOverflow.question.entity;
 import com.preproject.cloneStackOverflow.answer.entity.Answer;
 import com.preproject.cloneStackOverflow.audit.Auditable;
 import com.preproject.cloneStackOverflow.member.entity.Member;
-import com.preproject.cloneStackOverflow.utils.CustomBeanUtils;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.hibernate.annotations.ColumnDefault;
-import org.hibernate.query.internal.QueryImpl;
 
 import javax.persistence.*;
 import javax.persistence.GenerationType;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @Getter
@@ -30,7 +26,6 @@ public class Question extends Auditable {
     @NotBlank(message = "Insert Text.")
     @Column(length = 1000, nullable = false)
     private String body;
-    //@Setter
     @ManyToOne
     @JoinColumn(name = "MEMBER_ID")
     private Member member;
@@ -54,8 +49,8 @@ public class Question extends Auditable {
     public Question(Long questionId){
         this.questionId = questionId;
     }
-    public void setMember(Member memeber){
-        this.member = memeber;
+    public void setMember(Member member){
+        this.member = member;
         if(!this.member.getQuestions().contains(this)){
             this.member.getQuestions().add(this);
         }
@@ -70,7 +65,6 @@ public class Question extends Auditable {
         this.answerCount = answerCount;
         return this;
     }
-
 
     public Question(String title, String body) {
         this.title = title;
