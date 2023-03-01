@@ -14,7 +14,7 @@ function LoginForm() {
   const initialValues = { username: '', password: '' };
   const [formValues, setFormValues] = useState(initialValues);
   const [formErrors, setFormErrors] = useState({});
-  const [isSubmit, setIsSubmit] = useState(false);
+  // const [isSubmit, setIsSubmit] = useState(false);
 
   const { username, password } = formValues;
 
@@ -33,22 +33,23 @@ function LoginForm() {
   const onSubmit = e => {
     e.preventDefault();
     setFormErrors(checkValid(formValues));
-    setIsSubmit(true);
+    // setIsSubmit(true);
 
     const userData = {
       username,
       password,
     };
 
+    console.log(userData);
     dispatch(login(userData));
   };
 
-  useEffect(() => {
-    console.log(formErrors);
-    if (Object.keys(formErrors).length === 0 && isSubmit) {
-      console.log(formValues);
-    }
-  }, [formErrors]);
+  // useEffect(() => {
+  //   console.log(formErrors);
+  //   if (Object.keys(formErrors).length === 0 && isSubmit) {
+  //     console.log(formValues);
+  //   }
+  // }, [formErrors]);
 
   useEffect(() => {
     if (isError) {
@@ -56,7 +57,7 @@ function LoginForm() {
     }
 
     if (isSuccess || user) {
-      navigate('/login');
+      navigate('/');
     }
 
     dispatch(reset());
