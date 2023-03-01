@@ -1,4 +1,6 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import MainLayout from '../../components/MainLayout';
 import Button from '../../components/Button';
 import styled from 'styled-components';
@@ -6,8 +8,17 @@ import TextArea from '../../components/TextArea';
 import axios from 'axios';
 
 function BoardWrite() {
+  const navigate = useNavigate();
   const [titleValue, setTitleValue] = useState('');
   const [bodyValue, setBodyValue] = useState('');
+  const { user } = useSelector(state => state.auth);
+
+  const ACCESS_TOKEN = user.authorization;
+  console.log(ACCESS_TOKEN);
+
+  const memberid = user ? user.memberid : 0;
+  console.log(memberid);
+
   const titleHandller = e => {
     setTitleValue(e.target.value);
   };
@@ -16,17 +27,17 @@ function BoardWrite() {
   };
   const submit = () => {
     let data = {
-      memberId: 1,
+      memberId: memberid,
       title: titleValue,
       body: bodyValue,
     };
 
     axios
-      .post(
-        'http://ec2-54-180-126-179.ap-northeast-2.compute.amazonaws.com:8080/questions',
-        data,
-      )
-      .then(res => console.log(res));
+      .post('api/questions', data)
+      .then(res => console.log(res))
+      .catch(error => console.log(error));
+
+    navigate('/');
   };
 
   return (
