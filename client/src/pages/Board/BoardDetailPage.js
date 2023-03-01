@@ -5,43 +5,34 @@ import styled from 'styled-components';
 import TextArea from '../../components/TextArea';
 import axios from 'axios';
 import EditModal from './EditModal';
-import { useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
 
 function BoardDetail() {
   const [QuestData, setQuestData] = useState({});
-  const [qUser, setQUser] = useState({});
   const [ansData, setAnsData] = useState([]);
   const [openModal, setOpenModal] = useState(false);
   const [modalType, setModalType] = useState('');
-  const { user } = useSelector(state => state.auth);
+  const { no } = useParams();
 
   // todo3. 데이터 불러오기
-
-  const memberid = user ? user.memberid : 0;
 
   let QuestionsUrl = `/api/questions`;
 
   let AnswersUrl = `/api/answers`;
 
-  let MembersUrl = `/api/members`;
-
   useEffect(() => {
     axios
-      .get(`${QuestionsUrl}/1`)
+      .get(`${QuestionsUrl}/${no}`)
       .then(({ data }) => setQuestData(data.data))
       .catch(err => console.log(err));
     axios
-      .get(`${AnswersUrl}/1`)
+      .get(`${AnswersUrl}/${no}`)
       .then(data =>
         Array.isArray(data.data)
           ? setAnsData([...data.data])
           : setAnsData([data.data]),
       )
       .catch(err => console.log(err));
-    axios.get(`${MembersUrl}/${memberid}`).then(({ data }) => {
-      console.log(data);
-      setQUser(data.filter(e => e.memberId === QuestData.memberId).data);
-    });
   }, []);
 
   // todo4. 답변 작성
@@ -59,12 +50,12 @@ function BoardDetail() {
       memberId: QuestData.questionid,
     };
 
-    if (inputAnswer.length >= 20) {
+    if (inputAnswer.length >= 1) {
       axios
         .post(AnswersUrl, data)
         .then(res => console.log(res))
         .catch(err => console.log(err));
-    } else alert('20글자 이상 입력해 주세요.');
+    }
     setInputAnswer('');
   };
 
@@ -126,7 +117,7 @@ function BoardDetail() {
                 src={`https://placeimg.com/200/100/people/${QuestData.questionid}`}
                 alt="practice"
               />
-              <p>{qUser.username}</p>
+              <p>{QuestData.username || '김코딩'}</p>
             </Editor>
             <EditInfo>
               <span>{`${timeForToday(QuestData.createdAt)}`}</span>
@@ -180,7 +171,7 @@ function BoardDetail() {
             width={'120px'}
             onClick={answerSubmit}
           />
-          {ansData.map(({ body, createdAt, view }, i) => {
+          {ansData.map(({ body, createdAt, view, username }, i) => {
             str = body;
             return (
               <Post key={i}>
@@ -190,7 +181,7 @@ function BoardDetail() {
                       src={`https://placeimg.com/200/100/people/${1}`}
                       alt="practice"
                     />
-                    <p>{'Andy Obusek'}</p>
+                    <p>{username || 'Andy Obusek'}</p>
                   </Editor>
                   <EditInfo>
                     <span>{`${timeForToday(createdAt)}`}</span>
