@@ -11,7 +11,6 @@ import phonenum from '../../assets/phonenum.svg';
 import mail from '../../assets/mail.svg';
 import birthday from '../../assets/birthday.svg';
 import EditModal from '../MyPage/EditModal';
-// import Members from '../../data/message_member.json';
 
 function MyPage() {
   const [questionsData, setQuestionsData] = useState([]);

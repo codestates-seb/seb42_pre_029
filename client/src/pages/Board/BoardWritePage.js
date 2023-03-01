@@ -20,13 +20,13 @@ function BoardWrite() {
       title: titleValue,
       body: bodyValue,
     };
+
     axios
       .post(
-        'http://ec2-3-35-235-136.ap-northeast-2.compute.amazonaws.com:8080/questions',
+        'http://ec2-54-180-126-179.ap-northeast-2.compute.amazonaws.com:8080/questions',
         data,
       )
       .then(res => console.log(res));
-    window.location.href = '/';
   };
 
   return (
