@@ -18,7 +18,7 @@ function BoardList() {
   useEffect(() => {
     axios
       .get(
-        'http://ec2-3-35-235-136.ap-northeast-2.compute.amazonaws.com:8080/questions',
+        'http://ec2-54-180-126-179.ap-northeast-2.compute.amazonaws.com:8080/questions',
       )
       .then(({ data }) => setData(data))
       .catch(err => console.log(err));

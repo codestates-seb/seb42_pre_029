@@ -3,37 +3,48 @@ import { useEffect, useState } from 'react';
 import MainLayout from '../../components/MainLayout';
 import styled from 'styled-components';
 import TextArea from '../../components/TextArea';
-import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import EditModal from './EditModal';
+import { useSelector } from 'react-redux';
 
 function BoardDetail() {
-  const params = useParams();
-  const { no } = params;
   const [QuestData, setQuestData] = useState({});
   const [qUser, setQUser] = useState({});
   const [ansData, setAnsData] = useState([]);
   const [openModal, setOpenModal] = useState(false);
+  const [modalType, setModalType] = useState('');
+  const { user } = useSelector(state => state.auth);
 
-  // todo1. 질문 추천
-  // const [QueVotes, setQueVotes] = useState(0);
-  // const QueVotesHandller = e => {
-  //   let value = e.target.className;
-  //   let num = QueVotes;
-  //   value === 'votesUp' ? (num += 1) : (num -= 1);
-  //   setQueVotes(num);
-  // };
+  // todo3. 데이터 불러오기
 
-  // todo2. 답변 추천
-  // const [AnsVotes, setAnsVotes] = useState(0);
-  // const ansVotesHandller = e => {
-  //   let value = e.target.className;
-  //   let num = AnsVotes;
-  //   value === 'votesUp' ? (num += 1) : (num -= 1);
-  //   setAnsVotes(num);
-  // };
+  const memberid = user ? user.memberid : 0;
 
-  // todo3. 답변 작성
+  let QuestionsUrl = `/api/questions`;
+
+  let AnswersUrl = `/api/answers`;
+
+  let MembersUrl = `/api/members`;
+
+  useEffect(() => {
+    axios
+      .get(`${QuestionsUrl}/1`)
+      .then(({ data }) => setQuestData(data.data))
+      .catch(err => console.log(err));
+    axios
+      .get(`${AnswersUrl}/1`)
+      .then(data =>
+        Array.isArray(data.data)
+          ? setAnsData([...data.data])
+          : setAnsData([data.data]),
+      )
+      .catch(err => console.log(err));
+    axios.get(`${MembersUrl}/${memberid}`).then(({ data }) => {
+      console.log(data);
+      setQUser(data.filter(e => e.memberId === QuestData.memberId).data);
+    });
+  }, []);
+
+  // todo4. 답변 작성
 
   const [inputAnswer, setInputAnswer] = useState('');
 
@@ -50,54 +61,25 @@ function BoardDetail() {
 
     if (inputAnswer.length >= 20) {
       axios
-        .post(
-          `http://ec2-3-35-235-136.ap-northeast-2.compute.amazonaws.com:8080/answers`,
-          data,
-        )
+        .post(AnswersUrl, data)
         .then(res => console.log(res))
         .catch(err => console.log(err));
     } else alert('20글자 이상 입력해 주세요.');
     setInputAnswer('');
   };
 
-  // todo4. 데이터 불러오기
-
-  useEffect(() => {
-    axios
-      .get(
-        `http://ec2-3-35-235-136.ap-northeast-2.compute.amazonaws.com:8080/questions/${no}`,
-      )
-      .then(({ data }) => setQuestData(data.data))
-      .catch(err => console.log(err));
-    // 답변 데이터 받아오기
-    axios
-      .get(
-        `http://ec2-3-35-235-136.ap-northeast-2.compute.amazonaws.com:8080/answers/${no}`,
-      )
-      .then(data =>
-        Array.isArray(data.data)
-          ? setAnsData([...data.data])
-          : setAnsData([data.data]),
-      )
-      .catch(err => console.log(err));
-    axios
-      .get(
-        `http://ec2-3-35-235-136.ap-northeast-2.compute.amazonaws.com:8080/members/1`,
-      )
-      .then(({ data }) => {
-        setQUser(data.data);
-        console.log(data);
-      });
-  }, []);
-
-  //todo5. 질문 삭제&수정 구현
+  //todo5. 질문&답변 삭제,업데이트 구현
 
   const deleteQuestion = () => {
-    axios.delete(
-      `http://ec2-3-35-235-136.ap-northeast-2.compute.amazonaws.com:8080/questions/${no}`,
-    );
+    axios.delete(QuestionsUrl);
     window.location.href = '/';
   };
+
+  const deleteAnswer = () => {
+    axios.delete(AnswersUrl);
+  };
+
+  let str = '';
 
   //todo6. 현재 시간 기준으로 얼마나 지났는지 계산
   function timeForToday(value) {
@@ -130,7 +112,10 @@ function BoardDetail() {
       <EditModal
         open={openModal}
         onClose={() => setOpenModal(false)}
-        title={'Edit Your Question'}
+        name={modalType}
+        dataTitle={modalType === 'Question' ? QuestData.title : ''}
+        dataBody={modalType === 'Question' ? QuestData.body : str}
+        url={modalType === 'Question' ? QuestionsUrl : AnswersUrl}
       />
       <MainLayout sideBar>
         <BoardDetailPageTitle>
@@ -146,25 +131,21 @@ function BoardDetail() {
             <EditInfo>
               <span>{`${timeForToday(QuestData.createdAt)}`}</span>
               <span>{`${QuestData.view} view`}</span>
-              {/* <span>{`${QueVotes} votes`}</span> */}
             </EditInfo>
           </EditLayout>
         </BoardDetailPageTitle>
         <QuestionBody>
           <Post>
-            {/* <VotesControl>
-              <button onClick={e => QueVotesHandller(e)}>
-                <div className="votesUp"></div>
-              </button>
-              <span>{QueVotes}</span>
-              <button onClick={e => QueVotesHandller(e)}>
-                <div className="votesDown"></div>
-              </button>
-            </VotesControl> */}
             <Context>{QuestData.body}</Context>
           </Post>
           <PostHanddle>
-            <button type="text" onClick={() => setOpenModal(true)}>
+            <button
+              type="text"
+              onClick={() => {
+                setOpenModal(true);
+                setModalType('Question');
+              }}
+            >
               Edit
             </button>
             <div className="round"></div>
@@ -200,22 +181,13 @@ function BoardDetail() {
             onClick={answerSubmit}
           />
           {ansData.map(({ body, createdAt, view }, i) => {
-            console.log(body);
+            str = body;
             return (
               <Post key={i}>
-                {/* <VotesControl>
-                  <button onClick={e => ansVotesHandller(e)}>
-                    <div className="votesUp"></div>
-                  </button>
-                  <span>{AnsVotes}</span>
-                  <button onClick={e => ansVotesHandller(e)}>
-                    <div className="votesDown"></div>
-                  </button>
-                </VotesControl> */}
                 <AnsEditor>
                   <Editor>
                     <img
-                      src={`https://placeimg.com/200/100/people/${no}`}
+                      src={`https://placeimg.com/200/100/people/${1}`}
                       alt="practice"
                     />
                     <p>{'Andy Obusek'}</p>
@@ -223,14 +195,21 @@ function BoardDetail() {
                   <EditInfo>
                     <span>{`${timeForToday(createdAt)}`}</span>
                     <span>{`${view} view`}</span>
-                    {/* <span>{`${QueVotes} votes`}</span> */}
                   </EditInfo>
                 </AnsEditor>
                 <Context>{body}</Context>
                 <PostHanddle>
-                  <button type="text">Edit</button>
+                  <button
+                    type="text"
+                    onClick={() => {
+                      setOpenModal(true);
+                      setModalType('Answer');
+                    }}
+                  >
+                    Edit
+                  </button>
                   <div className="round"></div>
-                  <button type="text" onClick={deleteQuestion}>
+                  <button type="text" onClick={deleteAnswer}>
                     Delete
                   </button>
                 </PostHanddle>
@@ -327,43 +306,6 @@ const AnsEditor = styled.div`
   border-top: 1px solid var(--black-006);
   border-bottom: 1px solid var(--line-002);
 `;
-//vote 기능 css
-// const VotesControl = styled.article`
-//   display: flex;
-//   flex-direction: column;
-//   align-items: center;
-//   margin-right: 30px;
-//   & > button {
-//     background: none;
-//     & > .votesUp {
-//       width: 0px;
-//       height: 0px;
-//       border-bottom: 18px solid var(--black-005);
-//       border-left: 24px solid transparent;
-//       border-right: 24px solid transparent;
-//       cursor: pointer;
-//       margin-bottom: 10px;
-//     }
-//   }
-//   & > span {
-//     font-size: var(--font-size-h4);
-//     color: var(--black-004);
-//     text-align: center;
-//   }
-
-//   & > button {
-//     background: none;
-//     & > .votesDown {
-//       width: 0px;
-//       height: 0px;
-//       border-top: 18px solid var(--black-005);
-//       border-left: 24px solid transparent;
-//       border-right: 24px solid transparent;
-//       cursor: pointer;
-//       margin-top: 10px;
-//     }
-//   }
-// `;
 
 const PostHanddle = styled.article`
   display: flex;
