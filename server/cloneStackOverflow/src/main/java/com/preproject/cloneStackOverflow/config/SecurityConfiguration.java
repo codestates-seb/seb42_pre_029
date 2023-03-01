@@ -23,7 +23,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 
 import static org.springframework.security.config.Customizer.withDefaults;
 
-@CrossOrigin
+@CrossOrigin(origins = "http://localhost:3000")
 @Configuration
 @EnableWebSecurity(debug = true)
 public class SecurityConfiguration {
