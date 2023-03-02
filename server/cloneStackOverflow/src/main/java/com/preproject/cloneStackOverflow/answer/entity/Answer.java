@@ -1,6 +1,9 @@
 package com.preproject.cloneStackOverflow.answer.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.preproject.cloneStackOverflow.audit.Auditable;
+import com.preproject.cloneStackOverflow.exception.ExceptionCode;
+import com.preproject.cloneStackOverflow.exception.StackOverFlowException;
 import com.preproject.cloneStackOverflow.member.entity.Member;
 import com.preproject.cloneStackOverflow.question.entity.Question;
 import lombok.Getter;
@@ -16,9 +19,9 @@ import javax.persistence.*;
 public class Answer extends Auditable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long answerId;
+    private Long answerId;
 
-    @Column(nullable = false, length = 2000)
+    @Column(nullable = false, length = 10000)
     private String body;
 
     @ManyToOne
@@ -35,11 +38,22 @@ public class Answer extends Auditable {
 
     public void addMember(Member member){
         this.member = member;
+        if(!member.getAnswers().contains(this)){
+            member.getAnswers().add(this);
+        }
     }
 
     public void addQuestion(Question question) {
         this.question = question;
+        if(!member.getAnswers().contains(this)){
+            member.getAnswers().add(this);
+        }
     }
 
+    public static void checkNotFoundAnswers(int sourceAnswerCount, int targetAnswerCount) {
+        if (sourceAnswerCount != targetAnswerCount) {
+            throw new StackOverFlowException(ExceptionCode.ANSWER_NOT_FOUND);
+        }
+    }
 
 }

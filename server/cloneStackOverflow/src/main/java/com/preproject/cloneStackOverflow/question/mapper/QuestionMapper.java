@@ -1,14 +1,18 @@
 package com.preproject.cloneStackOverflow.question.mapper;
 
-import com.preproject.cloneStackOverflow.question.dto.QuestionPatchDto;
-import com.preproject.cloneStackOverflow.question.dto.QuestionPostDto;
-import com.preproject.cloneStackOverflow.question.dto.QuestionResponseDto;
+import com.preproject.cloneStackOverflow.question.dto.QuestionDto;
 import com.preproject.cloneStackOverflow.question.entity.Question;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
+import org.mapstruct.MappingConstants;
 
-@Mapper(componentModel = "spring")
+import java.util.List;
+
+@Mapper(componentModel = MappingConstants.ComponentModel.SPRING)
 public interface QuestionMapper {
-    Question questionPostDtoToQuestion(QuestionPostDto questionPostDto);
-    Question questionPatchDtoToQuestion(QuestionPatchDto questionPatchDto);
-    QuestionResponseDto questionToQuestionResponseDto(Question question);
+    Question questionPostDtoToQuestion(QuestionDto.Post requestBody);
+    Question questionPatchDtoToQuestion(QuestionDto.Patch requestBody);
+    @Mapping(source = "member.username", target = "username")
+    QuestionDto.Response questionToQuestionResponseDto(Question question);
+    List<QuestionDto.Response> questionsToQuestionResponseDtos(List<Question> questions);
 }

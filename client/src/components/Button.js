@@ -1,38 +1,60 @@
 import styled from 'styled-components';
 
-const GlobalButton = styled.button`
-  width: 5.71em;
-  height: 3em;
-  font-size: 0.86em;
-  border: none;
-  border-radius: 0.21em;
-  &.skyblue {
-    background-color: #e3ecf3;
-    color: #83a6c4;
-    border: 1px solid #83a6c4;
-    :active {
-      background-color: #b9d2e8;
-      color: #83a6c4;
-    }
-  }
-  &.blue {
-    background-color: #4393f7;
-    color: #fff;
-    :active {
-      background-color: #3172c6;
-      color: white;
-    }
-  }
-`;
-
-const Button = ({ type, text, onClick, style }) => {
+function Button({
+  type,
+  text,
+  border,
+  bgColor,
+  textColor,
+  hover,
+  active,
+  height,
+  width,
+  fontSize,
+  fontWeight,
+  padding,
+  onClick,
+}) {
   return (
     <>
-      <GlobalButton className={`${style}`} type={type} onClick={onClick}>
+      <GlobalButton
+        onClick={onClick}
+        type={type}
+        border={border}
+        bgColor={bgColor}
+        textColor={textColor}
+        hover={hover}
+        active={active}
+        height={height}
+        width={width}
+        fontSize={fontSize}
+        padding={padding}
+        fontWeight={fontWeight}
+      >
         {text}
       </GlobalButton>
     </>
   );
-};
+}
+
+const GlobalButton = styled.button`
+  height: ${({ height }) => (height ? height : '32px')};
+  width: ${({ width }) => (width ? width : 'auto')};
+  font-size: ${({ fontSize }) => (fontSize ? fontSize : 'var(--font-size-sm)')};
+  font-weight: ${({ fontWeight }) => (fontWeight ? fontWeight : 400)};
+  padding: ${({ padding }) => (padding ? padding : 0)};
+  border: ${({ border }) => (border ? border : null)};
+  border-radius: 3px;
+  background-color: ${({ bgColor }) =>
+    bgColor ? bgColor : 'var(--btn-default)'};
+  color: ${({ textColor }) => (textColor ? textColor : 'var(--black-002)')};
+  :hover {
+    background-color: ${({ hover }) => (hover ? hover : 'var(--btn-hover)')};
+  }
+  :active {
+    background-color: ${({ active }) =>
+      active ? active : 'var(--btn-selected)'};
+  }
+`;
 
 export default Button;

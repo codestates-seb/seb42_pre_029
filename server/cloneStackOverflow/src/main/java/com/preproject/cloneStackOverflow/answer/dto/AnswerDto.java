@@ -4,8 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Positive;
 import java.time.LocalDateTime;
-import java.util.List;
 
 public class AnswerDto {
 
@@ -15,8 +15,10 @@ public class AnswerDto {
         @NotNull
         private String body;
         @NotNull
+        @Positive
         private Long questionId;
         @NotNull
+        @Positive
         private Long memberId;
     }
 
@@ -24,7 +26,13 @@ public class AnswerDto {
     @AllArgsConstructor
     public static class Patch{
         @NotNull
+        private long answerId;
+        @NotNull
         private String body;
+
+        public void setAnswerId(long answerId){
+            this.answerId = answerId;
+        }
     }
 
     @Getter
@@ -32,20 +40,29 @@ public class AnswerDto {
     public static class PatchResponse {
         @NotNull
         private String body;
-        @NotNull
+        private LocalDateTime createdAt;
         private LocalDateTime modifiedAt;
 
     }
     @Getter
     @AllArgsConstructor
     public static class GetResponse {
+        private long answerId;
+        @NotNull
         String body;
+        private String username;
+        private LocalDateTime createdAt;
+        private LocalDateTime modifiedAt;
+
     }
 
     @Getter
     @AllArgsConstructor
-    public static class GetResponseAll{
-        List<String> body;
+    public static class PostResponse {
+        private long answerId;
+        private LocalDateTime createdAt;
+        private LocalDateTime modifiedAt;
     }
+
 
 }

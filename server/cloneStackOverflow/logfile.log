@@ -1,0 +1,2854 @@
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+ :: Spring Boot ::                (v2.7.8)
+
+2023-03-02 09:22:11.507  INFO 1409 --- [           main] c.p.c.CloneStackOverflowApplication      : Starting CloneStackOverflowApplication using Java 11.0.18 on ip-172-31-3-51 with PID 1409 (/home/ssm-user/seb42_pre_029/server/cloneStackOverflow/build/libs/cloneStackOverflow-0.0.1-SNAPSHOT.jar started by ssm-user in /home/ssm-user/seb42_pre_029/server/cloneStackOverflow)
+2023-03-02 09:22:11.516  INFO 1409 --- [           main] c.p.c.CloneStackOverflowApplication      : No active profile set, falling back to 1 default profile: "default"
+2023-03-02 09:22:13.596  INFO 1409 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-03-02 09:22:13.785  INFO 1409 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 175 ms. Found 3 JPA repository interfaces.
+2023-03-02 09:22:15.576  INFO 1409 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2023-03-02 09:22:15.602  INFO 1409 --- [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2023-03-02 09:22:15.611  INFO 1409 --- [           main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.71]
+2023-03-02 09:22:15.825  INFO 1409 --- [           main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2023-03-02 09:22:15.828  INFO 1409 --- [           main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 4153 ms
+2023-03-02 09:22:16.344 DEBUG 1409 --- [           main] j.LocalContainerEntityManagerFactoryBean : Building JPA container EntityManagerFactory for persistence unit 'default'
+2023-03-02 09:22:16.387  INFO 1409 --- [           main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-03-02 09:22:16.523  INFO 1409 --- [           main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 5.6.14.Final
+2023-03-02 09:22:17.000  INFO 1409 --- [           main] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2023-03-02 09:22:17.303  INFO 1409 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2023-03-02 09:22:18.207  INFO 1409 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2023-03-02 09:22:18.250  INFO 1409 --- [           main] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+2023-03-02 09:22:20.939  INFO 1409 --- [           main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2023-03-02 09:22:20.955  INFO 1409 --- [           main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-03-02 09:22:21.211 DEBUG 1409 --- [           main] tor$SharedEntityManagerInvocationHandler : Creating new EntityManager for shared EntityManager invocation
+2023-03-02 09:22:21.322 DEBUG 1409 --- [           main] tor$SharedEntityManagerInvocationHandler : Creating new EntityManager for shared EntityManager invocation
+2023-03-02 09:22:21.519 DEBUG 1409 --- [           main] tor$SharedEntityManagerInvocationHandler : Creating new EntityManager for shared EntityManager invocation
+2023-03-02 09:22:21.701 DEBUG 1409 --- [           main] tor$SharedEntityManagerInvocationHandler : Creating new EntityManager for shared EntityManager invocation
+2023-03-02 09:22:21.816 DEBUG 1409 --- [           main] tor$SharedEntityManagerInvocationHandler : Creating new EntityManager for shared EntityManager invocation
+2023-03-02 09:22:22.066 DEBUG 1409 --- [           main] tor$SharedEntityManagerInvocationHandler : Creating new EntityManager for shared EntityManager invocation
+2023-03-02 09:22:22.068 DEBUG 1409 --- [           main] tor$SharedEntityManagerInvocationHandler : Creating new EntityManager for shared EntityManager invocation
+2023-03-02 09:22:22.114 DEBUG 1409 --- [           main] tor$SharedEntityManagerInvocationHandler : Creating new EntityManager for shared EntityManager invocation
+2023-03-02 09:22:22.237 DEBUG 1409 --- [           main] tor$SharedEntityManagerInvocationHandler : Creating new EntityManager for shared EntityManager invocation
+2023-03-02 09:22:22.248 DEBUG 1409 --- [           main] tor$SharedEntityManagerInvocationHandler : Creating new EntityManager for shared EntityManager invocation
+2023-03-02 09:22:22.290 DEBUG 1409 --- [           main] tor$SharedEntityManagerInvocationHandler : Creating new EntityManager for shared EntityManager invocation
+2023-03-02 09:22:22.301 DEBUG 1409 --- [           main] tor$SharedEntityManagerInvocationHandler : Creating new EntityManager for shared EntityManager invocation
+2023-03-02 09:22:22.304 DEBUG 1409 --- [           main] tor$SharedEntityManagerInvocationHandler : Creating new EntityManager for shared EntityManager invocation
+2023-03-02 09:22:22.371  WARN 1409 --- [           main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-03-02 09:22:23.784  INFO 1409 --- [           main] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@235b4cb8, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@4346808, org.springframework.security.web.context.SecurityContextPersistenceFilter@63f9b562, org.springframework.security.web.header.HeaderWriterFilter@158e9f6e, org.springframework.web.filter.CorsFilter@17fede14, org.springframework.security.web.authentication.logout.LogoutFilter@287ae90c, com.preproject.cloneStackOverflow.member.auth.filter.JwtAuthenticationFilter@712ac7e6, com.preproject.cloneStackOverflow.member.auth.filter.JwtVerificationFilter@86d6bf7, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@5426cb36, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@4b1ec694, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@2fbe26da, org.springframework.security.web.session.SessionManagementFilter@54b2fc58, org.springframework.security.web.access.ExceptionTranslationFilter@6c184d4d, org.springframework.security.web.access.intercept.AuthorizationFilter@68c9e023]
+2023-03-02 09:22:23.801  WARN 1409 --- [           main] o.s.s.c.a.web.builders.WebSecurity       : 
+
+********************************************************************
+**********        Security debugging is enabled.       *************
+**********    This may include sensitive information.  *************
+**********      Do not use in a production system!     *************
+********************************************************************
+
+
+2023-03-02 09:22:24.458  INFO 1409 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2023-03-02 09:22:24.488  INFO 1409 --- [           main] c.p.c.CloneStackOverflowApplication      : Started CloneStackOverflowApplication in 14.5 seconds (JVM running for 15.978)
+2023-03-02 09:22:34.073  INFO 1409 --- [nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-03-02 09:22:34.073  INFO 1409 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2023-03-02 09:22:34.080  INFO 1409 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 7 ms
+2023-03-02 09:22:34.093  INFO 1409 --- [nio-8080-exec-1] Spring Security Debugger                 : 
+
+************************************************************
+
+Request received for GET '/questions':
+
+org.apache.catalina.connector.RequestFacade@3b516e54
+
+servletPath:/questions
+pathInfo:null
+headers: 
+host: ec2-52-79-41-219.ap-northeast-2.compute.amazonaws.com:8080
+connection: keep-alive
+pragma: no-cache
+cache-control: no-cache
+accept: application/json, text/plain, */*
+user-agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36
+origin: http://preproject-bucket-029.s3-website.ap-northeast-2.amazonaws.com
+referer: http://preproject-bucket-029.s3-website.ap-northeast-2.amazonaws.com/
+accept-encoding: gzip, deflate
+accept-language: ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7
+
+
+Security filter chain: [
+  DisableEncodeUrlFilter
+  WebAsyncManagerIntegrationFilter
+  SecurityContextPersistenceFilter
+  HeaderWriterFilter
+  CorsFilter
+  LogoutFilter
+  JwtAuthenticationFilter
+  JwtVerificationFilter
+  RequestCacheAwareFilter
+  SecurityContextHolderAwareRequestFilter
+  AnonymousAuthenticationFilter
+  SessionManagementFilter
+  ExceptionTranslationFilter
+  AuthorizationFilter
+]
+
+
+************************************************************
+
+
+2023-03-02 09:22:34.188 DEBUG 1409 --- [nio-8080-exec-1] o.j.s.OpenEntityManagerInViewInterceptor : Opening JPA EntityManager in OpenEntityManagerInViewInterceptor
+2023-03-02 09:22:34.293 DEBUG 1409 --- [nio-8080-exec-1] o.s.orm.jpa.JpaTransactionManager        : Found thread-bound EntityManager [SessionImpl(1095543145<open>)] for JPA transaction
+2023-03-02 09:22:34.293 DEBUG 1409 --- [nio-8080-exec-1] o.s.orm.jpa.JpaTransactionManager        : Creating new transaction with name [com.preproject.cloneStackOverflow.question.service.QuestionService.findQuestions]: PROPAGATION_REQUIRED,ISOLATION_DEFAULT,readOnly
+2023-03-02 09:22:34.303 DEBUG 1409 --- [nio-8080-exec-1] o.s.orm.jpa.JpaTransactionManager        : Exposing JPA transaction as JDBC [org.springframework.orm.jpa.vendor.HibernateJpaDialect$HibernateConnectionHandle@a98c639]
+2023-03-02 09:22:34.332 DEBUG 1409 --- [nio-8080-exec-1] o.s.orm.jpa.JpaTransactionManager        : Found thread-bound EntityManager [SessionImpl(1095543145<open>)] for JPA transaction
+2023-03-02 09:22:34.335 DEBUG 1409 --- [nio-8080-exec-1] o.s.orm.jpa.JpaTransactionManager        : Participating in existing transaction
+Hibernate: 
+    select
+        question0_.question_id as question1_3_,
+        question0_.created_at as created_2_3_,
+        question0_.last_modified_at as last_mod3_3_,
+        question0_.answer_count as answer_c4_3_,
+        question0_.body as body5_3_,
+        question0_.member_id as member_i9_3_,
+        question0_.question_count as question6_3_,
+        question0_.title as title7_3_,
+        question0_.view as view8_3_ 
+    from
+        question question0_
+Hibernate: 
+    select
+        member0_.member_id as member_i1_1_0_,
+        member0_.birth as birth2_1_0_,
+        member0_.email as email3_1_0_,
+        member0_.password as password4_1_0_,
+        member0_.phone as phone5_1_0_,
+        member0_.username as username6_1_0_,
+        roles1_.member_member_id as member_m1_2_1_,
+        roles1_.roles as roles2_2_1_ 
+    from
+        member member0_ 
+    left outer join
+        member_roles roles1_ 
+            on member0_.member_id=roles1_.member_member_id 
+    where
+        member0_.member_id=?
+Hibernate: 
+    select
+        member0_.member_id as member_i1_1_0_,
+        member0_.birth as birth2_1_0_,
+        member0_.email as email3_1_0_,
+        member0_.password as password4_1_0_,
+        member0_.phone as phone5_1_0_,
+        member0_.username as username6_1_0_,
+        roles1_.member_member_id as member_m1_2_1_,
+        roles1_.roles as roles2_2_1_ 
+    from
+        member member0_ 
+    left outer join
+        member_roles roles1_ 
+            on member0_.member_id=roles1_.member_member_id 
+    where
+        member0_.member_id=?
+Hibernate: 
+    select
+        member0_.member_id as member_i1_1_0_,
+        member0_.birth as birth2_1_0_,
+        member0_.email as email3_1_0_,
+        member0_.password as password4_1_0_,
+        member0_.phone as phone5_1_0_,
+        member0_.username as username6_1_0_,
+        roles1_.member_member_id as member_m1_2_1_,
+        roles1_.roles as roles2_2_1_ 
+    from
+        member member0_ 
+    left outer join
+        member_roles roles1_ 
+            on member0_.member_id=roles1_.member_member_id 
+    where
+        member0_.member_id=?
+Hibernate: 
+    select
+        member0_.member_id as member_i1_1_0_,
+        member0_.birth as birth2_1_0_,
+        member0_.email as email3_1_0_,
+        member0_.password as password4_1_0_,
+        member0_.phone as phone5_1_0_,
+        member0_.username as username6_1_0_,
+        roles1_.member_member_id as member_m1_2_1_,
+        roles1_.roles as roles2_2_1_ 
+    from
+        member member0_ 
+    left outer join
+        member_roles roles1_ 
+            on member0_.member_id=roles1_.member_member_id 
+    where
+        member0_.member_id=?
+Hibernate: 
+    select
+        member0_.member_id as member_i1_1_0_,
+        member0_.birth as birth2_1_0_,
+        member0_.email as email3_1_0_,
+        member0_.password as password4_1_0_,
+        member0_.phone as phone5_1_0_,
+        member0_.username as username6_1_0_,
+        roles1_.member_member_id as member_m1_2_1_,
+        roles1_.roles as roles2_2_1_ 
+    from
+        member member0_ 
+    left outer join
+        member_roles roles1_ 
+            on member0_.member_id=roles1_.member_member_id 
+    where
+        member0_.member_id=?
+Hibernate: 
+    select
+        member0_.member_id as member_i1_1_0_,
+        member0_.birth as birth2_1_0_,
+        member0_.email as email3_1_0_,
+        member0_.password as password4_1_0_,
+        member0_.phone as phone5_1_0_,
+        member0_.username as username6_1_0_,
+        roles1_.member_member_id as member_m1_2_1_,
+        roles1_.roles as roles2_2_1_ 
+    from
+        member member0_ 
+    left outer join
+        member_roles roles1_ 
+            on member0_.member_id=roles1_.member_member_id 
+    where
+        member0_.member_id=?
+2023-03-02 09:22:34.738 DEBUG 1409 --- [nio-8080-exec-1] o.s.orm.jpa.JpaTransactionManager        : Initiating transaction commit
+2023-03-02 09:22:34.743 DEBUG 1409 --- [nio-8080-exec-1] o.s.orm.jpa.JpaTransactionManager        : Committing JPA transaction on EntityManager [SessionImpl(1095543145<open>)]
+2023-03-02 09:22:34.748 DEBUG 1409 --- [nio-8080-exec-1] o.s.orm.jpa.JpaTransactionManager        : Not closing pre-bound JPA EntityManager after transaction
+2023-03-02 09:22:34.935 DEBUG 1409 --- [nio-8080-exec-1] o.j.s.OpenEntityManagerInViewInterceptor : Closing JPA EntityManager in OpenEntityManagerInViewInterceptor
+2023-03-02 09:22:40.527  INFO 1409 --- [nio-8080-exec-2] Spring Security Debugger                 : 
+
+************************************************************
+
+Request received for OPTIONS '/auth/login':
+
+org.apache.catalina.connector.RequestFacade@3b516e54
+
+servletPath:/auth/login
+pathInfo:null
+headers: 
+host: ec2-52-79-41-219.ap-northeast-2.compute.amazonaws.com:8080
+connection: keep-alive
+accept: */*
+access-control-request-method: POST
+access-control-request-headers: content-type
+origin: http://preproject-bucket-029.s3-website.ap-northeast-2.amazonaws.com
+user-agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36
+sec-fetch-mode: cors
+referer: http://preproject-bucket-029.s3-website.ap-northeast-2.amazonaws.com/
+accept-encoding: gzip, deflate
+accept-language: ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7
+
+
+Security filter chain: [
+  DisableEncodeUrlFilter
+  WebAsyncManagerIntegrationFilter
+  SecurityContextPersistenceFilter
+  HeaderWriterFilter
+  CorsFilter
+  LogoutFilter
+  JwtAuthenticationFilter
+  JwtVerificationFilter
+  RequestCacheAwareFilter
+  SecurityContextHolderAwareRequestFilter
+  AnonymousAuthenticationFilter
+  SessionManagementFilter
+  ExceptionTranslationFilter
+  AuthorizationFilter
+]
+
+
+************************************************************
+
+
+2023-03-02 09:22:40.561  INFO 1409 --- [nio-8080-exec-3] Spring Security Debugger                 : 
+
+************************************************************
+
+Request received for GET '/questions':
+
+org.apache.catalina.connector.RequestFacade@3b516e54
+
+servletPath:/questions
+pathInfo:null
+headers: 
+host: ec2-52-79-41-219.ap-northeast-2.compute.amazonaws.com:8080
+connection: keep-alive
+accept: application/json, text/plain, */*
+user-agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36
+origin: http://preproject-bucket-029.s3-website.ap-northeast-2.amazonaws.com
+referer: http://preproject-bucket-029.s3-website.ap-northeast-2.amazonaws.com/
+accept-encoding: gzip, deflate
+accept-language: ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7
+
+
+Security filter chain: [
+  DisableEncodeUrlFilter
+  WebAsyncManagerIntegrationFilter
+  SecurityContextPersistenceFilter
+  HeaderWriterFilter
+  CorsFilter
+  LogoutFilter
+  JwtAuthenticationFilter
+  JwtVerificationFilter
+  RequestCacheAwareFilter
+  SecurityContextHolderAwareRequestFilter
+  AnonymousAuthenticationFilter
+  SessionManagementFilter
+  ExceptionTranslationFilter
+  AuthorizationFilter
+]
+
+
+************************************************************
+
+
+2023-03-02 09:22:40.562 DEBUG 1409 --- [nio-8080-exec-3] o.j.s.OpenEntityManagerInViewInterceptor : Opening JPA EntityManager in OpenEntityManagerInViewInterceptor
+2023-03-02 09:22:40.563 DEBUG 1409 --- [nio-8080-exec-3] o.s.orm.jpa.JpaTransactionManager        : Found thread-bound EntityManager [SessionImpl(852262696<open>)] for JPA transaction
+2023-03-02 09:22:40.563 DEBUG 1409 --- [nio-8080-exec-3] o.s.orm.jpa.JpaTransactionManager        : Creating new transaction with name [com.preproject.cloneStackOverflow.question.service.QuestionService.findQuestions]: PROPAGATION_REQUIRED,ISOLATION_DEFAULT,readOnly
+2023-03-02 09:22:40.581 DEBUG 1409 --- [nio-8080-exec-3] o.s.orm.jpa.JpaTransactionManager        : Exposing JPA transaction as JDBC [org.springframework.orm.jpa.vendor.HibernateJpaDialect$HibernateConnectionHandle@77cef715]
+2023-03-02 09:22:40.581 DEBUG 1409 --- [nio-8080-exec-3] o.s.orm.jpa.JpaTransactionManager        : Found thread-bound EntityManager [SessionImpl(852262696<open>)] for JPA transaction
+2023-03-02 09:22:40.582 DEBUG 1409 --- [nio-8080-exec-3] o.s.orm.jpa.JpaTransactionManager        : Participating in existing transaction
+Hibernate: 
+    select
+        question0_.question_id as question1_3_,
+        question0_.created_at as created_2_3_,
+        question0_.last_modified_at as last_mod3_3_,
+        question0_.answer_count as answer_c4_3_,
+        question0_.body as body5_3_,
+        question0_.member_id as member_i9_3_,
+        question0_.question_count as question6_3_,
+        question0_.title as title7_3_,
+        question0_.view as view8_3_ 
+    from
+        question question0_
+Hibernate: 
+    select
+        member0_.member_id as member_i1_1_0_,
+        member0_.birth as birth2_1_0_,
+        member0_.email as email3_1_0_,
+        member0_.password as password4_1_0_,
+        member0_.phone as phone5_1_0_,
+        member0_.username as username6_1_0_,
+        roles1_.member_member_id as member_m1_2_1_,
+        roles1_.roles as roles2_2_1_ 
+    from
+        member member0_ 
+    left outer join
+        member_roles roles1_ 
+            on member0_.member_id=roles1_.member_member_id 
+    where
+        member0_.member_id=?
+Hibernate: 
+    select
+        member0_.member_id as member_i1_1_0_,
+        member0_.birth as birth2_1_0_,
+        member0_.email as email3_1_0_,
+        member0_.password as password4_1_0_,
+        member0_.phone as phone5_1_0_,
+        member0_.username as username6_1_0_,
+        roles1_.member_member_id as member_m1_2_1_,
+        roles1_.roles as roles2_2_1_ 
+    from
+        member member0_ 
+    left outer join
+        member_roles roles1_ 
+            on member0_.member_id=roles1_.member_member_id 
+    where
+        member0_.member_id=?
+Hibernate: 
+    select
+        member0_.member_id as member_i1_1_0_,
+        member0_.birth as birth2_1_0_,
+        member0_.email as email3_1_0_,
+        member0_.password as password4_1_0_,
+        member0_.phone as phone5_1_0_,
+        member0_.username as username6_1_0_,
+        roles1_.member_member_id as member_m1_2_1_,
+        roles1_.roles as roles2_2_1_ 
+    from
+        member member0_ 
+    left outer join
+        member_roles roles1_ 
+            on member0_.member_id=roles1_.member_member_id 
+    where
+        member0_.member_id=?
+Hibernate: 
+    select
+        member0_.member_id as member_i1_1_0_,
+        member0_.birth as birth2_1_0_,
+        member0_.email as email3_1_0_,
+        member0_.password as password4_1_0_,
+        member0_.phone as phone5_1_0_,
+        member0_.username as username6_1_0_,
+        roles1_.member_member_id as member_m1_2_1_,
+        roles1_.roles as roles2_2_1_ 
+    from
+        member member0_ 
+    left outer join
+        member_roles roles1_ 
+            on member0_.member_id=roles1_.member_member_id 
+    where
+        member0_.member_id=?
+Hibernate: 
+    select
+        member0_.member_id as member_i1_1_0_,
+        member0_.birth as birth2_1_0_,
+        member0_.email as email3_1_0_,
+        member0_.password as password4_1_0_,
+        member0_.phone as phone5_1_0_,
+        member0_.username as username6_1_0_,
+        roles1_.member_member_id as member_m1_2_1_,
+        roles1_.roles as roles2_2_1_ 
+    from
+        member member0_ 
+    left outer join
+        member_roles roles1_ 
+            on member0_.member_id=roles1_.member_member_id 
+    where
+        member0_.member_id=?
+Hibernate: 
+    select
+        member0_.member_id as member_i1_1_0_,
+        member0_.birth as birth2_1_0_,
+        member0_.email as email3_1_0_,
+        member0_.password as password4_1_0_,
+        member0_.phone as phone5_1_0_,
+        member0_.username as username6_1_0_,
+        roles1_.member_member_id as member_m1_2_1_,
+        roles1_.roles as roles2_2_1_ 
+    from
+        member member0_ 
+    left outer join
+        member_roles roles1_ 
+            on member0_.member_id=roles1_.member_member_id 
+    where
+        member0_.member_id=?
+2023-03-02 09:22:40.632 DEBUG 1409 --- [nio-8080-exec-3] o.s.orm.jpa.JpaTransactionManager        : Initiating transaction commit
+2023-03-02 09:22:40.633 DEBUG 1409 --- [nio-8080-exec-3] o.s.orm.jpa.JpaTransactionManager        : Committing JPA transaction on EntityManager [SessionImpl(852262696<open>)]
+2023-03-02 09:22:40.640 DEBUG 1409 --- [nio-8080-exec-3] o.s.orm.jpa.JpaTransactionManager        : Not closing pre-bound JPA EntityManager after transaction
+2023-03-02 09:22:40.642 DEBUG 1409 --- [nio-8080-exec-3] o.j.s.OpenEntityManagerInViewInterceptor : Closing JPA EntityManager in OpenEntityManagerInViewInterceptor
+2023-03-02 09:28:42.172  INFO 1409 --- [nio-8080-exec-5] Spring Security Debugger                 : 
+
+************************************************************
+
+Request received for GET '/questions':
+
+org.apache.catalina.connector.RequestFacade@3b516e54
+
+servletPath:/questions
+pathInfo:null
+headers: 
+host: ec2-52-79-41-219.ap-northeast-2.compute.amazonaws.com:8080
+connection: keep-alive
+pragma: no-cache
+cache-control: no-cache
+accept: application/json, text/plain, */*
+user-agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36
+origin: http://preproject-bucket-029.s3-website.ap-northeast-2.amazonaws.com
+referer: http://preproject-bucket-029.s3-website.ap-northeast-2.amazonaws.com/
+accept-encoding: gzip, deflate
+accept-language: ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7
+
+
+Security filter chain: [
+  DisableEncodeUrlFilter
+  WebAsyncManagerIntegrationFilter
+  SecurityContextPersistenceFilter
+  HeaderWriterFilter
+  CorsFilter
+  LogoutFilter
+  JwtAuthenticationFilter
+  JwtVerificationFilter
+  RequestCacheAwareFilter
+  SecurityContextHolderAwareRequestFilter
+  AnonymousAuthenticationFilter
+  SessionManagementFilter
+  ExceptionTranslationFilter
+  AuthorizationFilter
+]
+
+
+************************************************************
+
+
+2023-03-02 09:28:42.179 DEBUG 1409 --- [nio-8080-exec-5] o.j.s.OpenEntityManagerInViewInterceptor : Opening JPA EntityManager in OpenEntityManagerInViewInterceptor
+2023-03-02 09:28:42.186 DEBUG 1409 --- [nio-8080-exec-5] o.s.orm.jpa.JpaTransactionManager        : Found thread-bound EntityManager [SessionImpl(2001230952<open>)] for JPA transaction
+2023-03-02 09:28:42.186 DEBUG 1409 --- [nio-8080-exec-5] o.s.orm.jpa.JpaTransactionManager        : Creating new transaction with name [com.preproject.cloneStackOverflow.question.service.QuestionService.findQuestions]: PROPAGATION_REQUIRED,ISOLATION_DEFAULT,readOnly
+2023-03-02 09:28:42.191 DEBUG 1409 --- [nio-8080-exec-5] o.s.orm.jpa.JpaTransactionManager        : Exposing JPA transaction as JDBC [org.springframework.orm.jpa.vendor.HibernateJpaDialect$HibernateConnectionHandle@324acce5]
+2023-03-02 09:28:42.191 DEBUG 1409 --- [nio-8080-exec-5] o.s.orm.jpa.JpaTransactionManager        : Found thread-bound EntityManager [SessionImpl(2001230952<open>)] for JPA transaction
+2023-03-02 09:28:42.191 DEBUG 1409 --- [nio-8080-exec-5] o.s.orm.jpa.JpaTransactionManager        : Participating in existing transaction
+Hibernate: 
+    select
+        question0_.question_id as question1_3_,
+        question0_.created_at as created_2_3_,
+        question0_.last_modified_at as last_mod3_3_,
+        question0_.answer_count as answer_c4_3_,
+        question0_.body as body5_3_,
+        question0_.member_id as member_i9_3_,
+        question0_.question_count as question6_3_,
+        question0_.title as title7_3_,
+        question0_.view as view8_3_ 
+    from
+        question question0_
+Hibernate: 
+    select
+        member0_.member_id as member_i1_1_0_,
+        member0_.birth as birth2_1_0_,
+        member0_.email as email3_1_0_,
+        member0_.password as password4_1_0_,
+        member0_.phone as phone5_1_0_,
+        member0_.username as username6_1_0_,
+        roles1_.member_member_id as member_m1_2_1_,
+        roles1_.roles as roles2_2_1_ 
+    from
+        member member0_ 
+    left outer join
+        member_roles roles1_ 
+            on member0_.member_id=roles1_.member_member_id 
+    where
+        member0_.member_id=?
+Hibernate: 
+    select
+        member0_.member_id as member_i1_1_0_,
+        member0_.birth as birth2_1_0_,
+        member0_.email as email3_1_0_,
+        member0_.password as password4_1_0_,
+        member0_.phone as phone5_1_0_,
+        member0_.username as username6_1_0_,
+        roles1_.member_member_id as member_m1_2_1_,
+        roles1_.roles as roles2_2_1_ 
+    from
+        member member0_ 
+    left outer join
+        member_roles roles1_ 
+            on member0_.member_id=roles1_.member_member_id 
+    where
+        member0_.member_id=?
+Hibernate: 
+    select
+        member0_.member_id as member_i1_1_0_,
+        member0_.birth as birth2_1_0_,
+        member0_.email as email3_1_0_,
+        member0_.password as password4_1_0_,
+        member0_.phone as phone5_1_0_,
+        member0_.username as username6_1_0_,
+        roles1_.member_member_id as member_m1_2_1_,
+        roles1_.roles as roles2_2_1_ 
+    from
+        member member0_ 
+    left outer join
+        member_roles roles1_ 
+            on member0_.member_id=roles1_.member_member_id 
+    where
+        member0_.member_id=?
+Hibernate: 
+    select
+        member0_.member_id as member_i1_1_0_,
+        member0_.birth as birth2_1_0_,
+        member0_.email as email3_1_0_,
+        member0_.password as password4_1_0_,
+        member0_.phone as phone5_1_0_,
+        member0_.username as username6_1_0_,
+        roles1_.member_member_id as member_m1_2_1_,
+        roles1_.roles as roles2_2_1_ 
+    from
+        member member0_ 
+    left outer join
+        member_roles roles1_ 
+            on member0_.member_id=roles1_.member_member_id 
+    where
+        member0_.member_id=?
+Hibernate: 
+    select
+        member0_.member_id as member_i1_1_0_,
+        member0_.birth as birth2_1_0_,
+        member0_.email as email3_1_0_,
+        member0_.password as password4_1_0_,
+        member0_.phone as phone5_1_0_,
+        member0_.username as username6_1_0_,
+        roles1_.member_member_id as member_m1_2_1_,
+        roles1_.roles as roles2_2_1_ 
+    from
+        member member0_ 
+    left outer join
+        member_roles roles1_ 
+            on member0_.member_id=roles1_.member_member_id 
+    where
+        member0_.member_id=?
+Hibernate: 
+    select
+        member0_.member_id as member_i1_1_0_,
+        member0_.birth as birth2_1_0_,
+        member0_.email as email3_1_0_,
+        member0_.password as password4_1_0_,
+        member0_.phone as phone5_1_0_,
+        member0_.username as username6_1_0_,
+        roles1_.member_member_id as member_m1_2_1_,
+        roles1_.roles as roles2_2_1_ 
+    from
+        member member0_ 
+    left outer join
+        member_roles roles1_ 
+            on member0_.member_id=roles1_.member_member_id 
+    where
+        member0_.member_id=?
+2023-03-02 09:28:42.246 DEBUG 1409 --- [nio-8080-exec-5] o.s.orm.jpa.JpaTransactionManager        : Initiating transaction commit
+2023-03-02 09:28:42.247 DEBUG 1409 --- [nio-8080-exec-5] o.s.orm.jpa.JpaTransactionManager        : Committing JPA transaction on EntityManager [SessionImpl(2001230952<open>)]
+2023-03-02 09:28:42.251 DEBUG 1409 --- [nio-8080-exec-5] o.s.orm.jpa.JpaTransactionManager        : Not closing pre-bound JPA EntityManager after transaction
+2023-03-02 09:28:42.260 DEBUG 1409 --- [nio-8080-exec-5] o.j.s.OpenEntityManagerInViewInterceptor : Closing JPA EntityManager in OpenEntityManagerInViewInterceptor
+2023-03-02 09:28:48.395  INFO 1409 --- [nio-8080-exec-6] Spring Security Debugger                 : 
+
+************************************************************
+
+Request received for OPTIONS '/auth/login':
+
+org.apache.catalina.connector.RequestFacade@3b516e54
+
+servletPath:/auth/login
+pathInfo:null
+headers: 
+host: ec2-52-79-41-219.ap-northeast-2.compute.amazonaws.com:8080
+connection: keep-alive
+pragma: no-cache
+cache-control: no-cache
+accept: */*
+access-control-request-method: POST
+access-control-request-headers: content-type
+origin: http://preproject-bucket-029.s3-website.ap-northeast-2.amazonaws.com
+user-agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36
+sec-fetch-mode: cors
+referer: http://preproject-bucket-029.s3-website.ap-northeast-2.amazonaws.com/
+accept-encoding: gzip, deflate
+accept-language: ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7
+
+
+Security filter chain: [
+  DisableEncodeUrlFilter
+  WebAsyncManagerIntegrationFilter
+  SecurityContextPersistenceFilter
+  HeaderWriterFilter
+  CorsFilter
+  LogoutFilter
+  JwtAuthenticationFilter
+  JwtVerificationFilter
+  RequestCacheAwareFilter
+  SecurityContextHolderAwareRequestFilter
+  AnonymousAuthenticationFilter
+  SessionManagementFilter
+  ExceptionTranslationFilter
+  AuthorizationFilter
+]
+
+
+************************************************************
+
+
+2023-03-02 09:28:48.472  INFO 1409 --- [nio-8080-exec-7] Spring Security Debugger                 : 
+
+************************************************************
+
+Request received for GET '/questions':
+
+org.apache.catalina.connector.RequestFacade@3b516e54
+
+servletPath:/questions
+pathInfo:null
+headers: 
+host: ec2-52-79-41-219.ap-northeast-2.compute.amazonaws.com:8080
+connection: keep-alive
+pragma: no-cache
+cache-control: no-cache
+accept: application/json, text/plain, */*
+user-agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36
+origin: http://preproject-bucket-029.s3-website.ap-northeast-2.amazonaws.com
+referer: http://preproject-bucket-029.s3-website.ap-northeast-2.amazonaws.com/
+accept-encoding: gzip, deflate
+accept-language: ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7
+
+
+Security filter chain: [
+  DisableEncodeUrlFilter
+  WebAsyncManagerIntegrationFilter
+  SecurityContextPersistenceFilter
+  HeaderWriterFilter
+  CorsFilter
+  LogoutFilter
+  JwtAuthenticationFilter
+  JwtVerificationFilter
+  RequestCacheAwareFilter
+  SecurityContextHolderAwareRequestFilter
+  AnonymousAuthenticationFilter
+  SessionManagementFilter
+  ExceptionTranslationFilter
+  AuthorizationFilter
+]
+
+
+************************************************************
+
+
+2023-03-02 09:28:48.487 DEBUG 1409 --- [nio-8080-exec-7] o.j.s.OpenEntityManagerInViewInterceptor : Opening JPA EntityManager in OpenEntityManagerInViewInterceptor
+2023-03-02 09:28:48.488 DEBUG 1409 --- [nio-8080-exec-7] o.s.orm.jpa.JpaTransactionManager        : Found thread-bound EntityManager [SessionImpl(1465143093<open>)] for JPA transaction
+2023-03-02 09:28:48.489 DEBUG 1409 --- [nio-8080-exec-7] o.s.orm.jpa.JpaTransactionManager        : Creating new transaction with name [com.preproject.cloneStackOverflow.question.service.QuestionService.findQuestions]: PROPAGATION_REQUIRED,ISOLATION_DEFAULT,readOnly
+2023-03-02 09:28:48.494 DEBUG 1409 --- [nio-8080-exec-7] o.s.orm.jpa.JpaTransactionManager        : Exposing JPA transaction as JDBC [org.springframework.orm.jpa.vendor.HibernateJpaDialect$HibernateConnectionHandle@173a472]
+2023-03-02 09:28:48.494 DEBUG 1409 --- [nio-8080-exec-7] o.s.orm.jpa.JpaTransactionManager        : Found thread-bound EntityManager [SessionImpl(1465143093<open>)] for JPA transaction
+2023-03-02 09:28:48.494 DEBUG 1409 --- [nio-8080-exec-7] o.s.orm.jpa.JpaTransactionManager        : Participating in existing transaction
+Hibernate: 
+    select
+        question0_.question_id as question1_3_,
+        question0_.created_at as created_2_3_,
+        question0_.last_modified_at as last_mod3_3_,
+        question0_.answer_count as answer_c4_3_,
+        question0_.body as body5_3_,
+        question0_.member_id as member_i9_3_,
+        question0_.question_count as question6_3_,
+        question0_.title as title7_3_,
+        question0_.view as view8_3_ 
+    from
+        question question0_
+Hibernate: 
+    select
+        member0_.member_id as member_i1_1_0_,
+        member0_.birth as birth2_1_0_,
+        member0_.email as email3_1_0_,
+        member0_.password as password4_1_0_,
+        member0_.phone as phone5_1_0_,
+        member0_.username as username6_1_0_,
+        roles1_.member_member_id as member_m1_2_1_,
+        roles1_.roles as roles2_2_1_ 
+    from
+        member member0_ 
+    left outer join
+        member_roles roles1_ 
+            on member0_.member_id=roles1_.member_member_id 
+    where
+        member0_.member_id=?
+Hibernate: 
+    select
+        member0_.member_id as member_i1_1_0_,
+        member0_.birth as birth2_1_0_,
+        member0_.email as email3_1_0_,
+        member0_.password as password4_1_0_,
+        member0_.phone as phone5_1_0_,
+        member0_.username as username6_1_0_,
+        roles1_.member_member_id as member_m1_2_1_,
+        roles1_.roles as roles2_2_1_ 
+    from
+        member member0_ 
+    left outer join
+        member_roles roles1_ 
+            on member0_.member_id=roles1_.member_member_id 
+    where
+        member0_.member_id=?
+Hibernate: 
+    select
+        member0_.member_id as member_i1_1_0_,
+        member0_.birth as birth2_1_0_,
+        member0_.email as email3_1_0_,
+        member0_.password as password4_1_0_,
+        member0_.phone as phone5_1_0_,
+        member0_.username as username6_1_0_,
+        roles1_.member_member_id as member_m1_2_1_,
+        roles1_.roles as roles2_2_1_ 
+    from
+        member member0_ 
+    left outer join
+        member_roles roles1_ 
+            on member0_.member_id=roles1_.member_member_id 
+    where
+        member0_.member_id=?
+Hibernate: 
+    select
+        member0_.member_id as member_i1_1_0_,
+        member0_.birth as birth2_1_0_,
+        member0_.email as email3_1_0_,
+        member0_.password as password4_1_0_,
+        member0_.phone as phone5_1_0_,
+        member0_.username as username6_1_0_,
+        roles1_.member_member_id as member_m1_2_1_,
+        roles1_.roles as roles2_2_1_ 
+    from
+        member member0_ 
+    left outer join
+        member_roles roles1_ 
+            on member0_.member_id=roles1_.member_member_id 
+    where
+        member0_.member_id=?
+Hibernate: 
+    select
+        member0_.member_id as member_i1_1_0_,
+        member0_.birth as birth2_1_0_,
+        member0_.email as email3_1_0_,
+        member0_.password as password4_1_0_,
+        member0_.phone as phone5_1_0_,
+        member0_.username as username6_1_0_,
+        roles1_.member_member_id as member_m1_2_1_,
+        roles1_.roles as roles2_2_1_ 
+    from
+        member member0_ 
+    left outer join
+        member_roles roles1_ 
+            on member0_.member_id=roles1_.member_member_id 
+    where
+        member0_.member_id=?
+Hibernate: 
+    select
+        member0_.member_id as member_i1_1_0_,
+        member0_.birth as birth2_1_0_,
+        member0_.email as email3_1_0_,
+        member0_.password as password4_1_0_,
+        member0_.phone as phone5_1_0_,
+        member0_.username as username6_1_0_,
+        roles1_.member_member_id as member_m1_2_1_,
+        roles1_.roles as roles2_2_1_ 
+    from
+        member member0_ 
+    left outer join
+        member_roles roles1_ 
+            on member0_.member_id=roles1_.member_member_id 
+    where
+        member0_.member_id=?
+2023-03-02 09:28:48.535 DEBUG 1409 --- [nio-8080-exec-7] o.s.orm.jpa.JpaTransactionManager        : Initiating transaction commit
+2023-03-02 09:28:48.536 DEBUG 1409 --- [nio-8080-exec-7] o.s.orm.jpa.JpaTransactionManager        : Committing JPA transaction on EntityManager [SessionImpl(1465143093<open>)]
+2023-03-02 09:28:48.540 DEBUG 1409 --- [nio-8080-exec-7] o.s.orm.jpa.JpaTransactionManager        : Not closing pre-bound JPA EntityManager after transaction
+2023-03-02 09:28:48.542 DEBUG 1409 --- [nio-8080-exec-7] o.j.s.OpenEntityManagerInViewInterceptor : Closing JPA EntityManager in OpenEntityManagerInViewInterceptor
+2023-03-02 09:29:00.745  INFO 1409 --- [nio-8080-exec-8] Spring Security Debugger                 : 
+
+************************************************************
+
+Request received for GET '/questions':
+
+org.apache.catalina.connector.RequestFacade@3b516e54
+
+servletPath:/questions
+pathInfo:null
+headers: 
+host: ec2-52-79-41-219.ap-northeast-2.compute.amazonaws.com:8080
+connection: keep-alive
+pragma: no-cache
+cache-control: no-cache
+accept: application/json, text/plain, */*
+user-agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36
+origin: http://preproject-bucket-029.s3-website.ap-northeast-2.amazonaws.com
+referer: http://preproject-bucket-029.s3-website.ap-northeast-2.amazonaws.com/
+accept-encoding: gzip, deflate
+accept-language: ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7
+
+
+Security filter chain: [
+  DisableEncodeUrlFilter
+  WebAsyncManagerIntegrationFilter
+  SecurityContextPersistenceFilter
+  HeaderWriterFilter
+  CorsFilter
+  LogoutFilter
+  JwtAuthenticationFilter
+  JwtVerificationFilter
+  RequestCacheAwareFilter
+  SecurityContextHolderAwareRequestFilter
+  AnonymousAuthenticationFilter
+  SessionManagementFilter
+  ExceptionTranslationFilter
+  AuthorizationFilter
+]
+
+
+************************************************************
+
+
+2023-03-02 09:29:00.747 DEBUG 1409 --- [nio-8080-exec-8] o.j.s.OpenEntityManagerInViewInterceptor : Opening JPA EntityManager in OpenEntityManagerInViewInterceptor
+2023-03-02 09:29:00.749 DEBUG 1409 --- [nio-8080-exec-8] o.s.orm.jpa.JpaTransactionManager        : Found thread-bound EntityManager [SessionImpl(1383061245<open>)] for JPA transaction
+2023-03-02 09:29:00.749 DEBUG 1409 --- [nio-8080-exec-8] o.s.orm.jpa.JpaTransactionManager        : Creating new transaction with name [com.preproject.cloneStackOverflow.question.service.QuestionService.findQuestions]: PROPAGATION_REQUIRED,ISOLATION_DEFAULT,readOnly
+2023-03-02 09:29:00.758 DEBUG 1409 --- [nio-8080-exec-8] o.s.orm.jpa.JpaTransactionManager        : Exposing JPA transaction as JDBC [org.springframework.orm.jpa.vendor.HibernateJpaDialect$HibernateConnectionHandle@176d42d4]
+2023-03-02 09:29:00.758 DEBUG 1409 --- [nio-8080-exec-8] o.s.orm.jpa.JpaTransactionManager        : Found thread-bound EntityManager [SessionImpl(1383061245<open>)] for JPA transaction
+2023-03-02 09:29:00.758 DEBUG 1409 --- [nio-8080-exec-8] o.s.orm.jpa.JpaTransactionManager        : Participating in existing transaction
+Hibernate: 
+    select
+        question0_.question_id as question1_3_,
+        question0_.created_at as created_2_3_,
+        question0_.last_modified_at as last_mod3_3_,
+        question0_.answer_count as answer_c4_3_,
+        question0_.body as body5_3_,
+        question0_.member_id as member_i9_3_,
+        question0_.question_count as question6_3_,
+        question0_.title as title7_3_,
+        question0_.view as view8_3_ 
+    from
+        question question0_
+Hibernate: 
+    select
+        member0_.member_id as member_i1_1_0_,
+        member0_.birth as birth2_1_0_,
+        member0_.email as email3_1_0_,
+        member0_.password as password4_1_0_,
+        member0_.phone as phone5_1_0_,
+        member0_.username as username6_1_0_,
+        roles1_.member_member_id as member_m1_2_1_,
+        roles1_.roles as roles2_2_1_ 
+    from
+        member member0_ 
+    left outer join
+        member_roles roles1_ 
+            on member0_.member_id=roles1_.member_member_id 
+    where
+        member0_.member_id=?
+Hibernate: 
+    select
+        member0_.member_id as member_i1_1_0_,
+        member0_.birth as birth2_1_0_,
+        member0_.email as email3_1_0_,
+        member0_.password as password4_1_0_,
+        member0_.phone as phone5_1_0_,
+        member0_.username as username6_1_0_,
+        roles1_.member_member_id as member_m1_2_1_,
+        roles1_.roles as roles2_2_1_ 
+    from
+        member member0_ 
+    left outer join
+        member_roles roles1_ 
+            on member0_.member_id=roles1_.member_member_id 
+    where
+        member0_.member_id=?
+Hibernate: 
+    select
+        member0_.member_id as member_i1_1_0_,
+        member0_.birth as birth2_1_0_,
+        member0_.email as email3_1_0_,
+        member0_.password as password4_1_0_,
+        member0_.phone as phone5_1_0_,
+        member0_.username as username6_1_0_,
+        roles1_.member_member_id as member_m1_2_1_,
+        roles1_.roles as roles2_2_1_ 
+    from
+        member member0_ 
+    left outer join
+        member_roles roles1_ 
+            on member0_.member_id=roles1_.member_member_id 
+    where
+        member0_.member_id=?
+Hibernate: 
+    select
+        member0_.member_id as member_i1_1_0_,
+        member0_.birth as birth2_1_0_,
+        member0_.email as email3_1_0_,
+        member0_.password as password4_1_0_,
+        member0_.phone as phone5_1_0_,
+        member0_.username as username6_1_0_,
+        roles1_.member_member_id as member_m1_2_1_,
+        roles1_.roles as roles2_2_1_ 
+    from
+        member member0_ 
+    left outer join
+        member_roles roles1_ 
+            on member0_.member_id=roles1_.member_member_id 
+    where
+        member0_.member_id=?
+Hibernate: 
+    select
+        member0_.member_id as member_i1_1_0_,
+        member0_.birth as birth2_1_0_,
+        member0_.email as email3_1_0_,
+        member0_.password as password4_1_0_,
+        member0_.phone as phone5_1_0_,
+        member0_.username as username6_1_0_,
+        roles1_.member_member_id as member_m1_2_1_,
+        roles1_.roles as roles2_2_1_ 
+    from
+        member member0_ 
+    left outer join
+        member_roles roles1_ 
+            on member0_.member_id=roles1_.member_member_id 
+    where
+        member0_.member_id=?
+Hibernate: 
+    select
+        member0_.member_id as member_i1_1_0_,
+        member0_.birth as birth2_1_0_,
+        member0_.email as email3_1_0_,
+        member0_.password as password4_1_0_,
+        member0_.phone as phone5_1_0_,
+        member0_.username as username6_1_0_,
+        roles1_.member_member_id as member_m1_2_1_,
+        roles1_.roles as roles2_2_1_ 
+    from
+        member member0_ 
+    left outer join
+        member_roles roles1_ 
+            on member0_.member_id=roles1_.member_member_id 
+    where
+        member0_.member_id=?
+2023-03-02 09:29:00.803 DEBUG 1409 --- [nio-8080-exec-8] o.s.orm.jpa.JpaTransactionManager        : Initiating transaction commit
+2023-03-02 09:29:00.804 DEBUG 1409 --- [nio-8080-exec-8] o.s.orm.jpa.JpaTransactionManager        : Committing JPA transaction on EntityManager [SessionImpl(1383061245<open>)]
+2023-03-02 09:29:00.809 DEBUG 1409 --- [nio-8080-exec-8] o.s.orm.jpa.JpaTransactionManager        : Not closing pre-bound JPA EntityManager after transaction
+2023-03-02 09:29:00.810 DEBUG 1409 --- [nio-8080-exec-8] o.j.s.OpenEntityManagerInViewInterceptor : Closing JPA EntityManager in OpenEntityManagerInViewInterceptor
+2023-03-02 09:29:05.290  INFO 1409 --- [nio-8080-exec-9] Spring Security Debugger                 : 
+
+************************************************************
+
+Request received for OPTIONS '/auth/login':
+
+org.apache.catalina.connector.RequestFacade@3b516e54
+
+servletPath:/auth/login
+pathInfo:null
+headers: 
+host: ec2-52-79-41-219.ap-northeast-2.compute.amazonaws.com:8080
+connection: keep-alive
+accept: */*
+access-control-request-method: POST
+access-control-request-headers: content-type
+origin: http://preproject-bucket-029.s3-website.ap-northeast-2.amazonaws.com
+user-agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36
+sec-fetch-mode: cors
+referer: http://preproject-bucket-029.s3-website.ap-northeast-2.amazonaws.com/
+accept-encoding: gzip, deflate
+accept-language: ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7
+
+
+Security filter chain: [
+  DisableEncodeUrlFilter
+  WebAsyncManagerIntegrationFilter
+  SecurityContextPersistenceFilter
+  HeaderWriterFilter
+  CorsFilter
+  LogoutFilter
+  JwtAuthenticationFilter
+  JwtVerificationFilter
+  RequestCacheAwareFilter
+  SecurityContextHolderAwareRequestFilter
+  AnonymousAuthenticationFilter
+  SessionManagementFilter
+  ExceptionTranslationFilter
+  AuthorizationFilter
+]
+
+
+************************************************************
+
+
+2023-03-02 09:29:05.312  INFO 1409 --- [io-8080-exec-10] Spring Security Debugger                 : 
+
+************************************************************
+
+Request received for GET '/questions':
+
+org.apache.catalina.connector.RequestFacade@3b516e54
+
+servletPath:/questions
+pathInfo:null
+headers: 
+host: ec2-52-79-41-219.ap-northeast-2.compute.amazonaws.com:8080
+connection: keep-alive
+accept: application/json, text/plain, */*
+user-agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36
+origin: http://preproject-bucket-029.s3-website.ap-northeast-2.amazonaws.com
+referer: http://preproject-bucket-029.s3-website.ap-northeast-2.amazonaws.com/
+accept-encoding: gzip, deflate
+accept-language: ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7
+
+
+Security filter chain: [
+  DisableEncodeUrlFilter
+  WebAsyncManagerIntegrationFilter
+  SecurityContextPersistenceFilter
+  HeaderWriterFilter
+  CorsFilter
+  LogoutFilter
+  JwtAuthenticationFilter
+  JwtVerificationFilter
+  RequestCacheAwareFilter
+  SecurityContextHolderAwareRequestFilter
+  AnonymousAuthenticationFilter
+  SessionManagementFilter
+  ExceptionTranslationFilter
+  AuthorizationFilter
+]
+
+
+************************************************************
+
+
+2023-03-02 09:29:05.313 DEBUG 1409 --- [io-8080-exec-10] o.j.s.OpenEntityManagerInViewInterceptor : Opening JPA EntityManager in OpenEntityManagerInViewInterceptor
+2023-03-02 09:29:05.313 DEBUG 1409 --- [io-8080-exec-10] o.s.orm.jpa.JpaTransactionManager        : Found thread-bound EntityManager [SessionImpl(315388956<open>)] for JPA transaction
+2023-03-02 09:29:05.314 DEBUG 1409 --- [io-8080-exec-10] o.s.orm.jpa.JpaTransactionManager        : Creating new transaction with name [com.preproject.cloneStackOverflow.question.service.QuestionService.findQuestions]: PROPAGATION_REQUIRED,ISOLATION_DEFAULT,readOnly
+2023-03-02 09:29:05.318 DEBUG 1409 --- [io-8080-exec-10] o.s.orm.jpa.JpaTransactionManager        : Exposing JPA transaction as JDBC [org.springframework.orm.jpa.vendor.HibernateJpaDialect$HibernateConnectionHandle@66539e14]
+2023-03-02 09:29:05.319 DEBUG 1409 --- [io-8080-exec-10] o.s.orm.jpa.JpaTransactionManager        : Found thread-bound EntityManager [SessionImpl(315388956<open>)] for JPA transaction
+2023-03-02 09:29:05.319 DEBUG 1409 --- [io-8080-exec-10] o.s.orm.jpa.JpaTransactionManager        : Participating in existing transaction
+Hibernate: 
+    select
+        question0_.question_id as question1_3_,
+        question0_.created_at as created_2_3_,
+        question0_.last_modified_at as last_mod3_3_,
+        question0_.answer_count as answer_c4_3_,
+        question0_.body as body5_3_,
+        question0_.member_id as member_i9_3_,
+        question0_.question_count as question6_3_,
+        question0_.title as title7_3_,
+        question0_.view as view8_3_ 
+    from
+        question question0_
+Hibernate: 
+    select
+        member0_.member_id as member_i1_1_0_,
+        member0_.birth as birth2_1_0_,
+        member0_.email as email3_1_0_,
+        member0_.password as password4_1_0_,
+        member0_.phone as phone5_1_0_,
+        member0_.username as username6_1_0_,
+        roles1_.member_member_id as member_m1_2_1_,
+        roles1_.roles as roles2_2_1_ 
+    from
+        member member0_ 
+    left outer join
+        member_roles roles1_ 
+            on member0_.member_id=roles1_.member_member_id 
+    where
+        member0_.member_id=?
+Hibernate: 
+    select
+        member0_.member_id as member_i1_1_0_,
+        member0_.birth as birth2_1_0_,
+        member0_.email as email3_1_0_,
+        member0_.password as password4_1_0_,
+        member0_.phone as phone5_1_0_,
+        member0_.username as username6_1_0_,
+        roles1_.member_member_id as member_m1_2_1_,
+        roles1_.roles as roles2_2_1_ 
+    from
+        member member0_ 
+    left outer join
+        member_roles roles1_ 
+            on member0_.member_id=roles1_.member_member_id 
+    where
+        member0_.member_id=?
+Hibernate: 
+    select
+        member0_.member_id as member_i1_1_0_,
+        member0_.birth as birth2_1_0_,
+        member0_.email as email3_1_0_,
+        member0_.password as password4_1_0_,
+        member0_.phone as phone5_1_0_,
+        member0_.username as username6_1_0_,
+        roles1_.member_member_id as member_m1_2_1_,
+        roles1_.roles as roles2_2_1_ 
+    from
+        member member0_ 
+    left outer join
+        member_roles roles1_ 
+            on member0_.member_id=roles1_.member_member_id 
+    where
+        member0_.member_id=?
+Hibernate: 
+    select
+        member0_.member_id as member_i1_1_0_,
+        member0_.birth as birth2_1_0_,
+        member0_.email as email3_1_0_,
+        member0_.password as password4_1_0_,
+        member0_.phone as phone5_1_0_,
+        member0_.username as username6_1_0_,
+        roles1_.member_member_id as member_m1_2_1_,
+        roles1_.roles as roles2_2_1_ 
+    from
+        member member0_ 
+    left outer join
+        member_roles roles1_ 
+            on member0_.member_id=roles1_.member_member_id 
+    where
+        member0_.member_id=?
+Hibernate: 
+    select
+        member0_.member_id as member_i1_1_0_,
+        member0_.birth as birth2_1_0_,
+        member0_.email as email3_1_0_,
+        member0_.password as password4_1_0_,
+        member0_.phone as phone5_1_0_,
+        member0_.username as username6_1_0_,
+        roles1_.member_member_id as member_m1_2_1_,
+        roles1_.roles as roles2_2_1_ 
+    from
+        member member0_ 
+    left outer join
+        member_roles roles1_ 
+            on member0_.member_id=roles1_.member_member_id 
+    where
+        member0_.member_id=?
+Hibernate: 
+    select
+        member0_.member_id as member_i1_1_0_,
+        member0_.birth as birth2_1_0_,
+        member0_.email as email3_1_0_,
+        member0_.password as password4_1_0_,
+        member0_.phone as phone5_1_0_,
+        member0_.username as username6_1_0_,
+        roles1_.member_member_id as member_m1_2_1_,
+        roles1_.roles as roles2_2_1_ 
+    from
+        member member0_ 
+    left outer join
+        member_roles roles1_ 
+            on member0_.member_id=roles1_.member_member_id 
+    where
+        member0_.member_id=?
+2023-03-02 09:29:05.356 DEBUG 1409 --- [io-8080-exec-10] o.s.orm.jpa.JpaTransactionManager        : Initiating transaction commit
+2023-03-02 09:29:05.356 DEBUG 1409 --- [io-8080-exec-10] o.s.orm.jpa.JpaTransactionManager        : Committing JPA transaction on EntityManager [SessionImpl(315388956<open>)]
+2023-03-02 09:29:05.360 DEBUG 1409 --- [io-8080-exec-10] o.s.orm.jpa.JpaTransactionManager        : Not closing pre-bound JPA EntityManager after transaction
+2023-03-02 09:29:05.362 DEBUG 1409 --- [io-8080-exec-10] o.j.s.OpenEntityManagerInViewInterceptor : Closing JPA EntityManager in OpenEntityManagerInViewInterceptor
+2023-03-02 09:30:31.840  INFO 1409 --- [nio-8080-exec-3] Spring Security Debugger                 : 
+
+************************************************************
+
+Request received for GET '/questions':
+
+org.apache.catalina.connector.RequestFacade@3b516e54
+
+servletPath:/questions
+pathInfo:null
+headers: 
+host: ec2-52-79-41-219.ap-northeast-2.compute.amazonaws.com:8080
+connection: keep-alive
+accept: application/json, text/plain, */*
+user-agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36
+origin: http://preproject-bucket-029.s3-website.ap-northeast-2.amazonaws.com
+referer: http://preproject-bucket-029.s3-website.ap-northeast-2.amazonaws.com/
+accept-encoding: gzip, deflate
+accept-language: ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7
+
+
+Security filter chain: [
+  DisableEncodeUrlFilter
+  WebAsyncManagerIntegrationFilter
+  SecurityContextPersistenceFilter
+  HeaderWriterFilter
+  CorsFilter
+  LogoutFilter
+  JwtAuthenticationFilter
+  JwtVerificationFilter
+  RequestCacheAwareFilter
+  SecurityContextHolderAwareRequestFilter
+  AnonymousAuthenticationFilter
+  SessionManagementFilter
+  ExceptionTranslationFilter
+  AuthorizationFilter
+]
+
+
+************************************************************
+
+
+2023-03-02 09:30:31.845 DEBUG 1409 --- [nio-8080-exec-3] o.j.s.OpenEntityManagerInViewInterceptor : Opening JPA EntityManager in OpenEntityManagerInViewInterceptor
+2023-03-02 09:30:31.848 DEBUG 1409 --- [nio-8080-exec-3] o.s.orm.jpa.JpaTransactionManager        : Found thread-bound EntityManager [SessionImpl(71466745<open>)] for JPA transaction
+2023-03-02 09:30:31.851 DEBUG 1409 --- [nio-8080-exec-3] o.s.orm.jpa.JpaTransactionManager        : Creating new transaction with name [com.preproject.cloneStackOverflow.question.service.QuestionService.findQuestions]: PROPAGATION_REQUIRED,ISOLATION_DEFAULT,readOnly
+2023-03-02 09:30:31.856 DEBUG 1409 --- [nio-8080-exec-3] o.s.orm.jpa.JpaTransactionManager        : Exposing JPA transaction as JDBC [org.springframework.orm.jpa.vendor.HibernateJpaDialect$HibernateConnectionHandle@7d14f485]
+2023-03-02 09:30:31.856 DEBUG 1409 --- [nio-8080-exec-3] o.s.orm.jpa.JpaTransactionManager        : Found thread-bound EntityManager [SessionImpl(71466745<open>)] for JPA transaction
+2023-03-02 09:30:31.856 DEBUG 1409 --- [nio-8080-exec-3] o.s.orm.jpa.JpaTransactionManager        : Participating in existing transaction
+Hibernate: 
+    select
+        question0_.question_id as question1_3_,
+        question0_.created_at as created_2_3_,
+        question0_.last_modified_at as last_mod3_3_,
+        question0_.answer_count as answer_c4_3_,
+        question0_.body as body5_3_,
+        question0_.member_id as member_i9_3_,
+        question0_.question_count as question6_3_,
+        question0_.title as title7_3_,
+        question0_.view as view8_3_ 
+    from
+        question question0_
+Hibernate: 
+    select
+        member0_.member_id as member_i1_1_0_,
+        member0_.birth as birth2_1_0_,
+        member0_.email as email3_1_0_,
+        member0_.password as password4_1_0_,
+        member0_.phone as phone5_1_0_,
+        member0_.username as username6_1_0_,
+        roles1_.member_member_id as member_m1_2_1_,
+        roles1_.roles as roles2_2_1_ 
+    from
+        member member0_ 
+    left outer join
+        member_roles roles1_ 
+            on member0_.member_id=roles1_.member_member_id 
+    where
+        member0_.member_id=?
+Hibernate: 
+    select
+        member0_.member_id as member_i1_1_0_,
+        member0_.birth as birth2_1_0_,
+        member0_.email as email3_1_0_,
+        member0_.password as password4_1_0_,
+        member0_.phone as phone5_1_0_,
+        member0_.username as username6_1_0_,
+        roles1_.member_member_id as member_m1_2_1_,
+        roles1_.roles as roles2_2_1_ 
+    from
+        member member0_ 
+    left outer join
+        member_roles roles1_ 
+            on member0_.member_id=roles1_.member_member_id 
+    where
+        member0_.member_id=?
+Hibernate: 
+    select
+        member0_.member_id as member_i1_1_0_,
+        member0_.birth as birth2_1_0_,
+        member0_.email as email3_1_0_,
+        member0_.password as password4_1_0_,
+        member0_.phone as phone5_1_0_,
+        member0_.username as username6_1_0_,
+        roles1_.member_member_id as member_m1_2_1_,
+        roles1_.roles as roles2_2_1_ 
+    from
+        member member0_ 
+    left outer join
+        member_roles roles1_ 
+            on member0_.member_id=roles1_.member_member_id 
+    where
+        member0_.member_id=?
+Hibernate: 
+    select
+        member0_.member_id as member_i1_1_0_,
+        member0_.birth as birth2_1_0_,
+        member0_.email as email3_1_0_,
+        member0_.password as password4_1_0_,
+        member0_.phone as phone5_1_0_,
+        member0_.username as username6_1_0_,
+        roles1_.member_member_id as member_m1_2_1_,
+        roles1_.roles as roles2_2_1_ 
+    from
+        member member0_ 
+    left outer join
+        member_roles roles1_ 
+            on member0_.member_id=roles1_.member_member_id 
+    where
+        member0_.member_id=?
+Hibernate: 
+    select
+        member0_.member_id as member_i1_1_0_,
+        member0_.birth as birth2_1_0_,
+        member0_.email as email3_1_0_,
+        member0_.password as password4_1_0_,
+        member0_.phone as phone5_1_0_,
+        member0_.username as username6_1_0_,
+        roles1_.member_member_id as member_m1_2_1_,
+        roles1_.roles as roles2_2_1_ 
+    from
+        member member0_ 
+    left outer join
+        member_roles roles1_ 
+            on member0_.member_id=roles1_.member_member_id 
+    where
+        member0_.member_id=?
+Hibernate: 
+    select
+        member0_.member_id as member_i1_1_0_,
+        member0_.birth as birth2_1_0_,
+        member0_.email as email3_1_0_,
+        member0_.password as password4_1_0_,
+        member0_.phone as phone5_1_0_,
+        member0_.username as username6_1_0_,
+        roles1_.member_member_id as member_m1_2_1_,
+        roles1_.roles as roles2_2_1_ 
+    from
+        member member0_ 
+    left outer join
+        member_roles roles1_ 
+            on member0_.member_id=roles1_.member_member_id 
+    where
+        member0_.member_id=?
+2023-03-02 09:30:31.891 DEBUG 1409 --- [nio-8080-exec-3] o.s.orm.jpa.JpaTransactionManager        : Initiating transaction commit
+2023-03-02 09:30:31.891 DEBUG 1409 --- [nio-8080-exec-3] o.s.orm.jpa.JpaTransactionManager        : Committing JPA transaction on EntityManager [SessionImpl(71466745<open>)]
+2023-03-02 09:30:31.895 DEBUG 1409 --- [nio-8080-exec-3] o.s.orm.jpa.JpaTransactionManager        : Not closing pre-bound JPA EntityManager after transaction
+2023-03-02 09:30:31.899 DEBUG 1409 --- [nio-8080-exec-3] o.j.s.OpenEntityManagerInViewInterceptor : Closing JPA EntityManager in OpenEntityManagerInViewInterceptor
+2023-03-02 09:31:22.213  INFO 1409 --- [nio-8080-exec-4] Spring Security Debugger                 : 
+
+************************************************************
+
+Request received for GET '/questions':
+
+org.apache.catalina.connector.RequestFacade@3b516e54
+
+servletPath:/questions
+pathInfo:null
+headers: 
+host: ec2-52-79-41-219.ap-northeast-2.compute.amazonaws.com:8080
+connection: keep-alive
+pragma: no-cache
+cache-control: no-cache
+accept: application/json, text/plain, */*
+user-agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36
+origin: http://preproject-bucket-029.s3-website.ap-northeast-2.amazonaws.com
+referer: http://preproject-bucket-029.s3-website.ap-northeast-2.amazonaws.com/
+accept-encoding: gzip, deflate
+accept-language: ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7
+
+
+Security filter chain: [
+  DisableEncodeUrlFilter
+  WebAsyncManagerIntegrationFilter
+  SecurityContextPersistenceFilter
+  HeaderWriterFilter
+  CorsFilter
+  LogoutFilter
+  JwtAuthenticationFilter
+  JwtVerificationFilter
+  RequestCacheAwareFilter
+  SecurityContextHolderAwareRequestFilter
+  AnonymousAuthenticationFilter
+  SessionManagementFilter
+  ExceptionTranslationFilter
+  AuthorizationFilter
+]
+
+
+************************************************************
+
+
+2023-03-02 09:31:22.216 DEBUG 1409 --- [nio-8080-exec-4] o.j.s.OpenEntityManagerInViewInterceptor : Opening JPA EntityManager in OpenEntityManagerInViewInterceptor
+2023-03-02 09:31:22.217 DEBUG 1409 --- [nio-8080-exec-4] o.s.orm.jpa.JpaTransactionManager        : Found thread-bound EntityManager [SessionImpl(409098434<open>)] for JPA transaction
+2023-03-02 09:31:22.218 DEBUG 1409 --- [nio-8080-exec-4] o.s.orm.jpa.JpaTransactionManager        : Creating new transaction with name [com.preproject.cloneStackOverflow.question.service.QuestionService.findQuestions]: PROPAGATION_REQUIRED,ISOLATION_DEFAULT,readOnly
+2023-03-02 09:31:22.223 DEBUG 1409 --- [nio-8080-exec-4] o.s.orm.jpa.JpaTransactionManager        : Exposing JPA transaction as JDBC [org.springframework.orm.jpa.vendor.HibernateJpaDialect$HibernateConnectionHandle@6cf71f15]
+2023-03-02 09:31:22.223 DEBUG 1409 --- [nio-8080-exec-4] o.s.orm.jpa.JpaTransactionManager        : Found thread-bound EntityManager [SessionImpl(409098434<open>)] for JPA transaction
+2023-03-02 09:31:22.224 DEBUG 1409 --- [nio-8080-exec-4] o.s.orm.jpa.JpaTransactionManager        : Participating in existing transaction
+Hibernate: 
+    select
+        question0_.question_id as question1_3_,
+        question0_.created_at as created_2_3_,
+        question0_.last_modified_at as last_mod3_3_,
+        question0_.answer_count as answer_c4_3_,
+        question0_.body as body5_3_,
+        question0_.member_id as member_i9_3_,
+        question0_.question_count as question6_3_,
+        question0_.title as title7_3_,
+        question0_.view as view8_3_ 
+    from
+        question question0_
+Hibernate: 
+    select
+        member0_.member_id as member_i1_1_0_,
+        member0_.birth as birth2_1_0_,
+        member0_.email as email3_1_0_,
+        member0_.password as password4_1_0_,
+        member0_.phone as phone5_1_0_,
+        member0_.username as username6_1_0_,
+        roles1_.member_member_id as member_m1_2_1_,
+        roles1_.roles as roles2_2_1_ 
+    from
+        member member0_ 
+    left outer join
+        member_roles roles1_ 
+            on member0_.member_id=roles1_.member_member_id 
+    where
+        member0_.member_id=?
+Hibernate: 
+    select
+        member0_.member_id as member_i1_1_0_,
+        member0_.birth as birth2_1_0_,
+        member0_.email as email3_1_0_,
+        member0_.password as password4_1_0_,
+        member0_.phone as phone5_1_0_,
+        member0_.username as username6_1_0_,
+        roles1_.member_member_id as member_m1_2_1_,
+        roles1_.roles as roles2_2_1_ 
+    from
+        member member0_ 
+    left outer join
+        member_roles roles1_ 
+            on member0_.member_id=roles1_.member_member_id 
+    where
+        member0_.member_id=?
+Hibernate: 
+    select
+        member0_.member_id as member_i1_1_0_,
+        member0_.birth as birth2_1_0_,
+        member0_.email as email3_1_0_,
+        member0_.password as password4_1_0_,
+        member0_.phone as phone5_1_0_,
+        member0_.username as username6_1_0_,
+        roles1_.member_member_id as member_m1_2_1_,
+        roles1_.roles as roles2_2_1_ 
+    from
+        member member0_ 
+    left outer join
+        member_roles roles1_ 
+            on member0_.member_id=roles1_.member_member_id 
+    where
+        member0_.member_id=?
+Hibernate: 
+    select
+        member0_.member_id as member_i1_1_0_,
+        member0_.birth as birth2_1_0_,
+        member0_.email as email3_1_0_,
+        member0_.password as password4_1_0_,
+        member0_.phone as phone5_1_0_,
+        member0_.username as username6_1_0_,
+        roles1_.member_member_id as member_m1_2_1_,
+        roles1_.roles as roles2_2_1_ 
+    from
+        member member0_ 
+    left outer join
+        member_roles roles1_ 
+            on member0_.member_id=roles1_.member_member_id 
+    where
+        member0_.member_id=?
+Hibernate: 
+    select
+        member0_.member_id as member_i1_1_0_,
+        member0_.birth as birth2_1_0_,
+        member0_.email as email3_1_0_,
+        member0_.password as password4_1_0_,
+        member0_.phone as phone5_1_0_,
+        member0_.username as username6_1_0_,
+        roles1_.member_member_id as member_m1_2_1_,
+        roles1_.roles as roles2_2_1_ 
+    from
+        member member0_ 
+    left outer join
+        member_roles roles1_ 
+            on member0_.member_id=roles1_.member_member_id 
+    where
+        member0_.member_id=?
+Hibernate: 
+    select
+        member0_.member_id as member_i1_1_0_,
+        member0_.birth as birth2_1_0_,
+        member0_.email as email3_1_0_,
+        member0_.password as password4_1_0_,
+        member0_.phone as phone5_1_0_,
+        member0_.username as username6_1_0_,
+        roles1_.member_member_id as member_m1_2_1_,
+        roles1_.roles as roles2_2_1_ 
+    from
+        member member0_ 
+    left outer join
+        member_roles roles1_ 
+            on member0_.member_id=roles1_.member_member_id 
+    where
+        member0_.member_id=?
+2023-03-02 09:31:22.262 DEBUG 1409 --- [nio-8080-exec-4] o.s.orm.jpa.JpaTransactionManager        : Initiating transaction commit
+2023-03-02 09:31:22.267 DEBUG 1409 --- [nio-8080-exec-4] o.s.orm.jpa.JpaTransactionManager        : Committing JPA transaction on EntityManager [SessionImpl(409098434<open>)]
+2023-03-02 09:31:22.273 DEBUG 1409 --- [nio-8080-exec-4] o.s.orm.jpa.JpaTransactionManager        : Not closing pre-bound JPA EntityManager after transaction
+2023-03-02 09:31:22.275 DEBUG 1409 --- [nio-8080-exec-4] o.j.s.OpenEntityManagerInViewInterceptor : Closing JPA EntityManager in OpenEntityManagerInViewInterceptor
+2023-03-02 09:31:27.546  INFO 1409 --- [nio-8080-exec-5] Spring Security Debugger                 : 
+
+************************************************************
+
+Request received for OPTIONS '/auth/login':
+
+org.apache.catalina.connector.RequestFacade@3b516e54
+
+servletPath:/auth/login
+pathInfo:null
+headers: 
+host: ec2-52-79-41-219.ap-northeast-2.compute.amazonaws.com:8080
+connection: keep-alive
+accept: */*
+access-control-request-method: POST
+access-control-request-headers: content-type
+origin: http://preproject-bucket-029.s3-website.ap-northeast-2.amazonaws.com
+user-agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36
+sec-fetch-mode: cors
+referer: http://preproject-bucket-029.s3-website.ap-northeast-2.amazonaws.com/
+accept-encoding: gzip, deflate
+accept-language: ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7
+
+
+Security filter chain: [
+  DisableEncodeUrlFilter
+  WebAsyncManagerIntegrationFilter
+  SecurityContextPersistenceFilter
+  HeaderWriterFilter
+  CorsFilter
+  LogoutFilter
+  JwtAuthenticationFilter
+  JwtVerificationFilter
+  RequestCacheAwareFilter
+  SecurityContextHolderAwareRequestFilter
+  AnonymousAuthenticationFilter
+  SessionManagementFilter
+  ExceptionTranslationFilter
+  AuthorizationFilter
+]
+
+
+************************************************************
+
+
+2023-03-02 09:31:27.562  INFO 1409 --- [nio-8080-exec-6] Spring Security Debugger                 : 
+
+************************************************************
+
+Request received for GET '/questions':
+
+org.apache.catalina.connector.RequestFacade@3b516e54
+
+servletPath:/questions
+pathInfo:null
+headers: 
+host: ec2-52-79-41-219.ap-northeast-2.compute.amazonaws.com:8080
+connection: keep-alive
+accept: application/json, text/plain, */*
+user-agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36
+origin: http://preproject-bucket-029.s3-website.ap-northeast-2.amazonaws.com
+referer: http://preproject-bucket-029.s3-website.ap-northeast-2.amazonaws.com/
+accept-encoding: gzip, deflate
+accept-language: ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7
+
+
+Security filter chain: [
+  DisableEncodeUrlFilter
+  WebAsyncManagerIntegrationFilter
+  SecurityContextPersistenceFilter
+  HeaderWriterFilter
+  CorsFilter
+  LogoutFilter
+  JwtAuthenticationFilter
+  JwtVerificationFilter
+  RequestCacheAwareFilter
+  SecurityContextHolderAwareRequestFilter
+  AnonymousAuthenticationFilter
+  SessionManagementFilter
+  ExceptionTranslationFilter
+  AuthorizationFilter
+]
+
+
+************************************************************
+
+
+2023-03-02 09:31:27.563 DEBUG 1409 --- [nio-8080-exec-6] o.j.s.OpenEntityManagerInViewInterceptor : Opening JPA EntityManager in OpenEntityManagerInViewInterceptor
+2023-03-02 09:31:27.563 DEBUG 1409 --- [nio-8080-exec-6] o.s.orm.jpa.JpaTransactionManager        : Found thread-bound EntityManager [SessionImpl(610959493<open>)] for JPA transaction
+2023-03-02 09:31:27.563 DEBUG 1409 --- [nio-8080-exec-6] o.s.orm.jpa.JpaTransactionManager        : Creating new transaction with name [com.preproject.cloneStackOverflow.question.service.QuestionService.findQuestions]: PROPAGATION_REQUIRED,ISOLATION_DEFAULT,readOnly
+2023-03-02 09:31:27.569 DEBUG 1409 --- [nio-8080-exec-6] o.s.orm.jpa.JpaTransactionManager        : Exposing JPA transaction as JDBC [org.springframework.orm.jpa.vendor.HibernateJpaDialect$HibernateConnectionHandle@61680a6c]
+2023-03-02 09:31:27.571 DEBUG 1409 --- [nio-8080-exec-6] o.s.orm.jpa.JpaTransactionManager        : Found thread-bound EntityManager [SessionImpl(610959493<open>)] for JPA transaction
+2023-03-02 09:31:27.572 DEBUG 1409 --- [nio-8080-exec-6] o.s.orm.jpa.JpaTransactionManager        : Participating in existing transaction
+Hibernate: 
+    select
+        question0_.question_id as question1_3_,
+        question0_.created_at as created_2_3_,
+        question0_.last_modified_at as last_mod3_3_,
+        question0_.answer_count as answer_c4_3_,
+        question0_.body as body5_3_,
+        question0_.member_id as member_i9_3_,
+        question0_.question_count as question6_3_,
+        question0_.title as title7_3_,
+        question0_.view as view8_3_ 
+    from
+        question question0_
+Hibernate: 
+    select
+        member0_.member_id as member_i1_1_0_,
+        member0_.birth as birth2_1_0_,
+        member0_.email as email3_1_0_,
+        member0_.password as password4_1_0_,
+        member0_.phone as phone5_1_0_,
+        member0_.username as username6_1_0_,
+        roles1_.member_member_id as member_m1_2_1_,
+        roles1_.roles as roles2_2_1_ 
+    from
+        member member0_ 
+    left outer join
+        member_roles roles1_ 
+            on member0_.member_id=roles1_.member_member_id 
+    where
+        member0_.member_id=?
+Hibernate: 
+    select
+        member0_.member_id as member_i1_1_0_,
+        member0_.birth as birth2_1_0_,
+        member0_.email as email3_1_0_,
+        member0_.password as password4_1_0_,
+        member0_.phone as phone5_1_0_,
+        member0_.username as username6_1_0_,
+        roles1_.member_member_id as member_m1_2_1_,
+        roles1_.roles as roles2_2_1_ 
+    from
+        member member0_ 
+    left outer join
+        member_roles roles1_ 
+            on member0_.member_id=roles1_.member_member_id 
+    where
+        member0_.member_id=?
+Hibernate: 
+    select
+        member0_.member_id as member_i1_1_0_,
+        member0_.birth as birth2_1_0_,
+        member0_.email as email3_1_0_,
+        member0_.password as password4_1_0_,
+        member0_.phone as phone5_1_0_,
+        member0_.username as username6_1_0_,
+        roles1_.member_member_id as member_m1_2_1_,
+        roles1_.roles as roles2_2_1_ 
+    from
+        member member0_ 
+    left outer join
+        member_roles roles1_ 
+            on member0_.member_id=roles1_.member_member_id 
+    where
+        member0_.member_id=?
+Hibernate: 
+    select
+        member0_.member_id as member_i1_1_0_,
+        member0_.birth as birth2_1_0_,
+        member0_.email as email3_1_0_,
+        member0_.password as password4_1_0_,
+        member0_.phone as phone5_1_0_,
+        member0_.username as username6_1_0_,
+        roles1_.member_member_id as member_m1_2_1_,
+        roles1_.roles as roles2_2_1_ 
+    from
+        member member0_ 
+    left outer join
+        member_roles roles1_ 
+            on member0_.member_id=roles1_.member_member_id 
+    where
+        member0_.member_id=?
+Hibernate: 
+    select
+        member0_.member_id as member_i1_1_0_,
+        member0_.birth as birth2_1_0_,
+        member0_.email as email3_1_0_,
+        member0_.password as password4_1_0_,
+        member0_.phone as phone5_1_0_,
+        member0_.username as username6_1_0_,
+        roles1_.member_member_id as member_m1_2_1_,
+        roles1_.roles as roles2_2_1_ 
+    from
+        member member0_ 
+    left outer join
+        member_roles roles1_ 
+            on member0_.member_id=roles1_.member_member_id 
+    where
+        member0_.member_id=?
+Hibernate: 
+    select
+        member0_.member_id as member_i1_1_0_,
+        member0_.birth as birth2_1_0_,
+        member0_.email as email3_1_0_,
+        member0_.password as password4_1_0_,
+        member0_.phone as phone5_1_0_,
+        member0_.username as username6_1_0_,
+        roles1_.member_member_id as member_m1_2_1_,
+        roles1_.roles as roles2_2_1_ 
+    from
+        member member0_ 
+    left outer join
+        member_roles roles1_ 
+            on member0_.member_id=roles1_.member_member_id 
+    where
+        member0_.member_id=?
+2023-03-02 09:31:27.598 DEBUG 1409 --- [nio-8080-exec-6] o.s.orm.jpa.JpaTransactionManager        : Initiating transaction commit
+2023-03-02 09:31:27.598 DEBUG 1409 --- [nio-8080-exec-6] o.s.orm.jpa.JpaTransactionManager        : Committing JPA transaction on EntityManager [SessionImpl(610959493<open>)]
+2023-03-02 09:31:27.603 DEBUG 1409 --- [nio-8080-exec-6] o.s.orm.jpa.JpaTransactionManager        : Not closing pre-bound JPA EntityManager after transaction
+2023-03-02 09:31:27.605 DEBUG 1409 --- [nio-8080-exec-6] o.j.s.OpenEntityManagerInViewInterceptor : Closing JPA EntityManager in OpenEntityManagerInViewInterceptor
+2023-03-02 09:31:31.758  INFO 1409 --- [nio-8080-exec-7] Spring Security Debugger                 : 
+
+************************************************************
+
+Request received for GET '/questions':
+
+org.apache.catalina.connector.RequestFacade@3b516e54
+
+servletPath:/questions
+pathInfo:null
+headers: 
+host: ec2-52-79-41-219.ap-northeast-2.compute.amazonaws.com:8080
+connection: keep-alive
+pragma: no-cache
+cache-control: no-cache
+accept: application/json, text/plain, */*
+user-agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36
+origin: http://preproject-bucket-029.s3-website.ap-northeast-2.amazonaws.com
+referer: http://preproject-bucket-029.s3-website.ap-northeast-2.amazonaws.com/
+accept-encoding: gzip, deflate
+accept-language: ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7
+
+
+Security filter chain: [
+  DisableEncodeUrlFilter
+  WebAsyncManagerIntegrationFilter
+  SecurityContextPersistenceFilter
+  HeaderWriterFilter
+  CorsFilter
+  LogoutFilter
+  JwtAuthenticationFilter
+  JwtVerificationFilter
+  RequestCacheAwareFilter
+  SecurityContextHolderAwareRequestFilter
+  AnonymousAuthenticationFilter
+  SessionManagementFilter
+  ExceptionTranslationFilter
+  AuthorizationFilter
+]
+
+
+************************************************************
+
+
+2023-03-02 09:31:31.759 DEBUG 1409 --- [nio-8080-exec-7] o.j.s.OpenEntityManagerInViewInterceptor : Opening JPA EntityManager in OpenEntityManagerInViewInterceptor
+2023-03-02 09:31:31.764 DEBUG 1409 --- [nio-8080-exec-7] o.s.orm.jpa.JpaTransactionManager        : Found thread-bound EntityManager [SessionImpl(1083292590<open>)] for JPA transaction
+2023-03-02 09:31:31.764 DEBUG 1409 --- [nio-8080-exec-7] o.s.orm.jpa.JpaTransactionManager        : Creating new transaction with name [com.preproject.cloneStackOverflow.question.service.QuestionService.findQuestions]: PROPAGATION_REQUIRED,ISOLATION_DEFAULT,readOnly
+2023-03-02 09:31:31.768 DEBUG 1409 --- [nio-8080-exec-7] o.s.orm.jpa.JpaTransactionManager        : Exposing JPA transaction as JDBC [org.springframework.orm.jpa.vendor.HibernateJpaDialect$HibernateConnectionHandle@46608019]
+2023-03-02 09:31:31.768 DEBUG 1409 --- [nio-8080-exec-7] o.s.orm.jpa.JpaTransactionManager        : Found thread-bound EntityManager [SessionImpl(1083292590<open>)] for JPA transaction
+2023-03-02 09:31:31.768 DEBUG 1409 --- [nio-8080-exec-7] o.s.orm.jpa.JpaTransactionManager        : Participating in existing transaction
+Hibernate: 
+    select
+        question0_.question_id as question1_3_,
+        question0_.created_at as created_2_3_,
+        question0_.last_modified_at as last_mod3_3_,
+        question0_.answer_count as answer_c4_3_,
+        question0_.body as body5_3_,
+        question0_.member_id as member_i9_3_,
+        question0_.question_count as question6_3_,
+        question0_.title as title7_3_,
+        question0_.view as view8_3_ 
+    from
+        question question0_
+Hibernate: 
+    select
+        member0_.member_id as member_i1_1_0_,
+        member0_.birth as birth2_1_0_,
+        member0_.email as email3_1_0_,
+        member0_.password as password4_1_0_,
+        member0_.phone as phone5_1_0_,
+        member0_.username as username6_1_0_,
+        roles1_.member_member_id as member_m1_2_1_,
+        roles1_.roles as roles2_2_1_ 
+    from
+        member member0_ 
+    left outer join
+        member_roles roles1_ 
+            on member0_.member_id=roles1_.member_member_id 
+    where
+        member0_.member_id=?
+Hibernate: 
+    select
+        member0_.member_id as member_i1_1_0_,
+        member0_.birth as birth2_1_0_,
+        member0_.email as email3_1_0_,
+        member0_.password as password4_1_0_,
+        member0_.phone as phone5_1_0_,
+        member0_.username as username6_1_0_,
+        roles1_.member_member_id as member_m1_2_1_,
+        roles1_.roles as roles2_2_1_ 
+    from
+        member member0_ 
+    left outer join
+        member_roles roles1_ 
+            on member0_.member_id=roles1_.member_member_id 
+    where
+        member0_.member_id=?
+Hibernate: 
+    select
+        member0_.member_id as member_i1_1_0_,
+        member0_.birth as birth2_1_0_,
+        member0_.email as email3_1_0_,
+        member0_.password as password4_1_0_,
+        member0_.phone as phone5_1_0_,
+        member0_.username as username6_1_0_,
+        roles1_.member_member_id as member_m1_2_1_,
+        roles1_.roles as roles2_2_1_ 
+    from
+        member member0_ 
+    left outer join
+        member_roles roles1_ 
+            on member0_.member_id=roles1_.member_member_id 
+    where
+        member0_.member_id=?
+Hibernate: 
+    select
+        member0_.member_id as member_i1_1_0_,
+        member0_.birth as birth2_1_0_,
+        member0_.email as email3_1_0_,
+        member0_.password as password4_1_0_,
+        member0_.phone as phone5_1_0_,
+        member0_.username as username6_1_0_,
+        roles1_.member_member_id as member_m1_2_1_,
+        roles1_.roles as roles2_2_1_ 
+    from
+        member member0_ 
+    left outer join
+        member_roles roles1_ 
+            on member0_.member_id=roles1_.member_member_id 
+    where
+        member0_.member_id=?
+Hibernate: 
+    select
+        member0_.member_id as member_i1_1_0_,
+        member0_.birth as birth2_1_0_,
+        member0_.email as email3_1_0_,
+        member0_.password as password4_1_0_,
+        member0_.phone as phone5_1_0_,
+        member0_.username as username6_1_0_,
+        roles1_.member_member_id as member_m1_2_1_,
+        roles1_.roles as roles2_2_1_ 
+    from
+        member member0_ 
+    left outer join
+        member_roles roles1_ 
+            on member0_.member_id=roles1_.member_member_id 
+    where
+        member0_.member_id=?
+Hibernate: 
+    select
+        member0_.member_id as member_i1_1_0_,
+        member0_.birth as birth2_1_0_,
+        member0_.email as email3_1_0_,
+        member0_.password as password4_1_0_,
+        member0_.phone as phone5_1_0_,
+        member0_.username as username6_1_0_,
+        roles1_.member_member_id as member_m1_2_1_,
+        roles1_.roles as roles2_2_1_ 
+    from
+        member member0_ 
+    left outer join
+        member_roles roles1_ 
+            on member0_.member_id=roles1_.member_member_id 
+    where
+        member0_.member_id=?
+2023-03-02 09:31:31.797 DEBUG 1409 --- [nio-8080-exec-7] o.s.orm.jpa.JpaTransactionManager        : Initiating transaction commit
+2023-03-02 09:31:31.799 DEBUG 1409 --- [nio-8080-exec-7] o.s.orm.jpa.JpaTransactionManager        : Committing JPA transaction on EntityManager [SessionImpl(1083292590<open>)]
+2023-03-02 09:31:31.803 DEBUG 1409 --- [nio-8080-exec-7] o.s.orm.jpa.JpaTransactionManager        : Not closing pre-bound JPA EntityManager after transaction
+2023-03-02 09:31:31.805 DEBUG 1409 --- [nio-8080-exec-7] o.j.s.OpenEntityManagerInViewInterceptor : Closing JPA EntityManager in OpenEntityManagerInViewInterceptor
+2023-03-02 09:31:40.411  INFO 1409 --- [nio-8080-exec-9] Spring Security Debugger                 : 
+
+************************************************************
+
+Request received for GET '/questions':
+
+org.apache.catalina.connector.RequestFacade@3b516e54
+
+servletPath:/questions
+pathInfo:null
+headers: 
+host: ec2-52-79-41-219.ap-northeast-2.compute.amazonaws.com:8080
+connection: keep-alive
+accept: application/json, text/plain, */*
+user-agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36
+origin: http://preproject-bucket-029.s3-website.ap-northeast-2.amazonaws.com
+referer: http://preproject-bucket-029.s3-website.ap-northeast-2.amazonaws.com/
+accept-encoding: gzip, deflate
+accept-language: ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7
+
+
+Security filter chain: [
+  DisableEncodeUrlFilter
+  WebAsyncManagerIntegrationFilter
+  SecurityContextPersistenceFilter
+  HeaderWriterFilter
+  CorsFilter
+  LogoutFilter
+  JwtAuthenticationFilter
+  JwtVerificationFilter
+  RequestCacheAwareFilter
+  SecurityContextHolderAwareRequestFilter
+  AnonymousAuthenticationFilter
+  SessionManagementFilter
+  ExceptionTranslationFilter
+  AuthorizationFilter
+]
+
+
+************************************************************
+
+
+2023-03-02 09:31:40.412 DEBUG 1409 --- [nio-8080-exec-9] o.j.s.OpenEntityManagerInViewInterceptor : Opening JPA EntityManager in OpenEntityManagerInViewInterceptor
+2023-03-02 09:31:40.413 DEBUG 1409 --- [nio-8080-exec-9] o.s.orm.jpa.JpaTransactionManager        : Found thread-bound EntityManager [SessionImpl(1700470864<open>)] for JPA transaction
+2023-03-02 09:31:40.413 DEBUG 1409 --- [nio-8080-exec-9] o.s.orm.jpa.JpaTransactionManager        : Creating new transaction with name [com.preproject.cloneStackOverflow.question.service.QuestionService.findQuestions]: PROPAGATION_REQUIRED,ISOLATION_DEFAULT,readOnly
+2023-03-02 09:31:40.421 DEBUG 1409 --- [nio-8080-exec-9] o.s.orm.jpa.JpaTransactionManager        : Exposing JPA transaction as JDBC [org.springframework.orm.jpa.vendor.HibernateJpaDialect$HibernateConnectionHandle@2059b29f]
+2023-03-02 09:31:40.421 DEBUG 1409 --- [nio-8080-exec-9] o.s.orm.jpa.JpaTransactionManager        : Found thread-bound EntityManager [SessionImpl(1700470864<open>)] for JPA transaction
+2023-03-02 09:31:40.421 DEBUG 1409 --- [nio-8080-exec-9] o.s.orm.jpa.JpaTransactionManager        : Participating in existing transaction
+Hibernate: 
+    select
+        question0_.question_id as question1_3_,
+        question0_.created_at as created_2_3_,
+        question0_.last_modified_at as last_mod3_3_,
+        question0_.answer_count as answer_c4_3_,
+        question0_.body as body5_3_,
+        question0_.member_id as member_i9_3_,
+        question0_.question_count as question6_3_,
+        question0_.title as title7_3_,
+        question0_.view as view8_3_ 
+    from
+        question question0_
+Hibernate: 
+    select
+        member0_.member_id as member_i1_1_0_,
+        member0_.birth as birth2_1_0_,
+        member0_.email as email3_1_0_,
+        member0_.password as password4_1_0_,
+        member0_.phone as phone5_1_0_,
+        member0_.username as username6_1_0_,
+        roles1_.member_member_id as member_m1_2_1_,
+        roles1_.roles as roles2_2_1_ 
+    from
+        member member0_ 
+    left outer join
+        member_roles roles1_ 
+            on member0_.member_id=roles1_.member_member_id 
+    where
+        member0_.member_id=?
+Hibernate: 
+    select
+        member0_.member_id as member_i1_1_0_,
+        member0_.birth as birth2_1_0_,
+        member0_.email as email3_1_0_,
+        member0_.password as password4_1_0_,
+        member0_.phone as phone5_1_0_,
+        member0_.username as username6_1_0_,
+        roles1_.member_member_id as member_m1_2_1_,
+        roles1_.roles as roles2_2_1_ 
+    from
+        member member0_ 
+    left outer join
+        member_roles roles1_ 
+            on member0_.member_id=roles1_.member_member_id 
+    where
+        member0_.member_id=?
+Hibernate: 
+    select
+        member0_.member_id as member_i1_1_0_,
+        member0_.birth as birth2_1_0_,
+        member0_.email as email3_1_0_,
+        member0_.password as password4_1_0_,
+        member0_.phone as phone5_1_0_,
+        member0_.username as username6_1_0_,
+        roles1_.member_member_id as member_m1_2_1_,
+        roles1_.roles as roles2_2_1_ 
+    from
+        member member0_ 
+    left outer join
+        member_roles roles1_ 
+            on member0_.member_id=roles1_.member_member_id 
+    where
+        member0_.member_id=?
+Hibernate: 
+    select
+        member0_.member_id as member_i1_1_0_,
+        member0_.birth as birth2_1_0_,
+        member0_.email as email3_1_0_,
+        member0_.password as password4_1_0_,
+        member0_.phone as phone5_1_0_,
+        member0_.username as username6_1_0_,
+        roles1_.member_member_id as member_m1_2_1_,
+        roles1_.roles as roles2_2_1_ 
+    from
+        member member0_ 
+    left outer join
+        member_roles roles1_ 
+            on member0_.member_id=roles1_.member_member_id 
+    where
+        member0_.member_id=?
+Hibernate: 
+    select
+        member0_.member_id as member_i1_1_0_,
+        member0_.birth as birth2_1_0_,
+        member0_.email as email3_1_0_,
+        member0_.password as password4_1_0_,
+        member0_.phone as phone5_1_0_,
+        member0_.username as username6_1_0_,
+        roles1_.member_member_id as member_m1_2_1_,
+        roles1_.roles as roles2_2_1_ 
+    from
+        member member0_ 
+    left outer join
+        member_roles roles1_ 
+            on member0_.member_id=roles1_.member_member_id 
+    where
+        member0_.member_id=?
+Hibernate: 
+    select
+        member0_.member_id as member_i1_1_0_,
+        member0_.birth as birth2_1_0_,
+        member0_.email as email3_1_0_,
+        member0_.password as password4_1_0_,
+        member0_.phone as phone5_1_0_,
+        member0_.username as username6_1_0_,
+        roles1_.member_member_id as member_m1_2_1_,
+        roles1_.roles as roles2_2_1_ 
+    from
+        member member0_ 
+    left outer join
+        member_roles roles1_ 
+            on member0_.member_id=roles1_.member_member_id 
+    where
+        member0_.member_id=?
+2023-03-02 09:31:40.449 DEBUG 1409 --- [nio-8080-exec-9] o.s.orm.jpa.JpaTransactionManager        : Initiating transaction commit
+2023-03-02 09:31:40.449 DEBUG 1409 --- [nio-8080-exec-9] o.s.orm.jpa.JpaTransactionManager        : Committing JPA transaction on EntityManager [SessionImpl(1700470864<open>)]
+2023-03-02 09:31:40.453 DEBUG 1409 --- [nio-8080-exec-9] o.s.orm.jpa.JpaTransactionManager        : Not closing pre-bound JPA EntityManager after transaction
+2023-03-02 09:31:40.454 DEBUG 1409 --- [nio-8080-exec-9] o.j.s.OpenEntityManagerInViewInterceptor : Closing JPA EntityManager in OpenEntityManagerInViewInterceptor
+2023-03-02 09:31:41.406  INFO 1409 --- [io-8080-exec-10] Spring Security Debugger                 : 
+
+************************************************************
+
+Request received for GET '/questions':
+
+org.apache.catalina.connector.RequestFacade@3b516e54
+
+servletPath:/questions
+pathInfo:null
+headers: 
+host: ec2-52-79-41-219.ap-northeast-2.compute.amazonaws.com:8080
+connection: keep-alive
+pragma: no-cache
+cache-control: no-cache
+accept: application/json, text/plain, */*
+user-agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36
+origin: http://preproject-bucket-029.s3-website.ap-northeast-2.amazonaws.com
+referer: http://preproject-bucket-029.s3-website.ap-northeast-2.amazonaws.com/
+accept-encoding: gzip, deflate
+accept-language: ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7
+
+
+Security filter chain: [
+  DisableEncodeUrlFilter
+  WebAsyncManagerIntegrationFilter
+  SecurityContextPersistenceFilter
+  HeaderWriterFilter
+  CorsFilter
+  LogoutFilter
+  JwtAuthenticationFilter
+  JwtVerificationFilter
+  RequestCacheAwareFilter
+  SecurityContextHolderAwareRequestFilter
+  AnonymousAuthenticationFilter
+  SessionManagementFilter
+  ExceptionTranslationFilter
+  AuthorizationFilter
+]
+
+
+************************************************************
+
+
+2023-03-02 09:31:41.407 DEBUG 1409 --- [io-8080-exec-10] o.j.s.OpenEntityManagerInViewInterceptor : Opening JPA EntityManager in OpenEntityManagerInViewInterceptor
+2023-03-02 09:31:41.407 DEBUG 1409 --- [io-8080-exec-10] o.s.orm.jpa.JpaTransactionManager        : Found thread-bound EntityManager [SessionImpl(426845521<open>)] for JPA transaction
+2023-03-02 09:31:41.408 DEBUG 1409 --- [io-8080-exec-10] o.s.orm.jpa.JpaTransactionManager        : Creating new transaction with name [com.preproject.cloneStackOverflow.question.service.QuestionService.findQuestions]: PROPAGATION_REQUIRED,ISOLATION_DEFAULT,readOnly
+2023-03-02 09:31:41.412 DEBUG 1409 --- [io-8080-exec-10] o.s.orm.jpa.JpaTransactionManager        : Exposing JPA transaction as JDBC [org.springframework.orm.jpa.vendor.HibernateJpaDialect$HibernateConnectionHandle@195859d]
+2023-03-02 09:31:41.412 DEBUG 1409 --- [io-8080-exec-10] o.s.orm.jpa.JpaTransactionManager        : Found thread-bound EntityManager [SessionImpl(426845521<open>)] for JPA transaction
+2023-03-02 09:31:41.412 DEBUG 1409 --- [io-8080-exec-10] o.s.orm.jpa.JpaTransactionManager        : Participating in existing transaction
+Hibernate: 
+    select
+        question0_.question_id as question1_3_,
+        question0_.created_at as created_2_3_,
+        question0_.last_modified_at as last_mod3_3_,
+        question0_.answer_count as answer_c4_3_,
+        question0_.body as body5_3_,
+        question0_.member_id as member_i9_3_,
+        question0_.question_count as question6_3_,
+        question0_.title as title7_3_,
+        question0_.view as view8_3_ 
+    from
+        question question0_
+Hibernate: 
+    select
+        member0_.member_id as member_i1_1_0_,
+        member0_.birth as birth2_1_0_,
+        member0_.email as email3_1_0_,
+        member0_.password as password4_1_0_,
+        member0_.phone as phone5_1_0_,
+        member0_.username as username6_1_0_,
+        roles1_.member_member_id as member_m1_2_1_,
+        roles1_.roles as roles2_2_1_ 
+    from
+        member member0_ 
+    left outer join
+        member_roles roles1_ 
+            on member0_.member_id=roles1_.member_member_id 
+    where
+        member0_.member_id=?
+Hibernate: 
+    select
+        member0_.member_id as member_i1_1_0_,
+        member0_.birth as birth2_1_0_,
+        member0_.email as email3_1_0_,
+        member0_.password as password4_1_0_,
+        member0_.phone as phone5_1_0_,
+        member0_.username as username6_1_0_,
+        roles1_.member_member_id as member_m1_2_1_,
+        roles1_.roles as roles2_2_1_ 
+    from
+        member member0_ 
+    left outer join
+        member_roles roles1_ 
+            on member0_.member_id=roles1_.member_member_id 
+    where
+        member0_.member_id=?
+Hibernate: 
+    select
+        member0_.member_id as member_i1_1_0_,
+        member0_.birth as birth2_1_0_,
+        member0_.email as email3_1_0_,
+        member0_.password as password4_1_0_,
+        member0_.phone as phone5_1_0_,
+        member0_.username as username6_1_0_,
+        roles1_.member_member_id as member_m1_2_1_,
+        roles1_.roles as roles2_2_1_ 
+    from
+        member member0_ 
+    left outer join
+        member_roles roles1_ 
+            on member0_.member_id=roles1_.member_member_id 
+    where
+        member0_.member_id=?
+Hibernate: 
+    select
+        member0_.member_id as member_i1_1_0_,
+        member0_.birth as birth2_1_0_,
+        member0_.email as email3_1_0_,
+        member0_.password as password4_1_0_,
+        member0_.phone as phone5_1_0_,
+        member0_.username as username6_1_0_,
+        roles1_.member_member_id as member_m1_2_1_,
+        roles1_.roles as roles2_2_1_ 
+    from
+        member member0_ 
+    left outer join
+        member_roles roles1_ 
+            on member0_.member_id=roles1_.member_member_id 
+    where
+        member0_.member_id=?
+Hibernate: 
+    select
+        member0_.member_id as member_i1_1_0_,
+        member0_.birth as birth2_1_0_,
+        member0_.email as email3_1_0_,
+        member0_.password as password4_1_0_,
+        member0_.phone as phone5_1_0_,
+        member0_.username as username6_1_0_,
+        roles1_.member_member_id as member_m1_2_1_,
+        roles1_.roles as roles2_2_1_ 
+    from
+        member member0_ 
+    left outer join
+        member_roles roles1_ 
+            on member0_.member_id=roles1_.member_member_id 
+    where
+        member0_.member_id=?
+Hibernate: 
+    select
+        member0_.member_id as member_i1_1_0_,
+        member0_.birth as birth2_1_0_,
+        member0_.email as email3_1_0_,
+        member0_.password as password4_1_0_,
+        member0_.phone as phone5_1_0_,
+        member0_.username as username6_1_0_,
+        roles1_.member_member_id as member_m1_2_1_,
+        roles1_.roles as roles2_2_1_ 
+    from
+        member member0_ 
+    left outer join
+        member_roles roles1_ 
+            on member0_.member_id=roles1_.member_member_id 
+    where
+        member0_.member_id=?
+2023-03-02 09:31:41.443 DEBUG 1409 --- [io-8080-exec-10] o.s.orm.jpa.JpaTransactionManager        : Initiating transaction commit
+2023-03-02 09:31:41.443 DEBUG 1409 --- [io-8080-exec-10] o.s.orm.jpa.JpaTransactionManager        : Committing JPA transaction on EntityManager [SessionImpl(426845521<open>)]
+2023-03-02 09:31:41.447 DEBUG 1409 --- [io-8080-exec-10] o.s.orm.jpa.JpaTransactionManager        : Not closing pre-bound JPA EntityManager after transaction
+2023-03-02 09:31:41.448 DEBUG 1409 --- [io-8080-exec-10] o.j.s.OpenEntityManagerInViewInterceptor : Closing JPA EntityManager in OpenEntityManagerInViewInterceptor
+2023-03-02 09:32:55.501  INFO 1409 --- [nio-8080-exec-2] Spring Security Debugger                 : 
+
+************************************************************
+
+Request received for GET '/questions':
+
+org.apache.catalina.connector.RequestFacade@3b516e54
+
+servletPath:/questions
+pathInfo:null
+headers: 
+host: ec2-52-79-41-219.ap-northeast-2.compute.amazonaws.com:8080
+connection: keep-alive
+pragma: no-cache
+cache-control: no-cache
+accept: application/json, text/plain, */*
+user-agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36
+origin: http://preproject-bucket-029.s3-website.ap-northeast-2.amazonaws.com
+referer: http://preproject-bucket-029.s3-website.ap-northeast-2.amazonaws.com/
+accept-encoding: gzip, deflate
+accept-language: ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7
+
+
+Security filter chain: [
+  DisableEncodeUrlFilter
+  WebAsyncManagerIntegrationFilter
+  SecurityContextPersistenceFilter
+  HeaderWriterFilter
+  CorsFilter
+  LogoutFilter
+  JwtAuthenticationFilter
+  JwtVerificationFilter
+  RequestCacheAwareFilter
+  SecurityContextHolderAwareRequestFilter
+  AnonymousAuthenticationFilter
+  SessionManagementFilter
+  ExceptionTranslationFilter
+  AuthorizationFilter
+]
+
+
+************************************************************
+
+
+2023-03-02 09:32:55.509 DEBUG 1409 --- [nio-8080-exec-2] o.j.s.OpenEntityManagerInViewInterceptor : Opening JPA EntityManager in OpenEntityManagerInViewInterceptor
+2023-03-02 09:32:55.513 DEBUG 1409 --- [nio-8080-exec-2] o.s.orm.jpa.JpaTransactionManager        : Found thread-bound EntityManager [SessionImpl(428729605<open>)] for JPA transaction
+2023-03-02 09:32:55.513 DEBUG 1409 --- [nio-8080-exec-2] o.s.orm.jpa.JpaTransactionManager        : Creating new transaction with name [com.preproject.cloneStackOverflow.question.service.QuestionService.findQuestions]: PROPAGATION_REQUIRED,ISOLATION_DEFAULT,readOnly
+2023-03-02 09:32:55.517 DEBUG 1409 --- [nio-8080-exec-2] o.s.orm.jpa.JpaTransactionManager        : Exposing JPA transaction as JDBC [org.springframework.orm.jpa.vendor.HibernateJpaDialect$HibernateConnectionHandle@153e3306]
+2023-03-02 09:32:55.518 DEBUG 1409 --- [nio-8080-exec-2] o.s.orm.jpa.JpaTransactionManager        : Found thread-bound EntityManager [SessionImpl(428729605<open>)] for JPA transaction
+2023-03-02 09:32:55.518 DEBUG 1409 --- [nio-8080-exec-2] o.s.orm.jpa.JpaTransactionManager        : Participating in existing transaction
+Hibernate: 
+    select
+        question0_.question_id as question1_3_,
+        question0_.created_at as created_2_3_,
+        question0_.last_modified_at as last_mod3_3_,
+        question0_.answer_count as answer_c4_3_,
+        question0_.body as body5_3_,
+        question0_.member_id as member_i9_3_,
+        question0_.question_count as question6_3_,
+        question0_.title as title7_3_,
+        question0_.view as view8_3_ 
+    from
+        question question0_
+Hibernate: 
+    select
+        member0_.member_id as member_i1_1_0_,
+        member0_.birth as birth2_1_0_,
+        member0_.email as email3_1_0_,
+        member0_.password as password4_1_0_,
+        member0_.phone as phone5_1_0_,
+        member0_.username as username6_1_0_,
+        roles1_.member_member_id as member_m1_2_1_,
+        roles1_.roles as roles2_2_1_ 
+    from
+        member member0_ 
+    left outer join
+        member_roles roles1_ 
+            on member0_.member_id=roles1_.member_member_id 
+    where
+        member0_.member_id=?
+Hibernate: 
+    select
+        member0_.member_id as member_i1_1_0_,
+        member0_.birth as birth2_1_0_,
+        member0_.email as email3_1_0_,
+        member0_.password as password4_1_0_,
+        member0_.phone as phone5_1_0_,
+        member0_.username as username6_1_0_,
+        roles1_.member_member_id as member_m1_2_1_,
+        roles1_.roles as roles2_2_1_ 
+    from
+        member member0_ 
+    left outer join
+        member_roles roles1_ 
+            on member0_.member_id=roles1_.member_member_id 
+    where
+        member0_.member_id=?
+Hibernate: 
+    select
+        member0_.member_id as member_i1_1_0_,
+        member0_.birth as birth2_1_0_,
+        member0_.email as email3_1_0_,
+        member0_.password as password4_1_0_,
+        member0_.phone as phone5_1_0_,
+        member0_.username as username6_1_0_,
+        roles1_.member_member_id as member_m1_2_1_,
+        roles1_.roles as roles2_2_1_ 
+    from
+        member member0_ 
+    left outer join
+        member_roles roles1_ 
+            on member0_.member_id=roles1_.member_member_id 
+    where
+        member0_.member_id=?
+Hibernate: 
+    select
+        member0_.member_id as member_i1_1_0_,
+        member0_.birth as birth2_1_0_,
+        member0_.email as email3_1_0_,
+        member0_.password as password4_1_0_,
+        member0_.phone as phone5_1_0_,
+        member0_.username as username6_1_0_,
+        roles1_.member_member_id as member_m1_2_1_,
+        roles1_.roles as roles2_2_1_ 
+    from
+        member member0_ 
+    left outer join
+        member_roles roles1_ 
+            on member0_.member_id=roles1_.member_member_id 
+    where
+        member0_.member_id=?
+Hibernate: 
+    select
+        member0_.member_id as member_i1_1_0_,
+        member0_.birth as birth2_1_0_,
+        member0_.email as email3_1_0_,
+        member0_.password as password4_1_0_,
+        member0_.phone as phone5_1_0_,
+        member0_.username as username6_1_0_,
+        roles1_.member_member_id as member_m1_2_1_,
+        roles1_.roles as roles2_2_1_ 
+    from
+        member member0_ 
+    left outer join
+        member_roles roles1_ 
+            on member0_.member_id=roles1_.member_member_id 
+    where
+        member0_.member_id=?
+Hibernate: 
+    select
+        member0_.member_id as member_i1_1_0_,
+        member0_.birth as birth2_1_0_,
+        member0_.email as email3_1_0_,
+        member0_.password as password4_1_0_,
+        member0_.phone as phone5_1_0_,
+        member0_.username as username6_1_0_,
+        roles1_.member_member_id as member_m1_2_1_,
+        roles1_.roles as roles2_2_1_ 
+    from
+        member member0_ 
+    left outer join
+        member_roles roles1_ 
+            on member0_.member_id=roles1_.member_member_id 
+    where
+        member0_.member_id=?
+2023-03-02 09:32:55.547 DEBUG 1409 --- [nio-8080-exec-2] o.s.orm.jpa.JpaTransactionManager        : Initiating transaction commit
+2023-03-02 09:32:55.547 DEBUG 1409 --- [nio-8080-exec-2] o.s.orm.jpa.JpaTransactionManager        : Committing JPA transaction on EntityManager [SessionImpl(428729605<open>)]
+2023-03-02 09:32:55.551 DEBUG 1409 --- [nio-8080-exec-2] o.s.orm.jpa.JpaTransactionManager        : Not closing pre-bound JPA EntityManager after transaction
+2023-03-02 09:32:55.553 DEBUG 1409 --- [nio-8080-exec-2] o.j.s.OpenEntityManagerInViewInterceptor : Closing JPA EntityManager in OpenEntityManagerInViewInterceptor
+2023-03-02 09:32:59.397  INFO 1409 --- [nio-8080-exec-3] Spring Security Debugger                 : 
+
+************************************************************
+
+Request received for OPTIONS '/auth/login':
+
+org.apache.catalina.connector.RequestFacade@3b516e54
+
+servletPath:/auth/login
+pathInfo:null
+headers: 
+host: ec2-52-79-41-219.ap-northeast-2.compute.amazonaws.com:8080
+connection: keep-alive
+accept: */*
+access-control-request-method: POST
+access-control-request-headers: content-type
+origin: http://preproject-bucket-029.s3-website.ap-northeast-2.amazonaws.com
+user-agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36
+sec-fetch-mode: cors
+referer: http://preproject-bucket-029.s3-website.ap-northeast-2.amazonaws.com/
+accept-encoding: gzip, deflate
+accept-language: ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7
+
+
+Security filter chain: [
+  DisableEncodeUrlFilter
+  WebAsyncManagerIntegrationFilter
+  SecurityContextPersistenceFilter
+  HeaderWriterFilter
+  CorsFilter
+  LogoutFilter
+  JwtAuthenticationFilter
+  JwtVerificationFilter
+  RequestCacheAwareFilter
+  SecurityContextHolderAwareRequestFilter
+  AnonymousAuthenticationFilter
+  SessionManagementFilter
+  ExceptionTranslationFilter
+  AuthorizationFilter
+]
+
+
+************************************************************
+
+
+2023-03-02 09:32:59.416  INFO 1409 --- [nio-8080-exec-4] Spring Security Debugger                 : 
+
+************************************************************
+
+Request received for GET '/questions':
+
+org.apache.catalina.connector.RequestFacade@3b516e54
+
+servletPath:/questions
+pathInfo:null
+headers: 
+host: ec2-52-79-41-219.ap-northeast-2.compute.amazonaws.com:8080
+connection: keep-alive
+accept: application/json, text/plain, */*
+user-agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36
+origin: http://preproject-bucket-029.s3-website.ap-northeast-2.amazonaws.com
+referer: http://preproject-bucket-029.s3-website.ap-northeast-2.amazonaws.com/
+accept-encoding: gzip, deflate
+accept-language: ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7
+
+
+Security filter chain: [
+  DisableEncodeUrlFilter
+  WebAsyncManagerIntegrationFilter
+  SecurityContextPersistenceFilter
+  HeaderWriterFilter
+  CorsFilter
+  LogoutFilter
+  JwtAuthenticationFilter
+  JwtVerificationFilter
+  RequestCacheAwareFilter
+  SecurityContextHolderAwareRequestFilter
+  AnonymousAuthenticationFilter
+  SessionManagementFilter
+  ExceptionTranslationFilter
+  AuthorizationFilter
+]
+
+
+************************************************************
+
+
+2023-03-02 09:32:59.416 DEBUG 1409 --- [nio-8080-exec-4] o.j.s.OpenEntityManagerInViewInterceptor : Opening JPA EntityManager in OpenEntityManagerInViewInterceptor
+2023-03-02 09:32:59.417 DEBUG 1409 --- [nio-8080-exec-4] o.s.orm.jpa.JpaTransactionManager        : Found thread-bound EntityManager [SessionImpl(1192550798<open>)] for JPA transaction
+2023-03-02 09:32:59.417 DEBUG 1409 --- [nio-8080-exec-4] o.s.orm.jpa.JpaTransactionManager        : Creating new transaction with name [com.preproject.cloneStackOverflow.question.service.QuestionService.findQuestions]: PROPAGATION_REQUIRED,ISOLATION_DEFAULT,readOnly
+2023-03-02 09:32:59.426 DEBUG 1409 --- [nio-8080-exec-4] o.s.orm.jpa.JpaTransactionManager        : Exposing JPA transaction as JDBC [org.springframework.orm.jpa.vendor.HibernateJpaDialect$HibernateConnectionHandle@582e606]
+2023-03-02 09:32:59.426 DEBUG 1409 --- [nio-8080-exec-4] o.s.orm.jpa.JpaTransactionManager        : Found thread-bound EntityManager [SessionImpl(1192550798<open>)] for JPA transaction
+2023-03-02 09:32:59.426 DEBUG 1409 --- [nio-8080-exec-4] o.s.orm.jpa.JpaTransactionManager        : Participating in existing transaction
+Hibernate: 
+    select
+        question0_.question_id as question1_3_,
+        question0_.created_at as created_2_3_,
+        question0_.last_modified_at as last_mod3_3_,
+        question0_.answer_count as answer_c4_3_,
+        question0_.body as body5_3_,
+        question0_.member_id as member_i9_3_,
+        question0_.question_count as question6_3_,
+        question0_.title as title7_3_,
+        question0_.view as view8_3_ 
+    from
+        question question0_
+Hibernate: 
+    select
+        member0_.member_id as member_i1_1_0_,
+        member0_.birth as birth2_1_0_,
+        member0_.email as email3_1_0_,
+        member0_.password as password4_1_0_,
+        member0_.phone as phone5_1_0_,
+        member0_.username as username6_1_0_,
+        roles1_.member_member_id as member_m1_2_1_,
+        roles1_.roles as roles2_2_1_ 
+    from
+        member member0_ 
+    left outer join
+        member_roles roles1_ 
+            on member0_.member_id=roles1_.member_member_id 
+    where
+        member0_.member_id=?
+Hibernate: 
+    select
+        member0_.member_id as member_i1_1_0_,
+        member0_.birth as birth2_1_0_,
+        member0_.email as email3_1_0_,
+        member0_.password as password4_1_0_,
+        member0_.phone as phone5_1_0_,
+        member0_.username as username6_1_0_,
+        roles1_.member_member_id as member_m1_2_1_,
+        roles1_.roles as roles2_2_1_ 
+    from
+        member member0_ 
+    left outer join
+        member_roles roles1_ 
+            on member0_.member_id=roles1_.member_member_id 
+    where
+        member0_.member_id=?
+Hibernate: 
+    select
+        member0_.member_id as member_i1_1_0_,
+        member0_.birth as birth2_1_0_,
+        member0_.email as email3_1_0_,
+        member0_.password as password4_1_0_,
+        member0_.phone as phone5_1_0_,
+        member0_.username as username6_1_0_,
+        roles1_.member_member_id as member_m1_2_1_,
+        roles1_.roles as roles2_2_1_ 
+    from
+        member member0_ 
+    left outer join
+        member_roles roles1_ 
+            on member0_.member_id=roles1_.member_member_id 
+    where
+        member0_.member_id=?
+Hibernate: 
+    select
+        member0_.member_id as member_i1_1_0_,
+        member0_.birth as birth2_1_0_,
+        member0_.email as email3_1_0_,
+        member0_.password as password4_1_0_,
+        member0_.phone as phone5_1_0_,
+        member0_.username as username6_1_0_,
+        roles1_.member_member_id as member_m1_2_1_,
+        roles1_.roles as roles2_2_1_ 
+    from
+        member member0_ 
+    left outer join
+        member_roles roles1_ 
+            on member0_.member_id=roles1_.member_member_id 
+    where
+        member0_.member_id=?
+Hibernate: 
+    select
+        member0_.member_id as member_i1_1_0_,
+        member0_.birth as birth2_1_0_,
+        member0_.email as email3_1_0_,
+        member0_.password as password4_1_0_,
+        member0_.phone as phone5_1_0_,
+        member0_.username as username6_1_0_,
+        roles1_.member_member_id as member_m1_2_1_,
+        roles1_.roles as roles2_2_1_ 
+    from
+        member member0_ 
+    left outer join
+        member_roles roles1_ 
+            on member0_.member_id=roles1_.member_member_id 
+    where
+        member0_.member_id=?
+Hibernate: 
+    select
+        member0_.member_id as member_i1_1_0_,
+        member0_.birth as birth2_1_0_,
+        member0_.email as email3_1_0_,
+        member0_.password as password4_1_0_,
+        member0_.phone as phone5_1_0_,
+        member0_.username as username6_1_0_,
+        roles1_.member_member_id as member_m1_2_1_,
+        roles1_.roles as roles2_2_1_ 
+    from
+        member member0_ 
+    left outer join
+        member_roles roles1_ 
+            on member0_.member_id=roles1_.member_member_id 
+    where
+        member0_.member_id=?
+2023-03-02 09:32:59.449 DEBUG 1409 --- [nio-8080-exec-4] o.s.orm.jpa.JpaTransactionManager        : Initiating transaction commit
+2023-03-02 09:32:59.450 DEBUG 1409 --- [nio-8080-exec-4] o.s.orm.jpa.JpaTransactionManager        : Committing JPA transaction on EntityManager [SessionImpl(1192550798<open>)]
+2023-03-02 09:32:59.454 DEBUG 1409 --- [nio-8080-exec-4] o.s.orm.jpa.JpaTransactionManager        : Not closing pre-bound JPA EntityManager after transaction
+2023-03-02 09:32:59.458 DEBUG 1409 --- [nio-8080-exec-4] o.j.s.OpenEntityManagerInViewInterceptor : Closing JPA EntityManager in OpenEntityManagerInViewInterceptor
+2023-03-02 09:33:17.451  INFO 1409 --- [nio-8080-exec-5] Spring Security Debugger                 : 
+
+************************************************************
+
+Request received for GET '/questions/1':
+
+org.apache.catalina.connector.RequestFacade@3b516e54
+
+servletPath:/questions/1
+pathInfo:null
+headers: 
+host: ec2-52-79-41-219.ap-northeast-2.compute.amazonaws.com:8080
+connection: keep-alive
+accept: application/json, text/plain, */*
+user-agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36
+origin: http://preproject-bucket-029.s3-website.ap-northeast-2.amazonaws.com
+referer: http://preproject-bucket-029.s3-website.ap-northeast-2.amazonaws.com/
+accept-encoding: gzip, deflate
+accept-language: ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7
+
+
+Security filter chain: [
+  DisableEncodeUrlFilter
+  WebAsyncManagerIntegrationFilter
+  SecurityContextPersistenceFilter
+  HeaderWriterFilter
+  CorsFilter
+  LogoutFilter
+  JwtAuthenticationFilter
+  JwtVerificationFilter
+  RequestCacheAwareFilter
+  SecurityContextHolderAwareRequestFilter
+  AnonymousAuthenticationFilter
+  SessionManagementFilter
+  ExceptionTranslationFilter
+  AuthorizationFilter
+]
+
+
+************************************************************
+
+
+2023-03-02 09:33:17.457 DEBUG 1409 --- [nio-8080-exec-5] o.j.s.OpenEntityManagerInViewInterceptor : Opening JPA EntityManager in OpenEntityManagerInViewInterceptor
+2023-03-02 09:33:17.464  INFO 1409 --- [nio-8080-exec-6] Spring Security Debugger                 : 
+
+************************************************************
+
+Request received for GET '/answers/question/1':
+
+org.apache.catalina.connector.RequestFacade@54e3a525
+
+servletPath:/answers/question/1
+pathInfo:null
+headers: 
+host: ec2-52-79-41-219.ap-northeast-2.compute.amazonaws.com:8080
+connection: keep-alive
+accept: application/json, text/plain, */*
+user-agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36
+origin: http://preproject-bucket-029.s3-website.ap-northeast-2.amazonaws.com
+referer: http://preproject-bucket-029.s3-website.ap-northeast-2.amazonaws.com/
+accept-encoding: gzip, deflate
+accept-language: ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7
+
+
+Security filter chain: [
+  DisableEncodeUrlFilter
+  WebAsyncManagerIntegrationFilter
+  SecurityContextPersistenceFilter
+  HeaderWriterFilter
+  CorsFilter
+  LogoutFilter
+  JwtAuthenticationFilter
+  JwtVerificationFilter
+  RequestCacheAwareFilter
+  SecurityContextHolderAwareRequestFilter
+  AnonymousAuthenticationFilter
+  SessionManagementFilter
+  ExceptionTranslationFilter
+  AuthorizationFilter
+]
+
+
+************************************************************
+
+
+2023-03-02 09:33:17.466 DEBUG 1409 --- [nio-8080-exec-6] o.j.s.OpenEntityManagerInViewInterceptor : Opening JPA EntityManager in OpenEntityManagerInViewInterceptor
+2023-03-02 09:33:17.582 DEBUG 1409 --- [nio-8080-exec-5] o.s.orm.jpa.JpaTransactionManager        : Found thread-bound EntityManager [SessionImpl(972980410<open>)] for JPA transaction
+2023-03-02 09:33:17.584 DEBUG 1409 --- [nio-8080-exec-5] o.s.orm.jpa.JpaTransactionManager        : Creating new transaction with name [com.preproject.cloneStackOverflow.question.service.QuestionService.findQuestion]: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
+2023-03-02 09:33:17.589 DEBUG 1409 --- [nio-8080-exec-5] o.s.orm.jpa.JpaTransactionManager        : Exposing JPA transaction as JDBC [org.springframework.orm.jpa.vendor.HibernateJpaDialect$HibernateConnectionHandle@48c9c746]
+2023-03-02 09:33:17.589 DEBUG 1409 --- [nio-8080-exec-5] o.s.orm.jpa.JpaTransactionManager        : Found thread-bound EntityManager [SessionImpl(972980410<open>)] for JPA transaction
+2023-03-02 09:33:17.589 DEBUG 1409 --- [nio-8080-exec-5] o.s.orm.jpa.JpaTransactionManager        : Participating in existing transaction
+Hibernate: 
+    select
+        question0_.question_id as question1_3_0_,
+        question0_.created_at as created_2_3_0_,
+        question0_.last_modified_at as last_mod3_3_0_,
+        question0_.answer_count as answer_c4_3_0_,
+        question0_.body as body5_3_0_,
+        question0_.member_id as member_i9_3_0_,
+        question0_.question_count as question6_3_0_,
+        question0_.title as title7_3_0_,
+        question0_.view as view8_3_0_,
+        member1_.member_id as member_i1_1_1_,
+        member1_.birth as birth2_1_1_,
+        member1_.email as email3_1_1_,
+        member1_.password as password4_1_1_,
+        member1_.phone as phone5_1_1_,
+        member1_.username as username6_1_1_,
+        roles2_.member_member_id as member_m1_2_2_,
+        roles2_.roles as roles2_2_2_ 
+    from
+        question question0_ 
+    left outer join
+        member member1_ 
+            on question0_.member_id=member1_.member_id 
+    left outer join
+        member_roles roles2_ 
+            on member1_.member_id=roles2_.member_member_id 
+    where
+        question0_.question_id=?
+2023-03-02 09:33:17.601 DEBUG 1409 --- [nio-8080-exec-6] o.s.orm.jpa.JpaTransactionManager        : Found thread-bound EntityManager [SessionImpl(247425724<open>)] for JPA transaction
+2023-03-02 09:33:17.601 DEBUG 1409 --- [nio-8080-exec-6] o.s.orm.jpa.JpaTransactionManager        : Creating new transaction with name [com.preproject.cloneStackOverflow.question.service.QuestionService.findVerifiedQuestion]: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
+2023-03-02 09:33:17.607 DEBUG 1409 --- [nio-8080-exec-5] o.s.orm.jpa.JpaTransactionManager        : Found thread-bound EntityManager [SessionImpl(972980410<open>)] for JPA transaction
+2023-03-02 09:33:17.608 DEBUG 1409 --- [nio-8080-exec-5] o.s.orm.jpa.JpaTransactionManager        : Participating in existing transaction
+2023-03-02 09:33:17.609 DEBUG 1409 --- [nio-8080-exec-6] o.s.orm.jpa.JpaTransactionManager        : Exposing JPA transaction as JDBC [org.springframework.orm.jpa.vendor.HibernateJpaDialect$HibernateConnectionHandle@475e1ba4]
+2023-03-02 09:33:17.609 DEBUG 1409 --- [nio-8080-exec-6] o.s.orm.jpa.JpaTransactionManager        : Found thread-bound EntityManager [SessionImpl(247425724<open>)] for JPA transaction
+2023-03-02 09:33:17.610 DEBUG 1409 --- [nio-8080-exec-6] o.s.orm.jpa.JpaTransactionManager        : Participating in existing transaction
+Hibernate: 
+    select
+        question0_.question_id as question1_3_0_,
+        question0_.created_at as created_2_3_0_,
+        question0_.last_modified_at as last_mod3_3_0_,
+        question0_.answer_count as answer_c4_3_0_,
+        question0_.body as body5_3_0_,
+        question0_.member_id as member_i9_3_0_,
+        question0_.question_count as question6_3_0_,
+        question0_.title as title7_3_0_,
+        question0_.view as view8_3_0_,
+        member1_.member_id as member_i1_1_1_,
+        member1_.birth as birth2_1_1_,
+        member1_.email as email3_1_1_,
+        member1_.password as password4_1_1_,
+        member1_.phone as phone5_1_1_,
+        member1_.username as username6_1_1_,
+        roles2_.member_member_id as member_m1_2_2_,
+        roles2_.roles as roles2_2_2_ 
+    from
+        question question0_ 
+    left outer join
+        member member1_ 
+            on question0_.member_id=member1_.member_id 
+    left outer join
+        member_roles roles2_ 
+            on member1_.member_id=roles2_.member_member_id 
+    where
+        question0_.question_id=?
+2023-03-02 09:33:17.613 DEBUG 1409 --- [nio-8080-exec-6] o.s.orm.jpa.JpaTransactionManager        : Initiating transaction commit
+2023-03-02 09:33:17.615 DEBUG 1409 --- [nio-8080-exec-6] o.s.orm.jpa.JpaTransactionManager        : Committing JPA transaction on EntityManager [SessionImpl(247425724<open>)]
+Hibernate: 
+    select
+        answers0_.question_id as question6_0_0_,
+        answers0_.answer_id as answer_i1_0_0_,
+        answers0_.answer_id as answer_i1_0_1_,
+        answers0_.created_at as created_2_0_1_,
+        answers0_.last_modified_at as last_mod3_0_1_,
+        answers0_.body as body4_0_1_,
+        answers0_.member_id as member_i5_0_1_,
+        answers0_.question_id as question6_0_1_,
+        member1_.member_id as member_i1_1_2_,
+        member1_.birth as birth2_1_2_,
+        member1_.email as email3_1_2_,
+        member1_.password as password4_1_2_,
+        member1_.phone as phone5_1_2_,
+        member1_.username as username6_1_2_ 
+    from
+        answer answers0_ 
+    left outer join
+        member member1_ 
+            on answers0_.member_id=member1_.member_id 
+    where
+        answers0_.question_id=?
+2023-03-02 09:33:17.625 DEBUG 1409 --- [nio-8080-exec-5] o.s.orm.jpa.JpaTransactionManager        : Found thread-bound EntityManager [SessionImpl(972980410<open>)] for JPA transaction
+2023-03-02 09:33:17.631 DEBUG 1409 --- [nio-8080-exec-5] o.s.orm.jpa.JpaTransactionManager        : Participating in existing transaction
+2023-03-02 09:33:17.714 DEBUG 1409 --- [nio-8080-exec-5] o.s.orm.jpa.JpaTransactionManager        : Initiating transaction commit
+2023-03-02 09:33:17.716 DEBUG 1409 --- [nio-8080-exec-5] o.s.orm.jpa.JpaTransactionManager        : Committing JPA transaction on EntityManager [SessionImpl(972980410<open>)]
+2023-03-02 09:33:17.733 DEBUG 1409 --- [nio-8080-exec-6] o.s.orm.jpa.JpaTransactionManager        : Not closing pre-bound JPA EntityManager after transaction
+Hibernate: 
+    select
+        answer0_.answer_id as answer_i1_0_,
+        answer0_.created_at as created_2_0_,
+        answer0_.last_modified_at as last_mod3_0_,
+        answer0_.body as body4_0_,
+        answer0_.member_id as member_i5_0_,
+        answer0_.question_id as question6_0_ 
+    from
+        answer answer0_ 
+    where
+        answer0_.question_id=?
+2023-03-02 09:33:17.834 DEBUG 1409 --- [nio-8080-exec-6] o.j.s.OpenEntityManagerInViewInterceptor : Closing JPA EntityManager in OpenEntityManagerInViewInterceptor
+Hibernate: 
+    update
+        question 
+    set
+        last_modified_at=?,
+        answer_count=?,
+        body=?,
+        member_id=?,
+        question_count=?,
+        title=?,
+        view=? 
+    where
+        question_id=?
+2023-03-02 09:33:18.047 DEBUG 1409 --- [nio-8080-exec-5] o.s.orm.jpa.JpaTransactionManager        : Not closing pre-bound JPA EntityManager after transaction
+2023-03-02 09:33:18.053 DEBUG 1409 --- [nio-8080-exec-5] o.j.s.OpenEntityManagerInViewInterceptor : Closing JPA EntityManager in OpenEntityManagerInViewInterceptor
+2023-03-02 09:36:50.575  INFO 1409 --- [ionShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2023-03-02 09:36:50.583  INFO 1409 --- [ionShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2023-03-02 09:37:00.594  INFO 1409 --- [ionShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
