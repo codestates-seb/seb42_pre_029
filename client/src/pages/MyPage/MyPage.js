@@ -11,15 +11,49 @@ import phonenum from '../../assets/phonenum.svg';
 import mail from '../../assets/mail.svg';
 import birthday from '../../assets/birthday.svg';
 import EditModal from '../MyPage/EditModal';
+// import axios from 'axios';
 
 function MyPage() {
   const [questionsData, setQuestionsData] = useState([]);
   const [answersData, setAnswersData] = useState([]);
-  const [limit, setLimit] = useState(5);
-  const [page, setPage] = useState(1);
-  const offset = (page - 1) * limit;
-  const total = questionsData.length;
+  const [questionLimit, setQuestionLimit] = useState(5);
+  const [questionPage, setQuestionPage] = useState(1);
+  const [answerLimit, setAnswerLimit] = useState(5);
+  const [answerPage, setAnswerPage] = useState(1);
+  const questionOffset = (questionPage - 1) * questionLimit;
+  const answerOffset = (answerPage - 1) * answerLimit;
+  const questionTotal = questionsData.length;
+  const answerTotal = answersData.length;
   const [openModal, setOpenModal] = useState(false);
+  const [userData, setUserData] = useState([]);
+  // const [name, setName] = usestate('');
+  // const [phone, setPhone] = usestate('');
+  // const [email, setEmail] = usestate('');
+  // const [birth, setBirth] = usestate('');
+
+  useEffect(() => {
+    fetch(
+      'http://ec2-13-209-84-68.ap-northeast-2.compute.amazonaws.com:8080/questions',
+    )
+      .then(res => {
+        return res.json();
+      })
+      .then(data => {
+        setQuestionsData(data);
+      });
+  }, []);
+
+  useEffect(() => {
+    fetch(
+      'http://ec2-13-209-84-68.ap-northeast-2.compute.amazonaws.com:8080/questions',
+    )
+      .then(res => {
+        return res.json();
+      })
+      .then(data => {
+        setAnswersData(data);
+      });
+  }, []);
 
   useEffect(() => {
     setQuestionsData(questions.questions);
@@ -29,6 +63,49 @@ function MyPage() {
     setAnswersData(answers.answers);
   }, []);
 
+  useEffect(() => {
+    fetch(
+      'http://ec2-13-209-84-68.ap-northeast-2.compute.amazonaws.com:8080/members',
+      {
+        headers: {},
+      },
+    )
+      .then(res => {
+        return res.json();
+      })
+      .then(data => {
+        setUserData(data);
+      });
+  }, []);
+
+  // axios
+  //   .get(`/api/members/${user.memberid}`, {
+  //     headers: {
+  //       Authorization: user.authorization,
+  //     },
+  //   })
+  //   .then(response => console.log(response))
+  //   .catch(error => console.log(error));
+
+  // useEffect(() => {
+  //   axios
+  //     .get(
+  //       `http://ec2-13-209-84-68.ap-northeast-2.compute.amazonaws.com:8080/members/{}`,
+  //     )
+  //     .then(res => {
+  //       setUserData(data);
+  //       setName(data.username);
+  //       setPhone(data.phone);
+  //       setEmail(data.email);
+  //       setBirth(data.birth);
+  //     })
+  //     .catch(err => console.log(err));
+  // }, []);
+
+  // const updateAccount = (e) => {
+  //   e.preventDefault();
+  //   axios
+
   return (
     <>
       <EditModal open={openModal} onClose={() => setOpenModal(false)} />
@@ -36,14 +113,14 @@ function MyPage() {
         <UserInfoContainer>
           <img src={myImg} alt="myImg" />
           <UserInfoWrapper>
-            <h2>열글자이상넘어가면놉</h2>
+            <h2>{userData.username}</h2>
             <div>
               <img src={phonenum} alt="phone" />
-              <span>010-1234-5678</span>
+              <span>{userData.phone}</span>
               <img src={mail} alt="e-mail" />
-              <span>codestates@gmail.com</span>
+              <span>{userData.email}</span>
               <img src={birthday} alt="birthday" />
-              <span>1990.00.00</span>
+              <span>{userData.birth}</span>
             </div>
           </UserInfoWrapper>
           <Button
@@ -62,15 +139,15 @@ function MyPage() {
           <h2>Question</h2>
           <QuestionInfo>
             {questionsData
-              .slice(offset, offset + limit)
-              .map(({ questionid, title, createdAt }) => {
+              .slice(questionOffset, questionOffset + questionLimit)
+              .map(({ questionId, title, createdAt }) => {
                 return (
-                  <li key={questionid}>
+                  <li key={questionId}>
                     <div className="qcontainer">
-                      <span className="qnumber"> 0{questionid} </span>
+                      <span className="qnumber"> 0{questionId} </span>
                       <Link
                         className="qlist"
-                        to={`/board-detail/${questionid}`}
+                        to={`/board-detail/${questionId}`}
                       >
                         {title}
                       </Link>
@@ -82,23 +159,23 @@ function MyPage() {
           </QuestionInfo>
         </QuestionContainer>
         <Pagenation
-          limit={limit}
-          setLimit={setLimit}
-          page={page}
-          setPage={setPage}
-          total={total}
+          limit={questionLimit}
+          setLimit={setQuestionLimit}
+          page={questionPage}
+          setPage={setQuestionPage}
+          total={questionTotal}
         />
         <AnswerContainer>
           <h2>Answer</h2>
           <AnswerInfo>
             {answersData
-              .slice(offset, offset + limit)
-              .map(({ answerid, body, createdAt }) => {
+              .slice(answerOffset, answerOffset + answerLimit)
+              .map(({ answerId, body, createdAt }) => {
                 return (
-                  <li key={answerid}>
+                  <li key={answerId}>
                     <div className="acontainer">
-                      <span className="anumber"> 0{answerid} </span>
-                      <Link className="alist" to={`/board-detail/${answerid}`}>
+                      <span className="anumber"> 0{answerId} </span>
+                      <Link className="alist" to={`/board-detail/${answerId}`}>
                         {body}
                       </Link>
                       <span className="adate"> {`${createdAt}`}</span>
@@ -109,11 +186,11 @@ function MyPage() {
           </AnswerInfo>
         </AnswerContainer>
         <Pagenation
-          limit={limit}
-          setLimit={setLimit}
-          page={page}
-          setPage={setPage}
-          total={total}
+          limit={answerLimit}
+          setLimit={setAnswerLimit}
+          page={answerPage}
+          setPage={setAnswerPage}
+          total={answerTotal}
         />
       </MainLayout>
     </>
@@ -194,6 +271,7 @@ const QuestionInfo = styled.ul`
     padding-right: 15px;
   }
   & .qlist {
+    width: 600px;
     flex-grow: 1;
     display: block;
     overflow: hidden;
@@ -238,6 +316,7 @@ const AnswerInfo = styled.ul`
     padding-right: 15px;
   }
   & .alist {
+    width: 600px;
     flex-grow: 1;
     display: block;
     overflow: hidden;
