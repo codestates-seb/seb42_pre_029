@@ -34,9 +34,7 @@ public class AnswerController {
         Answer answer = answerService.createAnswer(mapper.answerPostToAnswer(answerPostDto)
                 ,answerPostDto.getMemberId(),answerPostDto.getQuestionId());
 
-        URI location = UriCreator.createUri(ANSWER_DEFAULT_URL, answer.getAnswerId());
-
-        return ResponseEntity.created(location).build();
+        return new ResponseEntity<>(mapper.answerToPostResponse(answer),HttpStatus.CREATED);
     }
 
     @GetMapping("/{answer-id}")
@@ -68,5 +66,11 @@ public class AnswerController {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
+    @GetMapping("/question/{question-id}")
+    public ResponseEntity getQuestionAnswers(@PathVariable("question-id") @Positive long questionId){
+        List<String> memberAnswers = answerService.findQuestionAnswers(questionId);
+
+        return new ResponseEntity<>(memberAnswers, HttpStatus.OK);
+    }
 
 }

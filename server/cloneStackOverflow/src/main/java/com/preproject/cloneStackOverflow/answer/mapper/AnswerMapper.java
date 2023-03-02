@@ -13,5 +13,5 @@ public interface AnswerMapper {
     AnswerDto.PatchResponse answerToPatchResponse(Answer answer);
     @Mapping(source = "member.username", target = "username")
     AnswerDto.GetResponse answerToGetResponse(Answer answer);
-
+    AnswerDto.PostResponse answerToPostResponse(Answer answer);
 }

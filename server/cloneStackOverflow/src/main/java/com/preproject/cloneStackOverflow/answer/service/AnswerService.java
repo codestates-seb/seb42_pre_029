@@ -75,8 +75,14 @@ public class AnswerService {
         return optionalAnswer.orElseThrow(() ->
                 new StackOverFlowException(ExceptionCode.ANSWER_NOT_FOUND));
     }
-// My-Page구현시 사용할 것
-//    public List<Answer> getAnswerListByMember(Member member) {
-//        return answerRepository.findByMember(member);
-//    }
+
+    public List<String> findQuestionAnswers(long questionId){
+        Question findQuestion = questionService.findVerifiedQuestion(questionId);
+        List<Answer> answerList = answerRepository.findByQuestion(findQuestion);
+        List<String> list = new ArrayList<>();
+        for(Answer answer : answerList){
+            list.add(answer.getBody());
+        }
+        return list;
+    }
 }
