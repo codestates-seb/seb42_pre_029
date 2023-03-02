@@ -6,6 +6,7 @@ import TextArea from '../../components/TextArea';
 import axios from 'axios';
 import EditModal from './EditModal';
 import { useParams } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 function BoardDetail() {
   const [QuestData, setQuestData] = useState({});
@@ -13,7 +14,10 @@ function BoardDetail() {
   const [openModal, setOpenModal] = useState(false);
   const [modalType, setModalType] = useState('');
   const { no } = useParams();
+  const { user } = useSelector(state => state.auth);
+  const memberid = user ? user.memberid : 1;
 
+  console.log(QuestData);
   // todo3. 데이터 불러오기
 
   let QuestionsUrl = `/api/questions`;
@@ -26,12 +30,12 @@ function BoardDetail() {
       .then(({ data }) => setQuestData(data.data))
       .catch(err => console.log(err));
     axios
-      .get(`${AnswersUrl}/${no}`)
-      .then(data =>
+      .get(`${AnswersUrl}/questions/${no}`)
+      .then(data => {
         Array.isArray(data.data)
           ? setAnsData([...data.data])
-          : setAnsData([data.data]),
-      )
+          : setAnsData([data.data]);
+      })
       .catch(err => console.log(err));
   }, []);
 
@@ -43,34 +47,14 @@ function BoardDetail() {
     if (e.target.value !== '') setInputAnswer(e.target.value);
   };
 
-  const answerSubmit = () => {
-    let data = {
-      body: inputAnswer,
-      questionId: QuestData.questionid,
-      memberId: QuestData.questionid,
-    };
-
-    if (inputAnswer.length >= 1) {
-      axios
-        .post(AnswersUrl, data)
-        .then(res => console.log(res))
-        .catch(err => console.log(err));
-    }
-    setInputAnswer('');
-  };
-
   //todo5. 질문&답변 삭제,업데이트 구현
 
   const deleteQuestion = () => {
-    axios.delete(QuestionsUrl);
-    window.location.href = '/';
+    axios.delete(`${QuestionsUrl}/${no}`);
+    // window.location.href = '/';
   };
 
-  const deleteAnswer = () => {
-    axios.delete(AnswersUrl);
-  };
-
-  let str = '';
+  let answerUpdateBody = '';
 
   //todo6. 현재 시간 기준으로 얼마나 지났는지 계산
   function timeForToday(value) {
@@ -105,8 +89,13 @@ function BoardDetail() {
         onClose={() => setOpenModal(false)}
         name={modalType}
         dataTitle={modalType === 'Question' ? QuestData.title : ''}
-        dataBody={modalType === 'Question' ? QuestData.body : str}
-        url={modalType === 'Question' ? QuestionsUrl : AnswersUrl}
+        dataBody={modalType === 'Question' ? QuestData.body : answerUpdateBody}
+        url={
+          modalType === 'Question'
+            ? `${QuestionsUrl}/${no}`
+            : `${AnswersUrl}/questions/${no}`
+        }
+        setData={modalType === 'Question' ? setQuestData : setAnsData}
       />
       <MainLayout sideBar>
         <BoardDetailPageTitle>
@@ -117,7 +106,7 @@ function BoardDetail() {
                 src={`https://placeimg.com/200/100/people/${QuestData.questionid}`}
                 alt="practice"
               />
-              <p>{QuestData.username || '김코딩'}</p>
+              <p>{QuestData.username || '무명'}</p>
             </Editor>
             <EditInfo>
               <span>{`${timeForToday(QuestData.createdAt)}`}</span>
@@ -169,10 +158,24 @@ function BoardDetail() {
             type={'positive'}
             Height={'32px'}
             width={'120px'}
-            onClick={answerSubmit}
+            onClick={() => {
+              let data = {
+                body: inputAnswer,
+                questionId: QuestData.questionid,
+                memberId: memberid,
+              };
+
+              if (inputAnswer.length >= 1) {
+                axios
+                  .post(AnswersUrl, data)
+                  .then(res => console.log(res))
+                  .catch(err => console.log(err));
+              }
+              setInputAnswer('');
+            }}
           />
-          {ansData.map(({ body, createdAt, view, username }, i) => {
-            str = body;
+          {ansData.map(({ answerid, body, createdAt, username }, i) => {
+            answerUpdateBody = body;
             return (
               <Post key={i}>
                 <AnsEditor>
@@ -185,7 +188,6 @@ function BoardDetail() {
                   </Editor>
                   <EditInfo>
                     <span>{`${timeForToday(createdAt)}`}</span>
-                    <span>{`${view} view`}</span>
                   </EditInfo>
                 </AnsEditor>
                 <Context>{body}</Context>
@@ -200,7 +202,10 @@ function BoardDetail() {
                     Edit
                   </button>
                   <div className="round"></div>
-                  <button type="text" onClick={deleteAnswer}>
+                  <button
+                    type="text"
+                    onClick={() => axios.delete(`${AnswersUrl}/${answerid}`)}
+                  >
                     Delete
                   </button>
                 </PostHanddle>

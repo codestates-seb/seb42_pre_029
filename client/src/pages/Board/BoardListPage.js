@@ -17,10 +17,10 @@ function BoardList() {
 
   useEffect(() => {
     axios
-      .get(
-        'http://ec2-54-180-126-179.ap-northeast-2.compute.amazonaws.com:8080/questions',
-      )
-      .then(({ data }) => setData(data))
+      .get('/api/questions')
+      .then(({ data }) => {
+        setData(data);
+      })
       .catch(err => console.log(err));
   }, []);
 
@@ -47,33 +47,43 @@ function BoardList() {
       <QuestionList>
         {data
           .slice(offset, offset + limit)
-          .map(({ questionId, title, body, createdAt, view, answercount }) => {
-            return (
-              <li key={questionId}>
-                <div className="container">
-                  <Link className="h4" to={`/board-detail/${questionId}`}>
-                    {title}
-                  </Link>
-                  <div className="editor">
-                    <div className="editorInfo">
-                      <img
-                        src={`https://placeimg.com/200/100/people/${questionId}`}
-                        alt="practice"
-                      />
-                      <p>Andy Obusek</p>
+          .map(
+            ({
+              questionId,
+              title,
+              body,
+              createdAt,
+              view,
+              username,
+              answerCount,
+            }) => {
+              return (
+                <li key={questionId}>
+                  <div className="container">
+                    <Link className="h4" to={`/board-detail/${questionId}`}>
+                      {title}
+                    </Link>
+                    <div className="editor">
+                      <div className="editorInfo">
+                        <img
+                          src={`https://placeimg.com/200/100/people/${questionId}`}
+                          alt="practice"
+                        />
+                        <p>{username}</p>
+                      </div>
+                      <span> {`${createdAt}`}</span>
                     </div>
-                    <span> {`${createdAt}`}</span>
                   </div>
-                </div>
-                <p>{body}</p>
-                <div className="questionInfo">
-                  <span>{`${answercount} answer`}</span>
-                  <div className="round"></div>
-                  <span>{`${view} views`}</span>
-                </div>
-              </li>
-            );
-          })}
+                  <p>{body}</p>
+                  <div className="questionInfo">
+                    <span>{`${answerCount || 0} answer`}</span>
+                    <div className="round"></div>
+                    <span>{`${view} views`}</span>
+                  </div>
+                </li>
+              );
+            },
+          )}
       </QuestionList>
 
       <Pagenation
