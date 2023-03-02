@@ -7,8 +7,6 @@ const signup = async userData => {
       console.log(response);
     })
     .catch(error => console.log(error));
-
-  console.log(userData);
 };
 
 const login = async userData => {
@@ -23,7 +21,6 @@ const login = async userData => {
       refresh: response.headers.refresh,
     };
 
-    console.log(user);
     localStorage.setItem('user', JSON.stringify(user));
 
     return user;

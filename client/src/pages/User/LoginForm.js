@@ -13,9 +13,9 @@ import Loading from '../../components/Loading';
 function LoginForm() {
   const initialValues = { username: '', password: '' };
   const [formValues, setFormValues] = useState(initialValues);
-  const [formErrors, setFormErrors] = useState({});
-  // const [isSubmit, setIsSubmit] = useState(false);
-
+  const [formErrors, setFormErrors] = useState({
+    error: 'Data cannot be empty.',
+  });
   const { username, password } = formValues;
 
   const navigate = useNavigate();
@@ -28,28 +28,22 @@ function LoginForm() {
   const onChange = e => {
     const { id, value } = e.target;
     setFormValues({ ...formValues, [id]: value });
+    setFormErrors(checkValid({ ...formValues, [id]: value }));
   };
 
   const onSubmit = e => {
     e.preventDefault();
     setFormErrors(checkValid(formValues));
-    // setIsSubmit(true);
 
     const userData = {
       username,
       password,
     };
 
-    console.log(userData);
-    dispatch(login(userData));
+    if (Object.keys(formErrors).length === 0) {
+      dispatch(login(userData));
+    }
   };
-
-  // useEffect(() => {
-  //   console.log(formErrors);
-  //   if (Object.keys(formErrors).length === 0 && isSubmit) {
-  //     console.log(formValues);
-  //   }
-  // }, [formErrors]);
 
   useEffect(() => {
     if (isError) {
