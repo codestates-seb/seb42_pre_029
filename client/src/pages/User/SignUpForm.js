@@ -11,9 +11,9 @@ import Loading from '../../components/Loading';
 function SignUpForm() {
   const initialValues = { username: '', email: '', password: '' };
   const [formValues, setFormValues] = useState(initialValues);
-  const [formErrors, setFormErrors] = useState({});
-  // const [isSubmit, setIsSubmit] = useState(false);
-
+  const [formErrors, setFormErrors] = useState({
+    error: 'Data cannot be empty.',
+  });
   const { username, email, password } = formValues;
 
   const navigate = useNavigate();
@@ -26,12 +26,12 @@ function SignUpForm() {
   const onChange = e => {
     const { id, value } = e.target;
     setFormValues({ ...formValues, [id]: value });
+    setFormErrors(checkValid({ ...formValues, [id]: value }));
   };
 
   const onSubmit = e => {
     e.preventDefault();
     setFormErrors(checkValid(formValues));
-    // setIsSubmit(true);
 
     const userData = {
       email,
@@ -39,16 +39,10 @@ function SignUpForm() {
       password,
     };
 
-    console.log(userData);
-    dispatch(signup(userData));
+    if (Object.keys(formErrors).length === 0) {
+      dispatch(signup(userData));
+    }
   };
-
-  // useEffect(() => {
-  //   console.log(formErrors);
-  //   if (Object.keys(formErrors).length === 0 && isSubmit) {
-  //     console.log(formValues);
-  //   }
-  // }, [formErrors]);
 
   useEffect(() => {
     if (isError) {
