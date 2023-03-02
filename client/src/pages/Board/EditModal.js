@@ -78,6 +78,7 @@ const EditModal = ({ open, onClose, name, dataTitle, dataBody, url }) => {
             />
           </TextField>
           <Button
+            type="submt"
             text={`Submit ${name}`}
             textColor={'#fff'}
             bgColor={'var(--main-002)'}
@@ -120,7 +121,7 @@ const Layout = styled.main`
   }
 `;
 
-const Container = styled.section`
+const Container = styled.form`
   padding: 0 40px;
   > h2 {
     font-size: var(--font-size-h2);
@@ -131,7 +132,7 @@ const Container = styled.section`
   }
 `;
 
-const TextField = styled.article`
+const TextField = styled.div`
   > span {
     font-size: var(--font-size-h5);
     font-weight: 700;

@@ -5,8 +5,9 @@ import styled from 'styled-components';
 import TextArea from '../../components/TextArea';
 import axios from 'axios';
 import EditModal from './EditModal';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import { timeForToday } from './util/timeForToday';
 
 function BoardDetail() {
   const [QuestData, setQuestData] = useState({});
@@ -16,8 +17,8 @@ function BoardDetail() {
   const { no } = useParams();
   const { user } = useSelector(state => state.auth);
   const memberid = user ? user.memberid : 1;
+  const navigate = useNavigate();
 
-  console.log(QuestData);
   // todo3. 데이터 불러오기
 
   let QuestionsUrl = `/api/questions`;
@@ -30,8 +31,9 @@ function BoardDetail() {
       .then(({ data }) => setQuestData(data.data))
       .catch(err => console.log(err));
     axios
-      .get(`${AnswersUrl}/questions/${no}`)
+      .get(`${AnswersUrl}/question/${no}`)
       .then(data => {
+        console.log(data);
         Array.isArray(data.data)
           ? setAnsData([...data.data])
           : setAnsData([data.data]);
@@ -43,44 +45,14 @@ function BoardDetail() {
 
   const [inputAnswer, setInputAnswer] = useState('');
 
-  const answerHandller = e => {
-    if (e.target.value !== '') setInputAnswer(e.target.value);
-  };
-
   //todo5. 질문&답변 삭제,업데이트 구현
 
   const deleteQuestion = () => {
     axios.delete(`${QuestionsUrl}/${no}`);
-    // window.location.href = '/';
+    navigate('/');
   };
 
   let answerUpdateBody = '';
-
-  //todo6. 현재 시간 기준으로 얼마나 지났는지 계산
-  function timeForToday(value) {
-    const today = new Date();
-    const timeValue = new Date(value);
-
-    const betweenTime = Math.floor(
-      (today.getTime() - timeValue.getTime()) / 1000 / 60,
-    );
-    if (betweenTime < 1) return '방금전';
-    if (betweenTime < 60) {
-      return `${betweenTime} minute ago`;
-    }
-
-    const betweenTimeHour = Math.floor(betweenTime / 60);
-    if (betweenTimeHour < 24) {
-      return `${betweenTimeHour} hour ago`;
-    }
-
-    const betweenTimeDay = Math.floor(betweenTime / 60 / 24);
-    if (betweenTimeDay < 365) {
-      return `${betweenTimeDay} day ago`;
-    }
-
-    return `${Math.floor(betweenTimeDay / 365)} year ago`;
-  }
 
   return (
     <>
@@ -106,7 +78,7 @@ function BoardDetail() {
                 src={`https://placeimg.com/200/100/people/${QuestData.questionid}`}
                 alt="practice"
               />
-              <p>{QuestData.username || '무명'}</p>
+              <p>{QuestData.username || '질문자'}</p>
             </Editor>
             <EditInfo>
               <span>{`${timeForToday(QuestData.createdAt)}`}</span>
@@ -129,7 +101,7 @@ function BoardDetail() {
               Edit
             </button>
             <div className="round"></div>
-            <button type="text" onClick={deleteQuestion}>
+            <button type="submit" onClick={deleteQuestion}>
               Delete
             </button>
           </PostHanddle>
@@ -147,7 +119,9 @@ function BoardDetail() {
             fontSize={'var(--font-size-md)'}
             fontColor={'var(--black-002)'}
             placeholder={'please input your answer'}
-            onChange={e => answerHandller(e)}
+            onChange={e => {
+              if (e.target.value !== '') setInputAnswer(e.target.value);
+            }}
           ></TextArea>
           <Button
             bgColor={'var(--btn-default)'}
@@ -184,13 +158,17 @@ function BoardDetail() {
                       src={`https://placeimg.com/200/100/people/${1}`}
                       alt="practice"
                     />
-                    <p>{username || 'Andy Obusek'}</p>
+                    <p>{username ? username : '답변자'}</p>
                   </Editor>
                   <EditInfo>
-                    <span>{`${timeForToday(createdAt)}`}</span>
+                    <span>
+                      {createdAt
+                        ? `${timeForToday(createdAt)}`
+                        : `${timeForToday(new Date())}`}
+                    </span>
                   </EditInfo>
                 </AnsEditor>
-                <Context>{body}</Context>
+                <Context>{body ? body : 'done'}</Context>
                 <PostHanddle>
                   <button
                     type="text"
@@ -203,7 +181,7 @@ function BoardDetail() {
                   </button>
                   <div className="round"></div>
                   <button
-                    type="text"
+                    type="submit"
                     onClick={() => axios.delete(`${AnswersUrl}/${answerid}`)}
                   >
                     Delete
@@ -303,7 +281,7 @@ const AnsEditor = styled.div`
   border-bottom: 1px solid var(--line-002);
 `;
 
-const PostHanddle = styled.article`
+const PostHanddle = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: flex-start;

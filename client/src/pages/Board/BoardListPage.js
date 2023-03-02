@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import { useState, useEffect } from 'react';
 import Pagenation from '../../components/Pagenation';
 import axios from 'axios';
+import { timeForToday } from './util/timeForToday';
 
 function BoardList() {
   const [data, setData] = useState([]);
@@ -71,7 +72,7 @@ function BoardList() {
                         />
                         <p>{username}</p>
                       </div>
-                      <span> {`${createdAt}`}</span>
+                      <span> {`${timeForToday(createdAt)}`}</span>
                     </div>
                   </div>
                   <p>{body}</p>
