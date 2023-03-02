@@ -45,9 +45,9 @@ public class AnswerController {
 
     @GetMapping("/member/{member-id}")
     public ResponseEntity getMemberAnswers(@PathVariable("member-id") @Positive long memberId){
-        List<String> memberAnswers = answerService.findMemberAnswers(memberId);
+        List<Answer> memberAnswers = answerService.findMemberAnswers(memberId);
 
-        return new ResponseEntity<>(memberAnswers, HttpStatus.OK);
+        return new ResponseEntity<>(mapper.answersToGetResponseAll(memberAnswers), HttpStatus.OK);
     }
 
     @PatchMapping("/{answer-id}")
@@ -68,9 +68,9 @@ public class AnswerController {
 
     @GetMapping("/question/{question-id}")
     public ResponseEntity getQuestionAnswers(@PathVariable("question-id") @Positive long questionId){
-        List<String> memberAnswers = answerService.findQuestionAnswers(questionId);
+        List<Answer> memberAnswers = answerService.findQuestionAnswers(questionId);
 
-        return new ResponseEntity<>(memberAnswers, HttpStatus.OK);
+        return new ResponseEntity<>(mapper.answersToGetResponseAll(memberAnswers), HttpStatus.OK);
     }
 
 }

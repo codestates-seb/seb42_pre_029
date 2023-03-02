@@ -47,6 +47,7 @@ public class AnswerDto {
     @Getter
     @AllArgsConstructor
     public static class GetResponse {
+        private long answerId;
         @NotNull
         String body;
         private String username;

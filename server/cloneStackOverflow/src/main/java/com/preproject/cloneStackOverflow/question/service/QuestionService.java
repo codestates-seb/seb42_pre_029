@@ -54,7 +54,7 @@ public class QuestionService {
 
     public Question findQuestion(long questionId){
         Question question = questionRepository.findById(questionId).orElseThrow(() -> new StackOverFlowException(ExceptionCode.QUESTION_NOT_FOUND));
-        question.userInfo();
+        //question.userInfo();
         question.setView(question.getView()+1);
         question.setAnswerCount(answerCount(questionId));
         return questionRepository.save(question);
