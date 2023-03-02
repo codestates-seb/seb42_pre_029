@@ -14,7 +14,7 @@ function BoardList() {
   const [page, setPage] = useState(1);
   const offset = (page - 1) * limit;
   const total = data.length;
-  const questionsUrl = '/api/questions';
+  const questionsUrl = `${process.env.REACT_APP_API_URL}/questions`;
   const { user } = useSelector(state => state.auth);
   //todo.1 questions 데이터 불러오기
 
@@ -22,7 +22,6 @@ function BoardList() {
     axios
       .get(questionsUrl)
       .then(({ data }) => {
-        console.log(data);
         setData(data);
       })
       .catch(err => console.log(err));

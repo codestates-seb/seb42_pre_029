@@ -17,7 +17,7 @@ function Header() {
 
   if (user) {
     axios
-      .get(`/api/members/${user.memberid}`, {
+      .get(`${process.env.REACT_APP_API_URL}/members/${user.memberid}`, {
         headers: {
           Authorization: user.authorization,
         },

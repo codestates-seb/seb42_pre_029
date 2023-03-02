@@ -35,7 +35,7 @@ function BoardWrite() {
         body: bodyValue,
       };
       axios
-        .post('api/questions', data, {
+        .post(`${process.env.REACT_APP_API_URL}/questions`, data, {
           header: {
             Authorization: ACCESS_TOKEN,
           },

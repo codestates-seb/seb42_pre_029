@@ -22,9 +22,9 @@ function BoardDetail() {
   const navigate = useNavigate();
   // todo3. 데이터 불러오기
 
-  let QuestionsUrl = `/api/questions`;
+  let QuestionsUrl = `${process.env.REACT_APP_API_URL}/questions`;
 
-  let AnswersUrl = `/api/answers`;
+  let AnswersUrl = `${process.env.REACT_APP_API_URL}/answers`;
 
   useEffect(() => {
     axios
