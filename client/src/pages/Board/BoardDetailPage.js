@@ -5,19 +5,21 @@ import styled from 'styled-components';
 import TextArea from '../../components/TextArea';
 import axios from 'axios';
 import EditModal from './EditModal';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import { timeForToday } from './util/timeForToday';
 
 function BoardDetail() {
   const [QuestData, setQuestData] = useState({});
   const [ansData, setAnsData] = useState([]);
   const [openModal, setOpenModal] = useState(false);
   const [modalType, setModalType] = useState('');
+  const [answerid, setAnswerid] = useState(0);
+  const [answerbody, setAnswerbody] = useState('');
   const { no } = useParams();
   const { user } = useSelector(state => state.auth);
   const memberid = user ? user.memberid : 1;
-
-  console.log(QuestData);
+  const navigate = useNavigate();
   // todo3. 데이터 불러오기
 
   let QuestionsUrl = `/api/questions`;
@@ -30,7 +32,7 @@ function BoardDetail() {
       .then(({ data }) => setQuestData(data.data))
       .catch(err => console.log(err));
     axios
-      .get(`${AnswersUrl}/questions/${no}`)
+      .get(`${AnswersUrl}/question/${no}`)
       .then(data => {
         Array.isArray(data.data)
           ? setAnsData([...data.data])
@@ -43,45 +45,12 @@ function BoardDetail() {
 
   const [inputAnswer, setInputAnswer] = useState('');
 
-  const answerHandller = e => {
-    if (e.target.value !== '') setInputAnswer(e.target.value);
-  };
-
   //todo5. 질문&답변 삭제,업데이트 구현
 
   const deleteQuestion = () => {
     axios.delete(`${QuestionsUrl}/${no}`);
-    // window.location.href = '/';
+    navigate('/');
   };
-
-  let answerUpdateBody = '';
-
-  //todo6. 현재 시간 기준으로 얼마나 지났는지 계산
-  function timeForToday(value) {
-    const today = new Date();
-    const timeValue = new Date(value);
-
-    const betweenTime = Math.floor(
-      (today.getTime() - timeValue.getTime()) / 1000 / 60,
-    );
-    if (betweenTime < 1) return '방금전';
-    if (betweenTime < 60) {
-      return `${betweenTime} minute ago`;
-    }
-
-    const betweenTimeHour = Math.floor(betweenTime / 60);
-    if (betweenTimeHour < 24) {
-      return `${betweenTimeHour} hour ago`;
-    }
-
-    const betweenTimeDay = Math.floor(betweenTime / 60 / 24);
-    if (betweenTimeDay < 365) {
-      return `${betweenTimeDay} day ago`;
-    }
-
-    return `${Math.floor(betweenTimeDay / 365)} year ago`;
-  }
-
   return (
     <>
       <EditModal
@@ -89,11 +58,11 @@ function BoardDetail() {
         onClose={() => setOpenModal(false)}
         name={modalType}
         dataTitle={modalType === 'Question' ? QuestData.title : ''}
-        dataBody={modalType === 'Question' ? QuestData.body : answerUpdateBody}
+        dataBody={modalType === 'Question' ? QuestData.body : answerbody}
         url={
           modalType === 'Question'
             ? `${QuestionsUrl}/${no}`
-            : `${AnswersUrl}/questions/${no}`
+            : `${AnswersUrl}/${answerid}`
         }
         setData={modalType === 'Question' ? setQuestData : setAnsData}
       />
@@ -106,7 +75,7 @@ function BoardDetail() {
                 src={`https://placeimg.com/200/100/people/${QuestData.questionid}`}
                 alt="practice"
               />
-              <p>{QuestData.username || '무명'}</p>
+              <p>{QuestData.username || '질문자'}</p>
             </Editor>
             <EditInfo>
               <span>{`${timeForToday(QuestData.createdAt)}`}</span>
@@ -129,7 +98,7 @@ function BoardDetail() {
               Edit
             </button>
             <div className="round"></div>
-            <button type="text" onClick={deleteQuestion}>
+            <button type="submit" onClick={deleteQuestion}>
               Delete
             </button>
           </PostHanddle>
@@ -147,7 +116,9 @@ function BoardDetail() {
             fontSize={'var(--font-size-md)'}
             fontColor={'var(--black-002)'}
             placeholder={'please input your answer'}
-            onChange={e => answerHandller(e)}
+            onChange={e => {
+              if (e.target.value !== '') setInputAnswer(e.target.value);
+            }}
           ></TextArea>
           <Button
             bgColor={'var(--btn-default)'}
@@ -161,7 +132,7 @@ function BoardDetail() {
             onClick={() => {
               let data = {
                 body: inputAnswer,
-                questionId: QuestData.questionid,
+                questionId: QuestData.questionId,
                 memberId: memberid,
               };
 
@@ -174,8 +145,7 @@ function BoardDetail() {
               setInputAnswer('');
             }}
           />
-          {ansData.map(({ answerid, body, createdAt, username }, i) => {
-            answerUpdateBody = body;
+          {ansData.map(({ answerId, body, createdAt, username }, i) => {
             return (
               <Post key={i}>
                 <AnsEditor>
@@ -184,27 +154,37 @@ function BoardDetail() {
                       src={`https://placeimg.com/200/100/people/${1}`}
                       alt="practice"
                     />
-                    <p>{username || 'Andy Obusek'}</p>
+                    <p>{username ? username : '답변자'}</p>
                   </Editor>
                   <EditInfo>
-                    <span>{`${timeForToday(createdAt)}`}</span>
+                    <span>
+                      {createdAt
+                        ? `${timeForToday(createdAt)}`
+                        : `${timeForToday(new Date())}`}
+                    </span>
                   </EditInfo>
                 </AnsEditor>
-                <Context>{body}</Context>
+                <Context>{body ? body : 'done'}</Context>
                 <PostHanddle>
                   <button
-                    type="text"
+                    type="button"
                     onClick={() => {
                       setOpenModal(true);
                       setModalType('Answer');
+                      setAnswerid(answerId);
+                      setAnswerbody(body);
                     }}
                   >
                     Edit
                   </button>
                   <div className="round"></div>
                   <button
-                    type="text"
-                    onClick={() => axios.delete(`${AnswersUrl}/${answerid}`)}
+                    type="submit"
+                    onClick={() => {
+                      axios
+                        .delete(`${AnswersUrl}/${answerId}`)
+                        .then(res => console.log(res));
+                    }}
                   >
                     Delete
                   </button>
@@ -335,7 +315,7 @@ const PostHanddle = styled.article`
   }
 `;
 
-const AnswerBody = styled.section`
+const AnswerBody = styled.form`
   display: flex;
   flex-direction: column;
   margin-top: 30px;

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-// import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import MainLayout from '../../components/MainLayout';
 import Button from '../../components/Button';
@@ -8,7 +8,7 @@ import TextArea from '../../components/TextArea';
 import axios from 'axios';
 
 function BoardWrite() {
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
   const [titleValue, setTitleValue] = useState('');
 
   const titleHandller = e => {
@@ -42,7 +42,7 @@ function BoardWrite() {
         })
         .then(res => console.log(res))
         .catch(error => console.log(error));
-      // navigate('/');
+      navigate('/');
     }
   };
 
@@ -115,6 +115,7 @@ function BoardWrite() {
             onChange={bodyHandller}
           />
           <Button
+            type={'submit'}
             text={'Submit'}
             textColor={'white'}
             width={'80px'}
@@ -186,7 +187,7 @@ const BoardWriteBody = styled.main`
   width: 845px;
 `;
 
-const TextField = styled.article`
+const TextField = styled.form`
   display: flex;
   flex-direction: column;
   width: 100%;

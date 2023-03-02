@@ -5,6 +5,8 @@ import styled from 'styled-components';
 import { useState, useEffect } from 'react';
 import Pagenation from '../../components/Pagenation';
 import axios from 'axios';
+import { timeForToday } from './util/timeForToday';
+import { useSelector } from 'react-redux';
 
 function BoardList() {
   const [data, setData] = useState([]);
@@ -12,13 +14,15 @@ function BoardList() {
   const [page, setPage] = useState(1);
   const offset = (page - 1) * limit;
   const total = data.length;
-
+  const questionsUrl = '/api/questions';
+  const { user } = useSelector(state => state.auth);
   //todo.1 questions 데이터 불러오기
 
   useEffect(() => {
     axios
-      .get('/api/questions')
+      .get(questionsUrl)
       .then(({ data }) => {
+        console.log(data);
         setData(data);
       })
       .catch(err => console.log(err));
@@ -31,7 +35,7 @@ function BoardList() {
           <h1>All Questions</h1>
           <p>{`${total} Questions`}</p>
         </div>
-        <Link to={`/board-write`}>
+        <Link to={user ? `/board-write` : '/'}>
           <Button
             bgColor={'var(--main-002)'}
             textColor={'#fff'}
@@ -71,7 +75,7 @@ function BoardList() {
                         />
                         <p>{username}</p>
                       </div>
-                      <span> {`${createdAt}`}</span>
+                      <span> {`${timeForToday(createdAt)}`}</span>
                     </div>
                   </div>
                   <p>{body}</p>
