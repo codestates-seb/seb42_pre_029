@@ -1,4 +1,6 @@
 import { useState } from 'react';
+// import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import MainLayout from '../../components/MainLayout';
 import Button from '../../components/Button';
 import styled from 'styled-components';
@@ -6,27 +8,42 @@ import TextArea from '../../components/TextArea';
 import axios from 'axios';
 
 function BoardWrite() {
+  // const navigate = useNavigate();
   const [titleValue, setTitleValue] = useState('');
-  const [bodyValue, setBodyValue] = useState('');
+
   const titleHandller = e => {
     setTitleValue(e.target.value);
   };
+
+  const [bodyValue, setBodyValue] = useState('');
+
   const bodyHandller = e => {
     setBodyValue(e.target.value);
   };
+
+  const { user } = useSelector(state => state.auth);
+
+  const ACCESS_TOKEN = user.authorization;
+
+  const memberid = user ? user.memberid : 1;
+
   const submit = () => {
-    let data = {
-      memberId: 1,
-      title: titleValue,
-      body: bodyValue,
-    };
-    axios
-      .post(
-        'http://ec2-3-35-235-136.ap-northeast-2.compute.amazonaws.com:8080/questions',
-        data,
-      )
-      .then(res => console.log(res));
-    window.location.href = '/';
+    if (titleValue !== '' && setTitleValue !== '') {
+      let data = {
+        memberId: memberid,
+        title: titleValue,
+        body: bodyValue,
+      };
+      axios
+        .post('api/questions', data, {
+          header: {
+            Authorization: ACCESS_TOKEN,
+          },
+        })
+        .then(res => console.log(res))
+        .catch(error => console.log(error));
+      // navigate('/');
+    }
   };
 
   return (

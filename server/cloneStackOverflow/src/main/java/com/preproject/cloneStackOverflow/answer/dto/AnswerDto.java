@@ -49,7 +49,7 @@ public class AnswerDto {
     public static class GetResponse {
         @NotNull
         String body;
-        private Long memberId;
+        private String username;
         private LocalDateTime createdAt;
         private LocalDateTime modifiedAt;
 

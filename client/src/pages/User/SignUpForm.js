@@ -1,20 +1,19 @@
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { reset } from '../../features/auth/authSlice';
+import { signup, reset } from '../../features/auth/authSlice';
 import styled from 'styled-components';
 import Card from '../../components/Card';
 import InputBox from '../../components/InputBox';
 import Button from '../../components/Button';
 import Loading from '../../components/Loading';
-import axios from 'axios';
 
 function SignUpForm() {
   const initialValues = { username: '', email: '', password: '' };
   const [formValues, setFormValues] = useState(initialValues);
-  const [formErrors, setFormErrors] = useState({});
-  const [isSubmit, setIsSubmit] = useState(false);
-
+  const [formErrors, setFormErrors] = useState({
+    error: 'Data cannot be empty.',
+  });
   const { username, email, password } = formValues;
 
   const navigate = useNavigate();
@@ -27,12 +26,12 @@ function SignUpForm() {
   const onChange = e => {
     const { id, value } = e.target;
     setFormValues({ ...formValues, [id]: value });
+    setFormErrors(checkValid({ ...formValues, [id]: value }));
   };
 
   const onSubmit = e => {
     e.preventDefault();
     setFormErrors(checkValid(formValues));
-    setIsSubmit(true);
 
     const userData = {
       email,
@@ -40,24 +39,10 @@ function SignUpForm() {
       password,
     };
 
-    console.log(userData);
-  };
-
-  useEffect(() => {
-    axios
-      .get(
-        'http://ec2-3-35-235-136.ap-northeast-2.compute.amazonaws.com:8080/members/1',
-      )
-      .then(data => console.log(data))
-      .catch(error => console.log(error));
-  });
-
-  useEffect(() => {
-    console.log(formErrors);
-    if (Object.keys(formErrors).length === 0 && isSubmit) {
-      console.log(formValues);
+    if (Object.keys(formErrors).length === 0) {
+      dispatch(signup(userData));
     }
-  }, [formErrors]);
+  };
 
   useEffect(() => {
     if (isError) {

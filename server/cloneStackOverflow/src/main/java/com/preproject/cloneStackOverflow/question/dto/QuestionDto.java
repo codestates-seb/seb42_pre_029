@@ -14,6 +14,7 @@ public class QuestionDto {
     @AllArgsConstructor
     public static class Post {
         @Positive
+        @Setter
         private long memberId;
         @NotNull
         private String title;
@@ -38,7 +39,7 @@ public class QuestionDto {
     @AllArgsConstructor
     public static class Response {
         private long questionId;
-        private long memberId;
+        private String username;
         private String title;
         private String body;
         private int view;
