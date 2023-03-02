@@ -1,29 +1,36 @@
 import { Link, useLocation } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 import SideBarItem from './SideBarItem';
 
 function SideBar() {
   const pathName = useLocation().pathname;
-
-  const menus = [
-    { name: 'Questions', path: '/' },
-    // { name: 'Tags', path: '/' },
-    { name: 'Users', path: '/login' },
-  ];
+  const { user } = useSelector(state => state.auth);
 
   return (
     <SideBarContainer>
       <MenuContainer>
-        {menus.map((menu, index) => {
-          return (
-            <Link to={menu.path} key={index}>
-              <SideBarItem
-                menu={menu.name}
-                isActive={pathName === menu.path ? true : false}
-              />
-            </Link>
-          );
-        })}
+        <Link to={'/'}>
+          <SideBarItem
+            menu={'Questions'}
+            isActive={pathName === '/' ? true : false}
+          />
+        </Link>
+        {user ? (
+          <Link to={'/my-page'}>
+            <SideBarItem
+              menu={'Users'}
+              isActive={pathName === '/my-page' ? true : false}
+            />
+          </Link>
+        ) : (
+          <Link to={'/login'}>
+            <SideBarItem
+              menu={'Users'}
+              isActive={pathName === '/login' ? true : false}
+            />
+          </Link>
+        )}
       </MenuContainer>
     </SideBarContainer>
   );
