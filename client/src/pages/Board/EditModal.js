@@ -8,9 +8,11 @@ const EditModal = ({ open, onClose, name, dataTitle, dataBody, url }) => {
   const [title, setTitle] = useState(dataTitle);
   const [body, setBody] = useState(dataBody);
   if (!open) return null;
+
   const titleHandller = (e, func) => {
     func(e.target.value);
   };
+  console.log(dataBody);
 
   const submit = () => {
     let data = {

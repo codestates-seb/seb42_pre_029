@@ -14,11 +14,12 @@ function BoardDetail() {
   const [ansData, setAnsData] = useState([]);
   const [openModal, setOpenModal] = useState(false);
   const [modalType, setModalType] = useState('');
+  const [answerid, setAnswerid] = useState(0);
+  const [answerbody, setAnswerbody] = useState('');
   const { no } = useParams();
   const { user } = useSelector(state => state.auth);
   const memberid = user ? user.memberid : 1;
   const navigate = useNavigate();
-
   // todo3. 데이터 불러오기
 
   let QuestionsUrl = `/api/questions`;
@@ -33,7 +34,6 @@ function BoardDetail() {
     axios
       .get(`${AnswersUrl}/question/${no}`)
       .then(data => {
-        console.log(data);
         Array.isArray(data.data)
           ? setAnsData([...data.data])
           : setAnsData([data.data]);
@@ -51,9 +51,6 @@ function BoardDetail() {
     axios.delete(`${QuestionsUrl}/${no}`);
     navigate('/');
   };
-
-  let answerUpdateBody = '';
-
   return (
     <>
       <EditModal
@@ -61,11 +58,11 @@ function BoardDetail() {
         onClose={() => setOpenModal(false)}
         name={modalType}
         dataTitle={modalType === 'Question' ? QuestData.title : ''}
-        dataBody={modalType === 'Question' ? QuestData.body : answerUpdateBody}
+        dataBody={modalType === 'Question' ? QuestData.body : answerbody}
         url={
           modalType === 'Question'
             ? `${QuestionsUrl}/${no}`
-            : `${AnswersUrl}/questions/${no}`
+            : `${AnswersUrl}/${answerid}`
         }
         setData={modalType === 'Question' ? setQuestData : setAnsData}
       />
@@ -135,7 +132,7 @@ function BoardDetail() {
             onClick={() => {
               let data = {
                 body: inputAnswer,
-                questionId: QuestData.questionid,
+                questionId: QuestData.questionId,
                 memberId: memberid,
               };
 
@@ -148,8 +145,7 @@ function BoardDetail() {
               setInputAnswer('');
             }}
           />
-          {ansData.map(({ answerid, body, createdAt, username }, i) => {
-            answerUpdateBody = body;
+          {ansData.map(({ answerId, body, createdAt, username }, i) => {
             return (
               <Post key={i}>
                 <AnsEditor>
@@ -171,10 +167,12 @@ function BoardDetail() {
                 <Context>{body ? body : 'done'}</Context>
                 <PostHanddle>
                   <button
-                    type="text"
+                    type="button"
                     onClick={() => {
                       setOpenModal(true);
                       setModalType('Answer');
+                      setAnswerid(answerId);
+                      setAnswerbody(body);
                     }}
                   >
                     Edit
@@ -182,7 +180,11 @@ function BoardDetail() {
                   <div className="round"></div>
                   <button
                     type="submit"
-                    onClick={() => axios.delete(`${AnswersUrl}/${answerid}`)}
+                    onClick={() => {
+                      axios
+                        .delete(`${AnswersUrl}/${answerId}`)
+                        .then(res => console.log(res));
+                    }}
                   >
                     Delete
                   </button>
@@ -281,7 +283,7 @@ const AnsEditor = styled.div`
   border-bottom: 1px solid var(--line-002);
 `;
 
-const PostHanddle = styled.div`
+const PostHanddle = styled.article`
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
@@ -313,7 +315,7 @@ const PostHanddle = styled.div`
   }
 `;
 
-const AnswerBody = styled.section`
+const AnswerBody = styled.form`
   display: flex;
   flex-direction: column;
   margin-top: 30px;
