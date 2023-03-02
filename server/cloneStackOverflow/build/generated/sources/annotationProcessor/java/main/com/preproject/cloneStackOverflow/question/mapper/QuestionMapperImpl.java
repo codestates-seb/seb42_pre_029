@@ -1,5 +1,6 @@
 package com.preproject.cloneStackOverflow.question.mapper;
 
+import com.preproject.cloneStackOverflow.member.entity.Member;
 import com.preproject.cloneStackOverflow.question.dto.QuestionDto;
 import com.preproject.cloneStackOverflow.question.entity.Question;
 import java.time.LocalDateTime;
@@ -10,8 +11,8 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2023-02-27T07:26:46+0000",
-    comments = "version: 1.5.3.Final, compiler: IncrementalProcessingEnvironment from gradle-language-java-7.6.jar, environment: Java 11.0.17 (Ubuntu)"
+    date = "2023-03-02T08:30:36+0000",
+    comments = "version: 1.5.3.Final, compiler: IncrementalProcessingEnvironment from gradle-language-java-7.6.jar, environment: Java 11.0.18 (Ubuntu)"
 )
 @Component
 public class QuestionMapperImpl implements QuestionMapper {
@@ -51,6 +52,7 @@ public class QuestionMapperImpl implements QuestionMapper {
             return null;
         }
 
+        String username = null;
         long questionId = 0L;
         String title = null;
         String body = null;
@@ -59,6 +61,7 @@ public class QuestionMapperImpl implements QuestionMapper {
         LocalDateTime modifiedAt = null;
         int answerCount = 0;
 
+        username = questionMemberUsername( question );
         questionId = question.getQuestionId();
         title = question.getTitle();
         body = question.getBody();
@@ -67,7 +70,7 @@ public class QuestionMapperImpl implements QuestionMapper {
         modifiedAt = question.getModifiedAt();
         answerCount = (int) question.getAnswerCount();
 
-        QuestionDto.Response response = new QuestionDto.Response( questionId, title, body, view, createdAt, modifiedAt, answerCount );
+        QuestionDto.Response response = new QuestionDto.Response( questionId, username, title, body, view, createdAt, modifiedAt, answerCount );
 
         return response;
     }
@@ -84,5 +87,20 @@ public class QuestionMapperImpl implements QuestionMapper {
         }
 
         return list;
+    }
+
+    private String questionMemberUsername(Question question) {
+        if ( question == null ) {
+            return null;
+        }
+        Member member = question.getMember();
+        if ( member == null ) {
+            return null;
+        }
+        String username = member.getUsername();
+        if ( username == null ) {
+            return null;
+        }
+        return username;
     }
 }
