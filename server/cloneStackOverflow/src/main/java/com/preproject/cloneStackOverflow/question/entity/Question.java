@@ -56,7 +56,11 @@ public class Question extends Auditable {
             this.member.getQuestions().add(this);
         }
     }
-
+    public void userInfo(){
+        Member member = new Member();
+        Long memberId = member.getMemberId();
+        String username = member.getUsername();
+    }
     public Question questionCount(long questionCount){
         this.questionCount = questionCount;
         return this;

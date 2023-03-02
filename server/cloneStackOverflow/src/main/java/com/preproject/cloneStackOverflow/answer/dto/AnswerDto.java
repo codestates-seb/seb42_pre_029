@@ -55,5 +55,13 @@ public class AnswerDto {
 
     }
 
+    @Getter
+    @AllArgsConstructor
+    public static class PostResponse {
+        private long answerId;
+        private LocalDateTime createdAt;
+        private LocalDateTime modifiedAt;
+    }
+
 
 }
