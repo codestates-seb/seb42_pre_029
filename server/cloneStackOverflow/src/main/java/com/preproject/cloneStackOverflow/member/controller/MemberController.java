@@ -27,7 +27,6 @@ import java.util.Map;
 
 @RequestMapping("/members")
 @RestController
-@CrossOrigin(origins = "http://preproject-bucket-029.s3-website.ap-northeast-2.amazonaws.com")
 @Validated
 @Slf4j
 public class MemberController {

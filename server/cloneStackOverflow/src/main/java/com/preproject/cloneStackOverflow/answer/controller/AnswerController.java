@@ -16,7 +16,6 @@ import java.net.URI;
 import java.util.List;
 
 @RestController
-@CrossOrigin(origins = "http://preproject-bucket-029.s3-website.ap-northeast-2.amazonaws.com")
 @Validated
 @RequestMapping("/answers")
 public class AnswerController {
