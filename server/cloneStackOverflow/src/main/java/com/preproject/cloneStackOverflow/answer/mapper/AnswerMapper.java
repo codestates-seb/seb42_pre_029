@@ -6,6 +6,8 @@ import com.preproject.cloneStackOverflow.answer.entity.Answer;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
+import java.util.List;
+
 @Mapper(componentModel = "spring")
 public interface AnswerMapper {
     Answer answerPostToAnswer(AnswerDto.Post answerPostDto);
@@ -14,4 +16,5 @@ public interface AnswerMapper {
     @Mapping(source = "member.username", target = "username")
     AnswerDto.GetResponse answerToGetResponse(Answer answer);
     AnswerDto.PostResponse answerToPostResponse(Answer answer);
+    List<AnswerDto.GetResponse> answersToGetResponseAll(List<Answer> answers);
 }

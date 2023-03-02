@@ -47,14 +47,9 @@ public class AnswerService {
         return findVerifyAnswer(answer.getAnswerId());
     }
 
-    public List<String> findMemberAnswers(long memberId){
+    public List<Answer> findMemberAnswers(long memberId){
         Member findMember = memberService.findVerifiedMember(memberId);
-        List<Answer> answerList = answerRepository.findByMember(findMember);
-        List<String> list = new ArrayList<>();
-        for(Answer answer : answerList){
-            list.add(answer.getBody());
-        }
-        return list;
+        return answerRepository.findByMember(findMember);
     }
 
     public Answer updateAnswer(Answer answer) {
@@ -76,13 +71,8 @@ public class AnswerService {
                 new StackOverFlowException(ExceptionCode.ANSWER_NOT_FOUND));
     }
 
-    public List<String> findQuestionAnswers(long questionId){
+    public List<Answer> findQuestionAnswers(long questionId){
         Question findQuestion = questionService.findVerifiedQuestion(questionId);
-        List<Answer> answerList = answerRepository.findByQuestion(findQuestion);
-        List<String> list = new ArrayList<>();
-        for(Answer answer : answerList){
-            list.add(answer.getBody());
-        }
-        return list;
+        return answerRepository.findByQuestion(findQuestion);
     }
 }
