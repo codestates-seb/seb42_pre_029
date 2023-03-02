@@ -32,9 +32,7 @@ function MyPage() {
   // const [birth, setBirth] = usestate('');
 
   useEffect(() => {
-    fetch(
-      'http://ec2-13-209-84-68.ap-northeast-2.compute.amazonaws.com:8080/questions',
-    )
+    fetch(`${process.env.REACT_APP_API_URL}/questions`)
       .then(res => {
         return res.json();
       })
@@ -44,9 +42,7 @@ function MyPage() {
   }, []);
 
   useEffect(() => {
-    fetch(
-      'http://ec2-13-209-84-68.ap-northeast-2.compute.amazonaws.com:8080/questions',
-    )
+    fetch(`${process.env.REACT_APP_API_URL}/questions`)
       .then(res => {
         return res.json();
       })
@@ -64,12 +60,9 @@ function MyPage() {
   }, []);
 
   useEffect(() => {
-    fetch(
-      'http://ec2-13-209-84-68.ap-northeast-2.compute.amazonaws.com:8080/members',
-      {
-        headers: {},
-      },
-    )
+    fetch(`${process.env.REACT_APP_API_URL}/members`, {
+      headers: {},
+    })
       .then(res => {
         return res.json();
       })
