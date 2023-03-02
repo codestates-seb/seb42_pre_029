@@ -1,3 +1,5 @@
+import { useState } from 'react';
+import axios from 'axios';
 import Button from './Button';
 import styled from 'styled-components';
 import { Link, useNavigate } from 'react-router-dom';
@@ -11,9 +13,20 @@ function Header() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { user } = useSelector(state => state.auth);
+  const [username, setUsername] = useState('Guest');
 
-  const memberid = user ? user.memberid : 0;
-  console.log(memberid);
+  if (user) {
+    axios
+      .get(`/api/members/${user.memberid}`, {
+        headers: {
+          Authorization: user.authorization,
+        },
+      })
+      .then(response => {
+        setUsername(response.data.data.username);
+      })
+      .catch(error => console.log(error));
+  }
 
   const onLogout = () => {
     dispatch(logout());
@@ -34,8 +47,10 @@ function Header() {
         {user ? (
           <div className="Button_container">
             <Link to="/my-page">
-              <img src={myImg} alt="myImg" height="32" width="32" />
-              <span>열글자이상넘어가면놉</span>
+              <div className="profile_container">
+                <img src={myImg} alt="myImg" height="32" width="32" />
+                <span>{username}</span>
+              </div>
             </Link>
             <Button
               onClick={onLogout}
@@ -89,7 +104,6 @@ const GNB = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  /* padding: 0 390px; */
   height: 80px;
   box-shadow: 0px 6px 12px 0px #0000001f;
 `;
@@ -131,6 +145,14 @@ const ItemContainer = styled.nav`
     display: flex;
     & > :first-child {
       margin-right: 8px;
+    }
+    & .profile_container {
+      display: flex;
+      align-items: center;
+      font-weight: 500;
+      & > img {
+        margin-right: 4px;
+      }
     }
   }
 `;
